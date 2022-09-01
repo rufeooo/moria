@@ -291,12 +291,6 @@ char *argv[];
 #endif
       }
 
-#ifndef MAC
-  /* Check operating hours			*/
-  /* If not wizard  No_Control_Y	       */
-  read_times();
-#endif
-
   /* Some necessary initializations		*/
   /* all made into constants or initialized in variables.c */
 

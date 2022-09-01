@@ -162,7 +162,6 @@ some of the system defines set up here.
 #define MORIA_SAV	"moria.sav"
 /* These 3 files need a dot at the end to prevent VMS from deciding that
    they are *.DAT files or anything else equally wierd. */
-#define MORIA_HOU	"moria:hours."
 #define MORIA_MOR	"moria:news."
 #define MORIA_GPL	"moria:COPYING."
 #define MORIA_TOP	"moria:scores."
@@ -177,7 +176,6 @@ some of the system defines set up here.
 
 #ifdef AMIGA
 #define MORIA_SAV 	"moria.sav"
-#define MORIA_HOU	"moria:hours"
 #define MORIA_MOR	"moria:news"
 #define MORIA_GPL	"moria:COPYING"
 #define MORIA_TOP	"moria:scores"
@@ -192,7 +190,6 @@ some of the system defines set up here.
 #if defined(GEMDOS)
 /* Atari ST */
 #define MORIA_SAV	"moria.sav"
-#define MORIA_HOU	"files\\hours"
 #define MORIA_MOR	"files\\news"
 #define MORIA_GPL	"files\\COPYING"
 #define MORIA_TOP	"files\\scores"
@@ -208,7 +205,6 @@ some of the system defines set up here.
 /* atari-st compiled with gnu-c  */
 
 #define MORIA_SAV	"moria.save"
-#define MORIA_HOU	(char *)prefix_file("files/hours")
 #define MORIA_MOR	(char *)prefix_file("files/news")
 #define MORIA_GPL	(char *)prefix_file("files/COPYING")
 #define MORIA_TOP	(char *)prefix_file("files/scores")
@@ -225,7 +221,6 @@ some of the system defines set up here.
 /* Debian standards for file location */
 /* This must be unix; change file names as appropriate.  */
 #define MORIA_SAV	".moria-save"
-#define MORIA_HOU	"/etc/moria-hours"
 #define MORIA_MOR	"/usr/lib/games/moria/news"
 #define MORIA_GPL	"/usr/lib/games/moria/COPYING"
 #define MORIA_TOP	"/var/games/moria/scores"
@@ -241,16 +236,15 @@ some of the system defines set up here.
 /* Generic UNIX */
 /* This must be unix; change file names as appropriate.  */
 #define MORIA_SAV	"moria-save"
-#define MORIA_HOU	"/home/dgrabiner/moria-5.6/files/hours"
-#define MORIA_MOR	"/home/dgrabiner/moria-5.6/files/news"
-#define MORIA_GPL	"/home/dgrabiner/moria-5.6/files/COPYING"
-#define MORIA_TOP	"/home/dgrabiner/moria-5.6/files/scores"
-#define MORIA_HELP	"/home/dgrabiner/moria-5.6/files/roglcmds.hlp"
-#define MORIA_ORIG_HELP	"/home/dgrabiner/moria-5.6/files/origcmds.hlp"
-#define MORIA_WIZ_HELP	"/home/dgrabiner/moria-5.6/files/rwizcmds.hlp"
-#define MORIA_OWIZ_HELP	"/home/dgrabiner/moria-5.6/files/owizcmds.hlp"
-#define MORIA_WELCOME	"/home/dgrabiner/moria-5.6/files/welcome.hlp"
-#define MORIA_VER	"/home/dgrabiner/moria-5.6/files/version.hlp"
+#define MORIA_MOR	"~/moria-5.6/files/news"
+#define MORIA_GPL	"~/moria-5.6/files/COPYING"
+#define MORIA_TOP	"~/moria-5.6/files/scores"
+#define MORIA_HELP	"~/moria-5.6/files/roglcmds.hlp"
+#define MORIA_ORIG_HELP	"~/moria-5.6/files/origcmds.hlp"
+#define MORIA_WIZ_HELP	"~/moria-5.6/files/rwizcmds.hlp"
+#define MORIA_OWIZ_HELP	"~/moria-5.6/files/owizcmds.hlp"
+#define MORIA_WELCOME	"~/moria-5.6/files/welcome.hlp"
+#define MORIA_VER	"~/moria-5.6/files/version.hlp"
 
 #endif
 #endif

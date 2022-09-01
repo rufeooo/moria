@@ -22,18 +22,6 @@
 #include "constant.h"
 #include "types.h"
 
-#ifdef MORIA_HOU
-/* Operating hours for Moria				-RAK-	*/
-/*	 X = Open; . = Closed					*/
-char  days[7][29] = { "SUN:XXXXXXXXXXXXXXXXXXXXXXXX",
-		    "MON:XXXXXXXX.........XXXXXXX",
-		    "TUE:XXXXXXXX.........XXXXXXX",
-		    "WED:XXXXXXXX.........XXXXXXX",
-		    "THU:XXXXXXXX.........XXXXXXX",
-		    "FRI:XXXXXXXX.........XXXXXXX",
-		    "SAT:XXXXXXXXXXXXXXXXXXXXXXXX" };
-#endif
-
 #ifdef MAC
 store_type *store;
 #else

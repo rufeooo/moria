@@ -94,30 +94,6 @@ void reset_seed()
   set_rnd_seed (old_seed);
 }
 
-
-/* Check the day-time strings to see if open		-RAK-	*/
-int check_time()
-{
-#ifdef MORIA_HOU
-  long clock_var;
-  register struct tm *tp;
-
-#ifdef MAC
-  clock_var = time((time_t *)0);
-#else
-  clock_var = time((long *)0);
-#endif
-  tp = localtime(&clock_var);
-  if (days[tp->tm_wday][tp->tm_hour+4] == 'X')
-    return TRUE;
-  else
-    return FALSE;
-#else
-  return TRUE;
-#endif
-}
-
-
 /* Generates a random integer x where 1<=X<=MAXVAL	-RAK-	*/
 int randint(maxval)
 int maxval;

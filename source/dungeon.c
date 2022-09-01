@@ -137,29 +137,6 @@ void dungeon()
     {
       /* Increment turn counter			*/
       turn++;
-#ifndef MAC
-      /* The Mac ignores the game hours file		*/
-      /* Check for game hours			       */
-      if (((turn % 250) == 1) && !check_time())
-	if (closing_flag > 4)
-	  {
-	    msg_print("The gates to Moria are now closed.");
-	    (void) strcpy (died_from, "(closing gate: saved)");
-	    if (!save_char())
-	      {
-		(void) strcpy (died_from, "a slammed gate");
-		death = TRUE;
-	      }
-	    exit_game();
-	  }
-	else
-	  {
-	    disturb (0, 0);
-	    closing_flag++;
-	    msg_print("The gates to Moria are closing.");
-	    msg_print("Please finish up or save your game.");
-	  }
-#endif
 
       /* turn over the store contents every, say, 1000 turns */
       if ((dun_level != 0) && ((turn % 1000) == 0))
