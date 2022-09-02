@@ -4,35 +4,35 @@
 
    This file is part of Umoria.
 
-   Umoria is free software; you can redistribute it and/or modify 
+   Umoria is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    Umoria is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License 
+   You should have received a copy of the GNU General Public License
    along with Umoria.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <stdio.h>
 
 #ifndef THINK_C
-#include <Types.h>
-#include <Resources.h>
-#include <Events.h>
-#include <Quickdraw.h>
-#include <Fonts.h>
 #include <Controls.h>
 #include <Dialogs.h>
-#include <TextEdit.h>
+#include <Errors.h>
+#include <Events.h>
+#include <Files.h>
+#include <Fonts.h>
 #include <Lists.h>
 #include <Packages.h>
-#include <Files.h>
+#include <Quickdraw.h>
+#include <Resources.h>
 #include <SysEqu.h>
-#include <Errors.h>
+#include <TextEdit.h>
+#include <Types.h>
 
 #include <String.h>
 #include <Strings.h>
@@ -45,48 +45,48 @@
 
 #include "ScrnMgr.h"
 
-#define p2cstr(x)	(char *)PtoCstr((char *)x)
-#define c2pstr(x)	(char *)CtoPstr((char *)x)
+#define p2cstr(x) (char*)PtoCstr((char*)x)
+#define c2pstr(x) (char*)CtoPstr((char*)x)
 
 #endif
 
 #include "config.h"
 #include "constant.h"
-#include "types.h"
 #include "externs.h"
+#include "types.h"
 
-#define maxEntries				100
+#define maxEntries 100
 
-#define horizIndent				4				/* same as std LDEF 0 */
+#define horizIndent 4 /* same as std LDEF 0 */
 
-#define ldefType				'LDEF'
-#define ldefID					514
+#define ldefType 'LDEF'
+#define ldefID 514
 
-#define scoresDlgID				514
-#define dfltBorder				2
-#define listBox					3
-#define titleBox				4
+#define scoresDlgID 514
+#define dfltBorder 2
+#define listBox 3
+#define titleBox 4
 
-#define codeEnter				0x03
-#define codeReturn				0x0D
+#define codeEnter 0x03
+#define codeReturn 0x0D
 
 #ifdef THINK_C
 /* Cover up error in THINK C library.  */
-#define ok	OK
-#define cancel	Cancel
+#define ok OK
+#define cancel Cancel
 #endif
 
 typedef struct LDEFRec {
-	short braInstruction;
-	short flags;
-	int32 resType;
-	short resID;
-	short version;
-	short jmpInstuction;
+  short braInstruction;
+  short flags;
+  int32 resType;
+  short resID;
+  short version;
+  short jmpInstuction;
 #ifdef THINK_C
-	void (*defProc)();
+  void (*defProc)();
 #else
-	pascal void (*defProc)();
+  pascal void (*defProc)();
 #endif
 } LDEFRec, *LDEFPtr, **LDEFHandle;
 
@@ -99,33 +99,34 @@ static ControlHandle okButton;
 
 static ListHandle theList;
 
-void CreateScoreFile()
+void
+CreateScoreFile()
 
 {
-	Str255 fileName;
-	OSErr err;
+  Str255 fileName;
+  OSErr err;
 
-	strncpy((char *)fileName, MORIA_TOP, 255);
-	fileName[255] = '\0';
-	(void) c2pstr(fileName);
+  strncpy((char*)fileName, MORIA_TOP, 255);
+  fileName[255] = '\0';
+  (void)c2pstr(fileName);
 
-	appldirectory();
-	err = FSOpen(fileName, 0, &scoresRefNum);
-	if (err == noErr)
-		(void) FSClose(scoresRefNum);
-	else
-		err = Create(fileName, 0, MORIA_FCREATOR, SCORE_FTYPE);
-	restoredirectory();
+  appldirectory();
+  err = FSOpen(fileName, 0, &scoresRefNum);
+  if (err == noErr)
+    (void)FSClose(scoresRefNum);
+  else
+    err = Create(fileName, 0, MORIA_FCREATOR, SCORE_FTYPE);
+  restoredirectory();
 
-	if (err != noErr)
-		alert_error("Ooops!  Could not create the high scores \
+  if (err != noErr)
+    alert_error(
+        "Ooops!  Could not create the high scores \
 file.  Disk may be locked.");
 
-	return;
+  return;
 }
 
-void EnterScoreFile(theScore)
-int32 *theScore;
+void EnterScoreFile(theScore) int32* theScore;
 
 {
 #if 0
@@ -192,36 +193,34 @@ int32 *theScore;
 #endif
 }
 
-static void Init(list)
-ListHandle list;
+static void Init(list) ListHandle list;
 
 {
-	GrafPtr thePort;
-	FontInfo fi;
-	short saveFont, saveSize;
+  GrafPtr thePort;
+  FontInfo fi;
+  short saveFont, saveSize;
 
-	GetPort(&thePort);
+  GetPort(&thePort);
 
-	saveFont = thePort->txFont;
-	saveSize = thePort->txSize;
+  saveFont = thePort->txFont;
+  saveSize = thePort->txSize;
 
-	TextFont(monaco);
-	TextSize(9);
+  TextFont(monaco);
+  TextSize(9);
 
-	GetFontInfo(&fi);
+  GetFontInfo(&fi);
 
-	TextFont(saveFont);
-	TextSize(saveSize);
+  TextFont(saveFont);
+  TextSize(saveSize);
 
-	(*list)->indent.v = fi.ascent;
-	(*list)->indent.h = horizIndent;
+  (*list)->indent.v = fi.ascent;
+  (*list)->indent.h = horizIndent;
 
-	return;
+  return;
 }
 
-static void Draw(scoreptr, clip, indent)
-int32 *scoreptr;
-Rect *clip;
+static void Draw(scoreptr, clip, indent) int32* scoreptr;
+Rect* clip;
 Point indent;
 
 {
@@ -263,286 +262,278 @@ Point indent;
 #endif
 }
 
-static pascal void HighScoresLDEF(msg, select, clip, cno, dataOffset,
-				  dataLen, list)
-short msg;
+static pascal void HighScoresLDEF(msg, select, clip, cno, dataOffset, dataLen,
+                                  list) short msg;
 Boolean select;
-Rect *clip;
+Rect* clip;
 Cell cno;
 short dataOffset, dataLen;
 ListHandle list;
 
 {
 #ifndef THINK_C
-	#pragma unused(select, cno, dataLen)
+#pragma unused(select, cno, dataLen)
 #endif
-	short offset;
-	int32 count;
-	int32 score;
+  short offset;
+  int32 count;
+  int32 score;
 
-	switch (msg) {
+  switch (msg) {
+    case lInitMsg:
+      Init(list);
+      break;
 
-		case lInitMsg:
-			Init(list);
-			break;
+    case lDrawMsg:
+      offset = *((short*)(*(*list)->cells + dataOffset));
+      if (offset == -1) {
+        Draw(NULL, clip, (*list)->indent);
+      } else {
+        count = sizeof(int32);
+        (void)SetFPos(scoresRefNum, fsFromStart, (int32)offset);
+        (void)FSRead(scoresRefNum, &count, (Ptr)&score);
+        Draw(&score, clip, (*list)->indent);
+      }
+      break;
+  }
 
-		case lDrawMsg:
-			offset = *((short *) (*(*list)->cells + dataOffset));
-			if (offset == -1) {
-				Draw(NULL, clip, (*list)->indent);
-			}
-			else {
-				count = sizeof(int32);
-				(void) SetFPos(scoresRefNum, fsFromStart, (int32) offset);
-				(void) FSRead(scoresRefNum, &count, (Ptr) &score);
-				Draw(&score, clip, (*list)->indent);
-			}
-			break;
-
-	}
-
-	return;
+  return;
 }
 
-static void InvalScoreRange()
+static void
+InvalScoreRange()
 
 {
-	char from[8], to[8];
-	short first, last;
+  char from[8], to[8];
+  short first, last;
 
-	first = (*theList)->visible.top + 1;
-	last = (*theList)->visible.bottom;
-	if (last > (*theList)->dataBounds.bottom)
-	  last = (*theList)->dataBounds.bottom;
+  first = (*theList)->visible.top + 1;
+  last = (*theList)->visible.bottom;
+  if (last > (*theList)->dataBounds.bottom)
+    last = (*theList)->dataBounds.bottom;
 
-	NumToString(first, from);
-	NumToString(last, to);
+  NumToString(first, from);
+  NumToString(last, to);
 
-	ParamText(from, to, NULL, NULL);
+  ParamText(from, to, NULL, NULL);
 
-	InvalRect(&titleRect);
+  InvalRect(&titleRect);
 
-	lastVisTop = (*theList)->visible.top;
+  lastVisTop = (*theList)->visible.top;
 
-	return;
+  return;
 }
 
-static pascal Boolean ScoresDlgFilter(theDialog, theEvent, itemHit)
-DialogPtr theDialog;
-EventRecord *theEvent;
-short *itemHit;
+static pascal Boolean ScoresDlgFilter(theDialog, theEvent,
+                                      itemHit) DialogPtr theDialog;
+EventRecord* theEvent;
+short* itemHit;
 
 {
-	GrafPtr oldPort;
-	Point localPt;
-	WindowPtr theWindow;
-	ControlHandle theControl;
-	Boolean handled;
-	char key;
-	short part;
+  GrafPtr oldPort;
+  Point localPt;
+  WindowPtr theWindow;
+  ControlHandle theControl;
+  Boolean handled;
+  char key;
+  short part;
 
-	handled = false;
+  handled = false;
 
-	switch (theEvent->what) {
+  switch (theEvent->what) {
+    case keyDown:
+      key = theEvent->message & charCodeMask;
+      if ((key == codeEnter) || (key == codeReturn)) {
+        handled = true;
+        HiliteControl(okButton, inButton);
+        *itemHit = ok;
+      }
+      break;
 
-		case keyDown:
-			key = theEvent->message & charCodeMask;
-			if ( (key == codeEnter) || (key == codeReturn) ) {
-				handled = true;
-				HiliteControl(okButton, inButton);
-				*itemHit = ok;
-			}
-			break;
+    case mouseDown:
+      part = FindWindow(theEvent->where, &theWindow);
+      if ((theWindow == (WindowPtr)theDialog) && (part == inContent)) {
+        GetPort(&oldPort);
+        SetPort((GrafPtr)theWindow);
+        localPt = theEvent->where;
+        GlobalToLocal(&localPt);
+        part = FindControl(localPt, theWindow, &theControl);
+        if (theControl == (*theList)->vScroll) {
+          handled = true;
+          (void)LClick(localPt, theEvent->modifiers, theList);
+          if ((*theList)->visible.top != lastVisTop) InvalScoreRange();
+          *itemHit = listBox;
+        }
+        SetPort(oldPort);
+      }
+      break;
+  }
 
-		case mouseDown:
-			part = FindWindow(theEvent->where, &theWindow);
-			if ( (theWindow == (WindowPtr) theDialog) && (part == inContent) ) {
-				GetPort(&oldPort);
-				SetPort((GrafPtr) theWindow);
-				localPt = theEvent->where;
-				GlobalToLocal(&localPt);
-				part = FindControl(localPt, theWindow, &theControl);
-				if (theControl == (*theList)->vScroll) {
-					handled = true;
-					(void) LClick(localPt, theEvent->modifiers, theList);
-					if ((*theList)->visible.top != lastVisTop) InvalScoreRange();
-					*itemHit = listBox;
-				}
-				SetPort(oldPort);
-			}
-			break;
-
-	}
-
-	return(handled);
+  return (handled);
 }
 
-static pascal void DrawListBox(theWindow, theItem)
-WindowPtr theWindow;
+static pascal void DrawListBox(theWindow, theItem) WindowPtr theWindow;
 short theItem;
 
 {
-	GrafPtr thePort;
-	short saveFont, saveSize;
-	short itsType;
-	Handle itsHandle;
-	Rect itsRect;
+  GrafPtr thePort;
+  short saveFont, saveSize;
+  short itsType;
+  Handle itsHandle;
+  Rect itsRect;
 
-	GetDItem((DialogPtr) theWindow, theItem, &itsType, &itsHandle, &itsRect);
+  GetDItem((DialogPtr)theWindow, theItem, &itsType, &itsHandle, &itsRect);
 
-	GetPort(&thePort);
+  GetPort(&thePort);
 
-	saveFont = thePort->txFont;
-	saveSize = thePort->txSize;
+  saveFont = thePort->txFont;
+  saveSize = thePort->txSize;
 
-	TextFont(monaco);
-	TextSize(9);
+  TextFont(monaco);
+  TextSize(9);
 
-	MoveTo(itsRect.left + (*theList)->indent.h + 1,
-	       itsRect.top + (*theList)->indent.v);
-	DrawString("\pPoints Name           Race      Class     Lv   Killed \
+  MoveTo(itsRect.left + (*theList)->indent.h + 1,
+         itsRect.top + (*theList)->indent.v);
+  DrawString(
+      "\pPoints Name           Race      Class     Lv   Killed \
 By                Dun Lv");
 
-	TextFont(saveFont);
-	TextSize(saveSize);
+  TextFont(saveFont);
+  TextSize(saveSize);
 
-	itsRect.top += (*theList)->cellSize.v;
-	FrameRect(&itsRect);
+  itsRect.top += (*theList)->cellSize.v;
+  FrameRect(&itsRect);
 
-	EraseRect(&(*theList)->rView);
-	LUpdate(theWindow->visRgn, theList);
+  EraseRect(&(*theList)->rView);
+  LUpdate(theWindow->visRgn, theList);
 
-	return;
+  return;
 }
 
-void DoScoresDlg()
+void
+DoScoresDlg()
 
 {
-	Str255 fileName;
-	OSErr err;
-	int32 bytes;
-	short entries;
-	GrafPtr oldPort;
-	FontInfo fi;
-	short saveFont, saveSize;
-	DialogPtr theDialog;
-	Handle itsHandle;
-	Handle ldef;
-	short itemHit;
-	short itsType;
-	Rect itsRect;
-	Rect listRect, cellRect;
-	Point cellSize;
-	int32 i;
-	int32 h, v;
-	Point cno;
-	short offset;
+  Str255 fileName;
+  OSErr err;
+  int32 bytes;
+  short entries;
+  GrafPtr oldPort;
+  FontInfo fi;
+  short saveFont, saveSize;
+  DialogPtr theDialog;
+  Handle itsHandle;
+  Handle ldef;
+  short itemHit;
+  short itsType;
+  Rect itsRect;
+  Rect listRect, cellRect;
+  Point cellSize;
+  int32 i;
+  int32 h, v;
+  Point cno;
+  short offset;
 
-	CreateScoreFile();
+  CreateScoreFile();
 
-	strncpy((char *)fileName, MORIA_TOP, 255);
-	fileName[255] = '\0';
-	(void) c2pstr(fileName);
+  strncpy((char*)fileName, MORIA_TOP, 255);
+  fileName[255] = '\0';
+  (void)c2pstr(fileName);
 
-	appldirectory();
-	err = FSOpen(fileName, 0, &scoresRefNum);
-	restoredirectory();
+  appldirectory();
+  err = FSOpen(fileName, 0, &scoresRefNum);
+  restoredirectory();
 
-	if (err != noErr) {
-		alert_error("Sorry.  High scores file could not be opened.");
-		return;
-	}
+  if (err != noErr) {
+    alert_error("Sorry.  High scores file could not be opened.");
+    return;
+  }
 
-	(void) GetEOF(scoresRefNum, &bytes);
-	entries = bytes / sizeof(int32);
+  (void)GetEOF(scoresRefNum, &bytes);
+  entries = bytes / sizeof(int32);
 
-	theDialog = GetNewDialog(scoresDlgID, nil, (WindowPtr) -1);
+  theDialog = GetNewDialog(scoresDlgID, nil, (WindowPtr)-1);
 
-	GetPort(&oldPort);
-	SetPort((GrafPtr) theDialog);
+  GetPort(&oldPort);
+  SetPort((GrafPtr)theDialog);
 
-	saveFont = theDialog->txFont;
-	saveSize= theDialog->txSize;
+  saveFont = theDialog->txFont;
+  saveSize = theDialog->txSize;
 
-	TextFont(monaco);
-	TextSize(9);
+  TextFont(monaco);
+  TextSize(9);
 
-	GetFontInfo(&fi);
+  GetFontInfo(&fi);
 
-	TextFont(saveFont);
-	TextSize(saveSize);
+  TextFont(saveFont);
+  TextSize(saveSize);
 
-	CenterScreenDLOG(scoresDlgID, fixHalf, fixHalf, &h, &v);
-	MoveWindow((WindowPtr) theDialog, (short) h, (short) v, false);
+  CenterScreenDLOG(scoresDlgID, fixHalf, fixHalf, &h, &v);
+  MoveWindow((WindowPtr)theDialog, (short)h, (short)v, false);
 
-	GetDItem(theDialog, ok, &itsType, (Handle *) &okButton, &itsRect);
-	InsetRect(&itsRect, -4, -4);
+  GetDItem(theDialog, ok, &itsType, (Handle*)&okButton, &itsRect);
+  InsetRect(&itsRect, -4, -4);
 
-	SetDItem(theDialog, dfltBorder, userItem, (Handle) DrawDefaultBorder,
-		 &itsRect);
+  SetDItem(theDialog, dfltBorder, userItem, (Handle)DrawDefaultBorder,
+           &itsRect);
 
-	GetDItem(theDialog, titleBox, &itsType, &itsHandle, &titleRect);
+  GetDItem(theDialog, titleBox, &itsType, &itsHandle, &titleRect);
 
-	GetDItem(theDialog, listBox, &itsType, &itsHandle, &listRect);
+  GetDItem(theDialog, listBox, &itsType, &itsHandle, &listRect);
 
-	SetPt(&cellSize, listRect.right - listRect.left - 2,
-	      fi.ascent + fi.descent + fi.leading);
+  SetPt(&cellSize, listRect.right - listRect.left - 2,
+        fi.ascent + fi.descent + fi.leading);
 
-	listRect.bottom =
-		listRect.top +
-		((listRect.bottom - listRect.top - 2) / cellSize.v) * cellSize.v +
-		2;
+  listRect.bottom =
+      listRect.top +
+      ((listRect.bottom - listRect.top - 2) / cellSize.v) * cellSize.v + 2;
 
-	SetDItem(theDialog, listBox, userItem, (Handle) DrawListBox, &listRect);
+  SetDItem(theDialog, listBox, userItem, (Handle)DrawListBox, &listRect);
 
-	InsetRect(&listRect, 1, 1);
-	listRect.top += cellSize.v;
-	listRect.right -= 15;
+  InsetRect(&listRect, 1, 1);
+  listRect.top += cellSize.v;
+  listRect.right -= 15;
 
-	ldef = GetResource(ldefType, ldefID);
-	MoveHHi(ldef);
-	HLock(ldef);
+  ldef = GetResource(ldefType, ldefID);
+  MoveHHi(ldef);
+  HLock(ldef);
 
-	(*((LDEFHandle) ldef))->defProc = HighScoresLDEF;
+  (*((LDEFHandle)ldef))->defProc = HighScoresLDEF;
 
-	SetRect(&cellRect, 0, 0, 1, entries ? entries : 1);
+  SetRect(&cellRect, 0, 0, 1, entries ? entries : 1);
 
-	theList = LNew(
-		&listRect, &cellRect, cellSize,
-		ldefID, (WindowPtr) theDialog,
-		false, false, false, true);
+  theList = LNew(&listRect, &cellRect, cellSize, ldefID, (WindowPtr)theDialog,
+                 false, false, false, true);
 
-	if (!entries) {
-		offset = -1;
-		SetPt(&cno, 0, 0);
-		LSetCell((Ptr) &offset, (short) sizeof(offset), cno, theList);
-	}
-	else {
-		for (i = 0, offset = 0; i < entries; i++, offset += sizeof(int32)) {
-			SetPt(&cno, 0, i);
-			LSetCell((Ptr) &offset, (short) sizeof(offset), cno, theList);
-		}
-	}
+  if (!entries) {
+    offset = -1;
+    SetPt(&cno, 0, 0);
+    LSetCell((Ptr)&offset, (short)sizeof(offset), cno, theList);
+  } else {
+    for (i = 0, offset = 0; i < entries; i++, offset += sizeof(int32)) {
+      SetPt(&cno, 0, i);
+      LSetCell((Ptr)&offset, (short)sizeof(offset), cno, theList);
+    }
+  }
 
-	LDoDraw(true, theList);
+  LDoDraw(true, theList);
 
-	InvalScoreRange();
+  InvalScoreRange();
 
-	ShowWindow((WindowPtr) theDialog);
+  ShowWindow((WindowPtr)theDialog);
 
-	do {
-		ModalDialog(ScoresDlgFilter, &itemHit);
-	} while (itemHit != ok);
+  do {
+    ModalDialog(ScoresDlgFilter, &itemHit);
+  } while (itemHit != ok);
 
-	LDispose(theList);
+  LDispose(theList);
 
-	HUnlock(ldef);
+  HUnlock(ldef);
 
-	SetPort(oldPort);
+  SetPort(oldPort);
 
-	DisposDialog(theDialog);
+  DisposDialog(theDialog);
 
-	(void) FSClose(scoresRefNum);
+  (void)FSClose(scoresRefNum);
 
-	return;
+  return;
 }

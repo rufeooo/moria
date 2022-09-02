@@ -4,17 +4,17 @@
 
    This file is part of Umoria.
 
-   Umoria is free software; you can redistribute it and/or modify 
+   Umoria is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    Umoria is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License 
+   You should have received a copy of the GNU General Public License
    along with Umoria.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include <StdIO.h>
@@ -26,70 +26,61 @@
 #include "DumpRes.h"
 
 typedef struct {
-	char *name;
-	int x, y, z;
+  char* name;
+  int x, y, z;
 } Test;
 
-Test table[5] = {
-	{ "Huron", 1, 2, 3 },
-	{ "Ontario", 4, 5, 6 },
-	{ "Michigan", 7, 8, 9 },
-	{ "Erie", 10, 11, 12 },
-	{ "Superior", 13, 14, 15 }
-};
+Test table[5] = {{"Huron", 1, 2, 3},
+                 {"Ontario", 4, 5, 6},
+                 {"Michigan", 7, 8, 9},
+                 {"Erie", 10, 11, 12},
+                 {"Superior", 13, 14, 15}};
 
-Test *data;
+Test* data;
 
-void MyStrProc(ptr, proc)
-char *ptr;
-void (*proc)(char **);
+void MyStrProc(ptr, proc) char* ptr;
+void (*proc)(char**);
 
 {
-	(*proc)(&((Test *) ptr)->name);
-	return;
+  (*proc)(&((Test*)ptr)->name);
+  return;
 }
 
 main()
 
 {
-	short resFile;
-	long i, rc;
+  short resFile;
+  long i, rc;
 
-	DumpRes(
-		"DumpResTest.rsrc",
-		'TEST', 256, "Test Data", 0,
-		(char *) table, 5, sizeof(Test),
-		MyStrProc
-	);
+  DumpRes("DumpResTest.rsrc", 'TEST', 256, "Test Data", 0, (char*)table, 5,
+          sizeof(Test), MyStrProc);
 
-	resFile = OpenResFile("\pDumpResTest.rsrc");
+  resFile = OpenResFile("\pDumpResTest.rsrc");
 
-	if (resFile != -1) {
+  if (resFile != -1) {
+    data = NULL;
 
-		data = NULL;
-
-		rc = LoadRes(
+                rc = LoadRes(
 			(char **) &data),
 			'TEST', 256,
 			5, sizeof(Test),
 			MyStrProc
 		);
 
-		if (rc)
-			for (i = 0; i < 5; i++)
-				fprintf(stderr, "%s : %d %d %d\n",
-					data[i].name, data[i].x, data[i].y,
-					data[i].z);
+                if (rc)
+                  for (i = 0; i < 5; i++)
+                    fprintf(stderr, "%s : %d %d %d\n", data[i].name, data[i].x,
+                            data[i].y, data[i].z);
 
-		else
-			fprintf(stderr, "LoadRes failed.\n");
+                else
+                  fprintf(stderr, "LoadRes failed.\n");
 
-		CloseResFile(resFile);
+                CloseResFile(resFile);
 
-	}
+  }
 
-	else
-		fprintf(stderr, "Unable to open file for LoadRes testing.\n");
+  else
+    fprintf(stderr, "Unable to open file for LoadRes testing.\n");
 
-	return(0);
+  return (0);
 }

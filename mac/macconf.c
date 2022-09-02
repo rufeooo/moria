@@ -4,24 +4,24 @@
 
    This file is part of Umoria.
 
-   Umoria is free software; you can redistribute it and/or modify 
+   Umoria is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    Umoria is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License 
+   You should have received a copy of the GNU General Public License
    along with Umoria.  If not, see <http://www.gnu.org/licenses/>. */
 
 #ifndef THINK_C
-#include <Types.h>
-#include <Quickdraw.h>
 #include <Controls.h>
 #include <Dialogs.h>
+#include <Quickdraw.h>
+#include <Types.h>
 
 #include <ScrnMgr.h>
 #else
@@ -31,165 +31,160 @@
 #include "constant.h"
 #include "types.h"
 
-#define rogueFlag				'-r\0\0'
-#define originalFlag			'-o\0\0'
+#define rogueFlag '-r\0\0'
+#define originalFlag '-o\0\0'
 
-#define cmdsetDlgID				256
-#define cmdsetRogue				3
-#define cmdsetOriginal			4
-#define cmdsetGrpRect			6
-#define cmdsetDfltBrdr			8
+#define cmdsetDlgID 256
+#define cmdsetRogue 3
+#define cmdsetOriginal 4
+#define cmdsetGrpRect 6
+#define cmdsetDfltBrdr 8
 
-#define teDlgID					257
-#define teFCFirst				3
-#define teFCLast				5
-#define teFCCount				(teFCLast - teFCFirst + 1)
-#define teFCOther				6
-#define teGrpRect				8
-#define teDfltBrdr				10
+#define teDlgID 257
+#define teFCFirst 3
+#define teFCLast 5
+#define teFCCount (teFCLast - teFCFirst + 1)
+#define teFCOther 6
+#define teGrpRect 8
+#define teDfltBrdr 10
 
 #ifdef THINK_C
 /* Cover up error in THINK C library.  */
-#define ok	OK
-#define cancel	Cancel
+#define ok OK
+#define cancel Cancel
 #endif
 
-int32 GetCommandSet(hndl)
-int32 **hndl;
+int32 GetCommandSet(hndl) int32** hndl;
 
 {
-	DialogPtr theDialog;
-	short theItem;
-	Handle theHandle;
-	short itemHit;
-	short itsType;
-	Handle itsHandle;
-	Rect itsRect;
-	int32 h, v;
+  DialogPtr theDialog;
+  short theItem;
+  Handle theHandle;
+  short itemHit;
+  short itsType;
+  Handle itsHandle;
+  Rect itsRect;
+  int32 h, v;
 
-	theDialog = GetNewDialog(cmdsetDlgID, nil, (WindowPtr) -1);
+  theDialog = GetNewDialog(cmdsetDlgID, nil, (WindowPtr)-1);
 
-	CenterScreenDLOG(cmdsetDlgID, fixHalf, fixThird, &h, &v);
-	MoveWindow((WindowPtr) theDialog, (short) h, (short) v, false);
+  CenterScreenDLOG(cmdsetDlgID, fixHalf, fixThird, &h, &v);
+  MoveWindow((WindowPtr)theDialog, (short)h, (short)v, false);
 
-	GetDItem(theDialog, ok, &itsType, &itsHandle, &itsRect);
-	InsetRect(&itsRect, -4, -4);
+  GetDItem(theDialog, ok, &itsType, &itsHandle, &itsRect);
+  InsetRect(&itsRect, -4, -4);
 
-	SetDItem(theDialog, cmdsetDfltBrdr, userItem,
-		 (Handle) DrawDefaultBorder, &itsRect);
+  SetDItem(theDialog, cmdsetDfltBrdr, userItem, (Handle)DrawDefaultBorder,
+           &itsRect);
 
-	GetDItem(theDialog, cmdsetGrpRect, &itsType, &itsHandle, &itsRect);
-	SetDItem(theDialog, cmdsetGrpRect, itsType, (Handle) DrawGroupRect,
-		 &itsRect);
+  GetDItem(theDialog, cmdsetGrpRect, &itsType, &itsHandle, &itsRect);
+  SetDItem(theDialog, cmdsetGrpRect, itsType, (Handle)DrawGroupRect, &itsRect);
 
-	theItem = (**hndl == originalFlag) ? cmdsetOriginal : cmdsetRogue;
-	GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
-	SetCtlValue((ControlHandle) theHandle, true);
+  theItem = (**hndl == originalFlag) ? cmdsetOriginal : cmdsetRogue;
+  GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
+  SetCtlValue((ControlHandle)theHandle, true);
 
-	ShowWindow((WindowPtr) theDialog);
+  ShowWindow((WindowPtr)theDialog);
 
-	do {
-		ModalDialog(nil, &itemHit);
-		if ((itemHit != theItem)
-		    && ((itemHit == cmdsetOriginal) || (itemHit == cmdsetRogue))) {
-			SetCtlValue((ControlHandle) theHandle, false);
-			theItem = itemHit;
-			GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
-			SetCtlValue((ControlHandle) theHandle, true);
-		}
-	} while ( (itemHit != ok) && (itemHit != cancel) );
+  do {
+    ModalDialog(nil, &itemHit);
+    if ((itemHit != theItem) &&
+        ((itemHit == cmdsetOriginal) || (itemHit == cmdsetRogue))) {
+      SetCtlValue((ControlHandle)theHandle, false);
+      theItem = itemHit;
+      GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
+      SetCtlValue((ControlHandle)theHandle, true);
+    }
+  } while ((itemHit != ok) && (itemHit != cancel));
 
-	if (itemHit == ok)
-		**hndl = (theItem == cmdsetOriginal) ? originalFlag : rogueFlag;
+  if (itemHit == ok)
+    **hndl = (theItem == cmdsetOriginal) ? originalFlag : rogueFlag;
 
-	DisposDialog(theDialog);
+  DisposDialog(theDialog);
 
-	return(itemHit == ok);
+  return (itemHit == ok);
 }
 
-int32 GetTextEditor(hndl)
-int32 **hndl;
+int32 GetTextEditor(hndl) int32** hndl;
 
 {
-	DialogPtr theDialog;
-	short theItem;
-	Handle theHandle, fcHandle;
-	short itemHit;
-	short itsType;
-	Handle itsHandle;
-	Rect itsRect;
-	int32 h, v;
-	char *p, *q;
-	Str255 fc;
-	static int32 editors[teFCCount-1] = { 'MACA', 'MSWD' };
+  DialogPtr theDialog;
+  short theItem;
+  Handle theHandle, fcHandle;
+  short itemHit;
+  short itsType;
+  Handle itsHandle;
+  Rect itsRect;
+  int32 h, v;
+  char *p, *q;
+  Str255 fc;
+  static int32 editors[teFCCount - 1] = {'MACA', 'MSWD'};
 
-	theDialog = GetNewDialog(teDlgID, nil, (WindowPtr) -1);
+  theDialog = GetNewDialog(teDlgID, nil, (WindowPtr)-1);
 
-	CenterScreenDLOG(teDlgID, fixHalf, fixThird, &h, &v);
-	MoveWindow((WindowPtr) theDialog, (short) h, (short) v, false);
+  CenterScreenDLOG(teDlgID, fixHalf, fixThird, &h, &v);
+  MoveWindow((WindowPtr)theDialog, (short)h, (short)v, false);
 
-	GetDItem(theDialog, ok, &itsType, &itsHandle, &itsRect);
-	InsetRect(&itsRect, -4, -4);
+  GetDItem(theDialog, ok, &itsType, &itsHandle, &itsRect);
+  InsetRect(&itsRect, -4, -4);
 
-	SetDItem(theDialog, teDfltBrdr, userItem, (Handle) DrawDefaultBorder,
-		 &itsRect);
+  SetDItem(theDialog, teDfltBrdr, userItem, (Handle)DrawDefaultBorder,
+           &itsRect);
 
-	GetDItem(theDialog, teGrpRect, &itsType, &itsHandle, &itsRect);
-	SetDItem(theDialog, teGrpRect, itsType, (Handle) DrawGroupRect, &itsRect);
+  GetDItem(theDialog, teGrpRect, &itsType, &itsHandle, &itsRect);
+  SetDItem(theDialog, teGrpRect, itsType, (Handle)DrawGroupRect, &itsRect);
 
-	GetDItem(theDialog, teFCOther, &itsType, &fcHandle, &itsRect);
+  GetDItem(theDialog, teFCOther, &itsType, &fcHandle, &itsRect);
 
-	for (theItem = 0; theItem < teFCCount-1; theItem++)
-		if (**hndl == editors[theItem])
-			break;
+  for (theItem = 0; theItem < teFCCount - 1; theItem++)
+    if (**hndl == editors[theItem]) break;
 
-	theItem += teFCFirst;
-	GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
-	SetCtlValue((ControlHandle) theHandle, true);
+  theItem += teFCFirst;
+  GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
+  SetCtlValue((ControlHandle)theHandle, true);
 
-	if (theItem == teFCLast) {
-		p = (char *)fc;
-		q = (char *) *hndl;
-		*p++ = 4;
-		*p++ = *q++;
-		*p++ = *q++;
-		*p++ = *q++;
-		*p = *q;
-		SetIText(fcHandle, fc);
-	}
+  if (theItem == teFCLast) {
+    p = (char*)fc;
+    q = (char*)*hndl;
+    *p++ = 4;
+    *p++ = *q++;
+    *p++ = *q++;
+    *p++ = *q++;
+    *p = *q;
+    SetIText(fcHandle, fc);
+  }
 
-	ShowWindow((WindowPtr) theDialog);
+  ShowWindow((WindowPtr)theDialog);
 
-	do {
+  do {
+    do {
+      ModalDialog(nil, &itemHit);
+      if ((itemHit != theItem) && (itemHit >= teFCFirst) &&
+          (itemHit <= teFCLast)) {
+        SetCtlValue((ControlHandle)theHandle, false);
+        theItem = itemHit;
+        GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
+        SetCtlValue((ControlHandle)theHandle, true);
+      }
+    } while ((itemHit != ok) && (itemHit != cancel));
 
-		do {
-			ModalDialog(nil, &itemHit);
-			if ( (itemHit != theItem) && (itemHit >= teFCFirst)
-			    && (itemHit <= teFCLast) ) {
-				SetCtlValue((ControlHandle) theHandle, false);
-				theItem = itemHit;
-				GetDItem(theDialog, theItem, &itsType, &theHandle, &itsRect);
-				SetCtlValue((ControlHandle) theHandle, true);
-			}
-		} while ( (itemHit != ok) && (itemHit != cancel) );
+    if (itemHit == ok) {
+      if (theItem != teFCLast)
+        **hndl = editors[theItem - teFCFirst];
+      else {
+        GetIText(fcHandle, fc);
+        p = (char*)*hndl;
+        q = (char*)fc + 1;
+        *p++ = (fc[0] > 0) ? *q++ : ' ';
+        *p++ = (fc[0] > 1) ? *q++ : ' ';
+        *p++ = (fc[0] > 2) ? *q++ : ' ';
+        *p = (fc[0] > 3) ? *q : ' ';
+      }
+    }
 
-		if (itemHit == ok) {
-			if (theItem != teFCLast)
-				**hndl = editors[theItem - teFCFirst];
-			else {
-				GetIText(fcHandle, fc);
-				p = (char *) *hndl;
-				q = (char *)fc + 1;
-				*p++ = (fc[0] > 0) ? *q++ : ' ';
-				*p++ = (fc[0] > 1) ? *q++ : ' ';
-				*p++ = (fc[0] > 2) ? *q++ : ' ';
-				*p = (fc[0] > 3) ? *q : ' ';
-			}
-		}
+  } while (!ok);
 
-	} while (!ok);
+  DisposDialog(theDialog);
 
-	DisposDialog(theDialog);
-
-	return(itemHit == ok);
+  return (itemHit == ok);
 }

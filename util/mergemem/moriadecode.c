@@ -1,19 +1,19 @@
 /* This file is part of Umoria.
 
-   Umoria is free software; you can redistribute it and/or modify 
+   Umoria is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
    Umoria is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of 
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU Genral Public License for more details.
 
-   You should have received a copy of the GNU General Public License 
+   You should have received a copy of the GNU General Public License
    along with Umoria.  If not, see <http://www.gnu.org/licenses/>. */
 
-/* 
+/*
    NAME
      moriadecode.c
 
@@ -33,32 +33,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-main(argc, argv)
-     int argc;
-     char *argv[];
+main(argc, argv) int argc;
+char* argv[];
 {
   unsigned char c;
   unsigned char xor_byte;
 
-/* version maj */
-  (void) scanf("%c",&c);
-  (void) printf("%c",c);
-/* version min */
-  (void) scanf("%c",&c);
-  (void) printf("%c",c);
-/* patch level */
-  (void) scanf("%c",&c);
-  (void) printf("%c",c);
-/* xor_byte */
-  (void) scanf("%c",&c);
-  (void) printf("%c",c);
-  xor_byte = c ;
-/* rest of file */
-  while(EOF != scanf("%c",&c))
-    {
-      (void) printf("%c",c ^ xor_byte);
-      xor_byte = c;
-    }
+  /* version maj */
+  (void)scanf("%c", &c);
+  (void)printf("%c", c);
+  /* version min */
+  (void)scanf("%c", &c);
+  (void)printf("%c", c);
+  /* patch level */
+  (void)scanf("%c", &c);
+  (void)printf("%c", c);
+  /* xor_byte */
+  (void)scanf("%c", &c);
+  (void)printf("%c", c);
+  xor_byte = c;
+  /* rest of file */
+  while (EOF != scanf("%c", &c)) {
+    (void)printf("%c", c ^ xor_byte);
+    xor_byte = c;
+  }
 }
