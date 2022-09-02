@@ -1,3 +1,4 @@
+#pragma once
 /* source/config.h: configuration definitions
 
    Copyright (C) 1989-2008 James E. Wilson, Robert A. Koeneke, 
@@ -236,15 +237,15 @@ some of the system defines set up here.
 /* Generic UNIX */
 /* This must be unix; change file names as appropriate.  */
 #define MORIA_SAV	"moria-save"
-#define MORIA_MOR	"~/moria-5.6/files/news"
-#define MORIA_GPL	"~/moria-5.6/files/COPYING"
-#define MORIA_TOP	"~/moria-5.6/files/scores"
-#define MORIA_HELP	"~/moria-5.6/files/roglcmds.hlp"
-#define MORIA_ORIG_HELP	"~/moria-5.6/files/origcmds.hlp"
-#define MORIA_WIZ_HELP	"~/moria-5.6/files/rwizcmds.hlp"
-#define MORIA_OWIZ_HELP	"~/moria-5.6/files/owizcmds.hlp"
-#define MORIA_WELCOME	"~/moria-5.6/files/welcome.hlp"
-#define MORIA_VER	"~/moria-5.6/files/version.hlp"
+#define MORIA_MOR	"files/news"
+#define MORIA_GPL	"files/COPYING"
+#define MORIA_TOP	"files/scores"
+#define MORIA_HELP	"files/roglcmds.hlp"
+#define MORIA_ORIG_HELP	"files/origcmds.hlp"
+#define MORIA_WIZ_HELP	"files/rwizcmds.hlp"
+#define MORIA_OWIZ_HELP	"files/owizcmds.hlp"
+#define MORIA_WELCOME	"files/welcome.hlp"
+#define MORIA_VER	"files/version.hlp"
 
 #endif
 #endif

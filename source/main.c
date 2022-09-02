@@ -107,24 +107,6 @@ char *getenv();
 #endif
 #endif
 
-#ifndef MAC
-#ifndef AMIGA
-#ifdef USG
-#if !defined(MSDOS) && !defined(ATARIST_TC)
-unsigned short getuid(), getgid();
-#endif
-#else
-#ifndef SECURE
-#ifdef BSD4_3
-uid_t getuid(), getgid();
-#else  /* other BSD versions */
-int getuid(), getgid();
-#endif
-#endif
-#endif
-#endif
-#endif
-
 #ifndef VMS
 #ifndef MAC
 #if defined(ultrix) || defined(USG)

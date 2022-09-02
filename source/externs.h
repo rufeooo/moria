@@ -1,3 +1,4 @@
+#pragma once
 /* source/externs.h: declarations for global variables and initialized data
 
    Copyright (C) 1989-2008 James E. Wilson, Robert A. Koeneke, 
@@ -54,7 +55,7 @@ extern char *sprintf();
 extern int errno;
 #endif
 
-extern char *copyright[5];
+extern char *copyright[17];
 
 /* horrible hack: needed because compact_monster() can be called from deep
    within creatures() via place_monster() and summon_monster() */

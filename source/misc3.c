@@ -2443,7 +2443,7 @@ int dir;
 register int *y, *x;
 {
   register int new_row, new_col;
-  int bool;
+  int b;
 
   switch(dir)
     {
@@ -2484,15 +2484,15 @@ register int *y, *x;
       new_col = *x + 1;
       break;
     }
-  bool = FALSE;
+  b = FALSE;
   if ((new_row >= 0) && (new_row < cur_height)
       && (new_col >= 0) && (new_col < cur_width))
     {
       *y = new_row;
       *x = new_col;
-      bool = TRUE;
+      b = TRUE;
     }
-  return(bool);
+  return(b);
 }
 
 /* Saving throws for player character.		-RAK-	*/

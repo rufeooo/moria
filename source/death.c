@@ -58,24 +58,6 @@
 #endif
 #endif
 
-#ifdef VMS
-unsigned int getuid(), getgid();
-#else
-#ifdef unix
-#ifdef USG
-unsigned short getuid(), getgid();
-#else
-#ifndef SECURE
-#ifdef BSD4_3
-uid_t getuid(), getgid();
-#else  /* other BSD versions */
-int getuid(), getgid();
-#endif
-#endif
-#endif
-#endif
-#endif
-
 #ifdef USG
 #ifndef ATARIST_MWC
 #include <string.h>

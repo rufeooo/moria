@@ -1,3 +1,4 @@
+#pragma once
 /* source/types.h: global type declarations
 
    Copyright (C) 1989-2008 James E. Wilson, Robert A. Koeneke, 
