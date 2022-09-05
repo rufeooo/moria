@@ -1208,7 +1208,7 @@ static void wr_long(l) register int32u l;
   DEBUG(fprintf(logfile, " %02X", (int)xor_byte));
   xor_byte ^= ((l >> 24) & 0xFF);
   (void)putc((int)xor_byte, fileptr);
-  DEBUG(fprintf(logfile, " %02X = %ld\n", (int)xor_byte, (long)l));
+  DEBUG(fprintf(logfile, " %02X = %d\n", (int)xor_byte, (long)l));
 }
 
 static void wr_bytes(c, count) int8u* c;
@@ -1337,7 +1337,7 @@ static void rd_long(ptr) int32u* ptr;
   xor_byte = (getc(fileptr) & 0xFF);
   l |= (int32u)(c ^ xor_byte) << 24;
   *ptr = l;
-  DEBUG(fprintf(logfile, "%02X %02X = %ld\n", (int)c, (int)xor_byte, (long)l));
+  DEBUG(fprintf(logfile, "%02X %02X = %d\n", (int)c, (int)xor_byte, (long)l));
 }
 
 static void rd_bytes(ch_ptr, count) int8u* ch_ptr;

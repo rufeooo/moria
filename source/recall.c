@@ -313,7 +313,7 @@ int roff_recall(mon_num) int mon_num;
          5) /
         10;
 
-    (void)sprintf(temp, " creature is worth %ld.%02ld point%s", templong, j,
+    (void)sprintf(temp, " creature is worth %d.%02d point%s", templong, j,
                   (templong == 1 && j == 0 ? "" : "s"));
     roff(temp);
 
@@ -427,7 +427,7 @@ int roff_recall(mon_num) int mon_num;
 #endif
   {
     if ((mp->r_spells & CS_FREQ) > 5) { /* Could offset by level */
-      (void)sprintf(temp, "; 1 time in %ld", cp->spells & CS_FREQ);
+      (void)sprintf(temp, "; 1 time in %d", cp->spells & CS_FREQ);
       roff(temp);
     }
     roff(".");
@@ -588,7 +588,7 @@ int roff_recall(mon_num) int mon_num;
     } else if (j == 2)
       roff(" one or two");
     else {
-      (void)sprintf(temp, " up to %ld", j);
+      (void)sprintf(temp, " up to %d", j);
       roff(temp);
     }
 #ifdef ATARIST_MWC

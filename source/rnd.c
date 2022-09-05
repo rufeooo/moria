@@ -120,7 +120,7 @@ main()
   for (i = 1; i < 10000; i++) (void)rnd();
 
   random = rnd();
-  printf("z[10001] = %ld, should be 1043618065\n", random);
+  printf("z[10001] = %d, should be 1043618065\n", random);
   if (random == 1043618065L) printf("success!!!\n");
 }
 
