@@ -29,7 +29,7 @@
 #include <strings.h>
 #endif
 
-/* Use a staff.					-RAK-	*/
+/* Use a staff.  				-RAK-	*/
 void
 use()
 {
@@ -62,7 +62,7 @@ use()
       (i_ptr->p1)--;
       while (i != 0) {
         j = bit_pos(&i) + 1;
-        /* Staffs.				*/
+        /* Staffs.  			*/
         switch (j) {
           case 1:
             ident = light_area(char_row, char_col);
@@ -156,7 +156,7 @@ use()
             msg_print("Internal error in staffs()");
             break;
         }
-        /* End of staff actions.		*/
+        /* End of staff actions.  	*/
       }
       if (ident) {
         if (!known1_p(i_ptr)) {

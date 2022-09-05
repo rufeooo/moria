@@ -18,8 +18,8 @@
    You should have received a copy of the GNU General Public License
    along with Umoria.  If not, see <http://www.gnu.org/licenses/>. */
 
-/* This signal package was brought to you by		-JEW-  */
-/* Completely rewritten by				-CJS- */
+/* This signal package was brought to you by  	-JEW-  */
+/* Completely rewritten by  			-CJS- */
 
 /* To find out what system we're on.  */
 

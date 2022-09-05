@@ -47,7 +47,7 @@ static int monval(int8u);
 static void get_money(void);
 #endif
 
-/* Generates character's stats				-JWT-	*/
+/* Generates character's stats  			-JWT-	*/
 static void
 get_stats()
 {
@@ -66,7 +66,7 @@ get_stats()
     py.stats.max_stat[i] = 5 + dice[3 * i] + dice[3 * i + 1] + dice[3 * i + 2];
 }
 
-/* Changes stats by given amount				-JWT-	*/
+/* Changes stats by given amount  			-JWT-	*/
 static void change_stat(stat, amount) int stat;
 int16 amount;
 {
@@ -139,7 +139,7 @@ get_all_stats()
   p_ptr->flags.see_infra = r_ptr->infra;
 }
 
-/* Allows player to select a race			-JWT-	*/
+/* Allows player to select a race  		-JWT-	*/
 static void
 choose_race()
 {
@@ -186,7 +186,7 @@ choose_race()
   put_buffer(r_ptr->trace, 3, 15);
 }
 
-/* Will print the history of a character			-JWT-	*/
+/* Will print the history of a character  		-JWT-	*/
 static void
 print_history()
 {
@@ -196,10 +196,10 @@ print_history()
   for (i = 0; i < 4; i++) prt(py.misc.history[i], i + 15, 10);
 }
 
-/* Get the racial history, determines social class	-RAK-	*/
-/* Assumptions:	Each race has init history beginning at		*/
-/*		(race-1)*3+1					*/
-/*		All history parts are in ascending order	*/
+/* Get the racial history, determines social class  -RAK-	*/
+/* Assumptions:  Each race has init history beginning at		*/
+/*  	(race-1)*3+1					*/
+/*  	All history parts are in ascending order	*/
 static void
 get_history()
 {
@@ -209,7 +209,7 @@ get_history()
   char history_block[240];
   register background_type* b_ptr;
 
-  /* Get a block of history text				*/
+  /* Get a block of history text  			*/
   hist_ptr = py.misc.prace * 3 + 1;
   history_block[0] = '\0';
   social_class = randint(4);
@@ -235,7 +235,7 @@ get_history()
   for (hist_ptr = 0; hist_ptr < 4; hist_ptr++)
     py.misc.history[hist_ptr][0] = '\0';
 
-  /* Process block of history text for pretty output	*/
+  /* Process block of history text for pretty output  */
   start_pos = 0;
   end_pos = strlen(history_block) - 1;
   line_ctr = 0;
@@ -258,7 +258,7 @@ get_history()
     start_pos = new_start;
   } while (!flag);
 
-  /* Compute social class for player			*/
+  /* Compute social class for player  		*/
   if (social_class > 100)
     social_class = 100;
   else if (social_class < 1)
@@ -266,7 +266,7 @@ get_history()
   py.misc.sc = social_class;
 }
 
-/* Gets the character's sex				-JWT-	*/
+/* Gets the character's sex  			-JWT-	*/
 static void
 get_sex()
 {
@@ -296,7 +296,7 @@ get_sex()
   } while (!exit_flag);
 }
 
-/* Computes character's age, height, and weight		-JWT-	*/
+/* Computes character's age, height, and weight  	-JWT-	*/
 static void
 get_ahw()
 {
@@ -314,7 +314,7 @@ get_ahw()
   py.misc.disarm = race[i].b_dis + todis_adj();
 }
 
-/* Gets a character class				-JWT-	*/
+/* Gets a character class  			-JWT-	*/
 static void
 get_class()
 {
@@ -364,7 +364,7 @@ get_class()
       clear_from(20);
       put_buffer(c_ptr->title, 5, 15);
 
-      /* Adjust the stats for the class adjustment		-RAK-	*/
+      /* Adjust the stats for the class adjustment  	-RAK-	*/
       p_ptr = &py;
       change_stat(A_STR, c_ptr->madj_str);
       change_stat(A_INT, c_ptr->madj_int);
@@ -377,11 +377,11 @@ get_class()
         set_use_stat(i);
       }
 
-      p_ptr->misc.ptodam = todam_adj(); /* Real values		*/
+      p_ptr->misc.ptodam = todam_adj(); /* Real values  	*/
       p_ptr->misc.ptohit = tohit_adj();
       p_ptr->misc.ptoac = toac_adj();
       p_ptr->misc.pac = 0;
-      p_ptr->misc.dis_td = p_ptr->misc.ptodam; /* Displayed values	*/
+      p_ptr->misc.dis_td = p_ptr->misc.ptodam; /* Displayed values  */
       p_ptr->misc.dis_th = p_ptr->misc.ptohit;
       p_ptr->misc.dis_tac = p_ptr->misc.ptoac;
       p_ptr->misc.dis_ac = p_ptr->misc.pac + p_ptr->misc.dis_tac;
@@ -448,14 +448,14 @@ get_money()
 
   gold = py.misc.sc * 6 + randint(25) + 325; /* Social Class adj */
   gold -= tmp;                               /* Stat adj */
-  gold += monval(a_ptr[A_CHR]);              /* Charisma adj	*/
+  gold += monval(a_ptr[A_CHR]);              /* Charisma adj  */
   if (!py.misc.male) gold += 50; /* She charmed the banker into it! -CJS- */
   if (gold < 80) gold = 80;      /* Minimum */
   py.misc.au = gold;
 }
 
 /* ---------- M A I N  for Character Creation Routine ---------- */
-/*							-JWT-	*/
+/*  						-JWT-	*/
 void
 create_character()
 {
@@ -500,8 +500,8 @@ create_character()
   put_misc3();
   get_name();
 
-  /* This delay may be reduced, but is recommended to keep players	*/
-  /* from continuously rolling up characters, which can be VERY	*/
-  /* expensive CPU wise.						*/
+  /* This delay may be reduced, but is recommended to keep players  */
+  /* from continuously rolling up characters, which can be VERY  */
+  /* expensive CPU wise.  					*/
   pause_exit(23, PLAYER_EXIT_PAUSE);
 }

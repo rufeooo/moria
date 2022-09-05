@@ -31,7 +31,7 @@
 #include <strings.h>
 #endif
 
-/* Scrolls for the reading				-RAK-	*/
+/* Scrolls for the reading  			-RAK-	*/
 void
 read_scroll()
 {
@@ -68,7 +68,7 @@ read_scroll()
       j = bit_pos(&i) + 1;
       if (i_ptr->tval == TV_SCROLL2) j += 32;
 
-      /* Scrolls.			*/
+      /* Scrolls.  		*/
       switch (j) {
         case 1:
           i_ptr = &inventory[INVEN_WIELD];
@@ -174,7 +174,7 @@ read_scroll()
           used_up = ident_spell();
 
           /* The identify may merge objects, causing the identify scroll
-             to move to a different place.	Check for that here.  It can
+             to move to a different place.  Check for that here.  It can
              move arbitrarily far if an identify scroll was used on
              another identify scroll, but it always moves down. */
           while (i_ptr->tval != TV_SCROLL1 || i_ptr->flags != 0x00000008) {
@@ -475,7 +475,7 @@ read_scroll()
           msg_print("Internal error in scroll()");
           break;
       }
-      /* End of Scrolls.			       */
+      /* End of Scrolls.  		       */
     }
     i_ptr = &inventory[item_val];
     if (ident) {

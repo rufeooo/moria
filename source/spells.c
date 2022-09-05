@@ -40,10 +40,10 @@ static void replace_spot(int, int, int);
 static void replace_spot();
 #endif
 
-/* Following are spell procedure/functions			-RAK-	*/
-/* These routines are commonly used in the scroll, potion, wands, and	 */
-/* staves routines, and are occasionally called from other areas.	  */
-/* Now included are creature spells also.		       -RAK    */
+/* Following are spell procedure/functions  		-RAK-	*/
+/* These routines are commonly used in the scroll, potion, wands, and   */
+/* staves routines, and are occasionally called from other areas.    */
+/* Now included are creature spells also.  	       -RAK    */
 
 void monster_name(m_name, m_ptr, r_ptr) char* m_name;
 monster_type* m_ptr;
@@ -65,7 +65,7 @@ creature_type* r_ptr;
     (void)sprintf(m_name, "the %s", r_ptr->name);
 }
 
-/* Sleep creatures adjacent to player			-RAK-	*/
+/* Sleep creatures adjacent to player  		-RAK-	*/
 int sleep_monsters1(y, x) int y, x;
 {
   register int i, j;
@@ -101,7 +101,7 @@ int sleep_monsters1(y, x) int y, x;
   return (sleep);
 }
 
-/* Detect any treasure on the current panel		-RAK-	*/
+/* Detect any treasure on the current panel  	-RAK-	*/
 int
 detect_treasure()
 {
@@ -122,7 +122,7 @@ detect_treasure()
   return (detect);
 }
 
-/* Detect all objects on the current panel		-RAK-	*/
+/* Detect all objects on the current panel  	-RAK-	*/
 int
 detect_object()
 {
@@ -143,7 +143,7 @@ detect_object()
   return (detect);
 }
 
-/* Locates and displays traps on current panel		-RAK-	*/
+/* Locates and displays traps on current panel  	-RAK-	*/
 int
 detect_trap()
 {
@@ -169,7 +169,7 @@ detect_trap()
   return (detect);
 }
 
-/* Locates and displays all secret doors on current panel -RAK-	*/
+/* Locates and displays all secret doors on current panel -RAK-  */
 int
 detect_sdoor()
 {
@@ -186,7 +186,7 @@ detect_sdoor()
           change_trap(i, j);
           detect = TRUE;
         }
-        /* Staircases	 */
+        /* Staircases   */
         else if (((t_list[c_ptr->tptr].tval == TV_UP_STAIR) ||
                   (t_list[c_ptr->tptr].tval == TV_DOWN_STAIR)) &&
                  !c_ptr->fm) {
@@ -234,7 +234,7 @@ detect_invisible()
 }
 
 /* Light an area: 1.  If corridor  light immediate area -RAK-*/
-/*		  2.  If room  light entire room plus immediate area.     */
+/*  	  2.  If room  light entire room plus immediate area.     */
 int light_area(y, x) register int y, x;
 {
   register int i, j, light;
@@ -252,7 +252,7 @@ int light_area(y, x) register int y, x;
   return (light);
 }
 
-/* Darken an area, opposite of light area		-RAK-	*/
+/* Darken an area, opposite of light area  	-RAK-	*/
 int unlight_area(y, x) int y, x;
 {
   register int i, j;
@@ -295,7 +295,7 @@ int unlight_area(y, x) int y, x;
   return (unlight);
 }
 
-/* Map the current area plus some			-RAK-	*/
+/* Map the current area plus some  		-RAK-	*/
 void
 map_area()
 {
@@ -323,7 +323,7 @@ map_area()
   prt_map();
 }
 
-/* Identify an object					-RAK-	*/
+/* Identify an object  				-RAK-	*/
 int
 ident_spell()
 {
@@ -350,7 +350,7 @@ ident_spell()
   return (ident);
 }
 
-/* Get all the monsters on the level pissed off.	-RAK-	*/
+/* Get all the monsters on the level pissed off.  -RAK-	*/
 int aggravate_monster(dis_affect) int dis_affect;
 {
   register int i, aggravate;
@@ -369,7 +369,7 @@ int aggravate_monster(dis_affect) int dis_affect;
   return (aggravate);
 }
 
-/* Surround the fool with traps (chuckle)		-RAK-	*/
+/* Surround the fool with traps (chuckle)  	-RAK-	*/
 int
 trap_creation()
 {
@@ -397,7 +397,7 @@ trap_creation()
   return (trap);
 }
 
-/* Surround the player with doors.			-RAK-	*/
+/* Surround the player with doors.  		-RAK-	*/
 int
 door_creation()
 {
@@ -423,7 +423,7 @@ door_creation()
   return (door);
 }
 
-/* Destroys any adjacent door(s)/trap(s)		-RAK-	*/
+/* Destroys any adjacent door(s)/trap(s)  	-RAK-	*/
 int
 td_destroy()
 {
@@ -454,7 +454,7 @@ td_destroy()
   return (destroy);
 }
 
-/* Display all creatures on the current panel		-RAK-	*/
+/* Display all creatures on the current panel  	-RAK-	*/
 int
 detect_monsters()
 {
@@ -489,8 +489,8 @@ detect_monsters()
   return (detect);
 }
 
-/* Leave a line of light in given dir, blue light can sometimes	*/
-/* hurt creatures.				       -RAK-   */
+/* Leave a line of light in given dir, blue light can sometimes  */
+/* hurt creatures.  			       -RAK-   */
 void light_line(dir, y, x) int dir, y, x;
 {
   register int i;
@@ -543,7 +543,7 @@ void light_line(dir, y, x) int dir, y, x;
   } while (!flag);
 }
 
-/* Light line in all directions				-RAK-	*/
+/* Light line in all directions  			-RAK-	*/
 void starlite(y, x) register int y, x;
 {
   register int i;
@@ -554,7 +554,7 @@ void starlite(y, x) register int y, x;
     if (i != 5) light_line(i, y, x);
 }
 
-/* Disarms all traps/chests in a given direction	-RAK-	*/
+/* Disarms all traps/chests in a given direction  -RAK-	*/
 int disarm_all(dir, y, x) int dir, y, x;
 {
   register cave_type* c_ptr;
@@ -592,7 +592,7 @@ int disarm_all(dir, y, x) int dir, y, x;
   return (disarm);
 }
 
-/* Return flags for given type area affect		-RAK-	*/
+/* Return flags for given type area affect  	-RAK-	*/
 void get_flags(typ, weapon_type, harm_type, destroy) int typ;
 int32u* weapon_type;
 int* harm_type;
@@ -639,7 +639,7 @@ int (**destroy)();
   }
 }
 
-/* Shoot a bolt in a given direction			-RAK-	*/
+/* Shoot a bolt in a given direction  		-RAK-	*/
 void fire_bolt(typ, dir, y, x, dam, bolt_typ) int typ, dir, y, x, dam;
 char* bolt_typ;
 {
@@ -710,8 +710,8 @@ char* bolt_typ;
   } while (!flag);
 }
 
-/* Shoot a ball in a given direction.  Note that balls have an	*/
-/* area affect.					      -RAK-   */
+/* Shoot a ball in a given direction.  Note that balls have an  */
+/* area affect.  				      -RAK-   */
 void fire_ball(typ, dir, y, x, dam_hp, descrip) int typ, dir, y, x, dam_hp;
 char* descrip;
 {
@@ -747,8 +747,8 @@ char* descrip;
           y = oldy;
           x = oldx;
         }
-        /* The ball hits and explodes.		     */
-        /* The explosion.			     */
+        /* The ball hits and explodes.  	     */
+        /* The explosion.  		     */
         for (i = y - max_dis; i <= y + max_dis; i++)
           for (j = x - max_dis; j <= x + max_dis; j++)
             if (in_bounds(i, j) && (distance(y, x, i, j) <= max_dis) &&
@@ -795,7 +795,7 @@ char* descrip;
                 (distance(y, x, i, j) <= max_dis))
               lite_spot(i, j);
 
-        /* End  explosion.		     */
+        /* End  explosion.  	     */
         if (thit == 1) {
           (void)sprintf(out_val, "The %s envelops a creature!", descrip);
           msg_print(out_val);
@@ -808,7 +808,7 @@ char* descrip;
         else if (tkill > 1)
           msg_print("There are several screams of agony!");
         if (tkill >= 0) prt_experience();
-        /* End ball hitting.		     */
+        /* End ball hitting.  	     */
       } else if (panel_contains(y, x) && (py.flags.blind < 1)) {
         print('*', y, x);
         /* show bolt */
@@ -821,7 +821,7 @@ char* descrip;
 }
 
 /* Breath weapon works like a fire_ball, but affects the player. */
-/* Note the area affect.			      -RAK-   */
+/* Note the area affect.  		      -RAK-   */
 void breath(typ, y, x, dam_hp, ddesc, monptr) int typ, y, x, dam_hp;
 char* ddesc;
 int monptr;
@@ -967,7 +967,7 @@ int recharge(num) register int num;
   return (res);
 }
 
-/* Increase or decrease a creatures hit points		-RAK-	*/
+/* Increase or decrease a creatures hit points  	-RAK-	*/
 int hp_monster(dir, y, x, dam) int dir, y, x, dam;
 {
   register int i;
@@ -1006,7 +1006,7 @@ int hp_monster(dir, y, x, dam) int dir, y, x, dam;
   return (monster);
 }
 
-/* Drains life; note it must be living.		-RAK-	*/
+/* Drains life; note it must be living.  	-RAK-	*/
 int drain_life(dir, y, x) int dir, y, x;
 {
   register int i;
@@ -1048,8 +1048,8 @@ int drain_life(dir, y, x) int dir, y, x;
   return (drain);
 }
 
-/* Increase or decrease a creatures speed		-RAK-	*/
-/* NOTE: cannot slow a winning creature (BALROG)		 */
+/* Increase or decrease a creatures speed  	-RAK-	*/
+/* NOTE: cannot slow a winning creature (BALROG)  	 */
 int speed_monster(dir, y, x, spd) int dir, y, x, spd;
 {
   int flag, dist, speed;
@@ -1094,7 +1094,7 @@ int speed_monster(dir, y, x, spd) int dir, y, x, spd;
   return (speed);
 }
 
-/* Confuse a creature					-RAK-	*/
+/* Confuse a creature  				-RAK-	*/
 int confuse_monster(dir, y, x) int dir, y, x;
 {
   int flag, dist, confuse;
@@ -1141,7 +1141,7 @@ int confuse_monster(dir, y, x) int dir, y, x;
   return (confuse);
 }
 
-/* Sleep a creature.					-RAK-	*/
+/* Sleep a creature.  				-RAK-	*/
 int sleep_monster(dir, y, x) int dir, y, x;
 {
   int flag, dist, sleep;
@@ -1181,7 +1181,7 @@ int sleep_monster(dir, y, x) int dir, y, x;
   return (sleep);
 }
 
-/* Turn stone to mud, delete wall.			-RAK-	*/
+/* Turn stone to mud, delete wall.  		-RAK-	*/
 int wall_to_mud(dir, y, x) int dir, y, x;
 {
   int i, wall, dist;
@@ -1251,7 +1251,7 @@ int wall_to_mud(dir, y, x) int dir, y, x;
   return (wall);
 }
 
-/* Destroy all traps and doors in a given direction	-RAK-	*/
+/* Destroy all traps and doors in a given direction  -RAK-	*/
 int td_destroy2(dir, y, x) int dir, y, x;
 {
   register int destroy2, dist;
@@ -1286,8 +1286,8 @@ int td_destroy2(dir, y, x) int dir, y, x;
   return (destroy2);
 }
 
-/* Polymorph a monster					-RAK-	*/
-/* NOTE: cannot polymorph a winning creature (BALROG)		 */
+/* Polymorph a monster  				-RAK-	*/
+/* NOTE: cannot polymorph a winning creature (BALROG)  	 */
 int poly_monster(dir, y, x) int dir, y, x;
 {
   int dist, flag, poly;
@@ -1329,7 +1329,7 @@ int poly_monster(dir, y, x) int dir, y, x;
   return (poly);
 }
 
-/* Create a wall.					-RAK-	*/
+/* Create a wall.  				-RAK-	*/
 int build_wall(dir, y, x) int dir, y, x;
 {
   register int i;
@@ -1398,7 +1398,7 @@ int build_wall(dir, y, x) int dir, y, x;
   return (build);
 }
 
-/* Replicate a creature					-RAK-	*/
+/* Replicate a creature  				-RAK-	*/
 int clone_monster(dir, y, x) int dir, y, x;
 {
   register cave_type* c_ptr;
@@ -1421,7 +1421,7 @@ int clone_monster(dir, y, x) int dir, y, x;
   return (FALSE);
 }
 
-/* Move the creature record to a new location		-RAK-	*/
+/* Move the creature record to a new location  	-RAK-	*/
 void teleport_away(monptr, dis) int monptr, dis;
 {
   register int yn, xn, ctr;
@@ -1451,7 +1451,7 @@ void teleport_away(monptr, dis) int monptr, dis;
   update_mon(monptr);
 }
 
-/* Teleport player to spell casting creature		-RAK-	*/
+/* Teleport player to spell casting creature  	-RAK-	*/
 void teleport_to(ny, nx) int ny, nx;
 {
   int dis, ctr, y, x;
@@ -1485,7 +1485,7 @@ void teleport_to(ny, nx) int ny, nx;
   creatures(FALSE);
 }
 
-/* Teleport all creatures in a given direction away	-RAK-	*/
+/* Teleport all creatures in a given direction away  -RAK-	*/
 int teleport_monster(dir, y, x) int dir, y, x;
 {
   register int flag, result, dist;
@@ -1509,8 +1509,8 @@ int teleport_monster(dir, y, x) int dir, y, x;
   return (result);
 }
 
-/* Delete all creatures within max_sight distance	-RAK-	*/
-/* NOTE : Winning creatures cannot be genocided			 */
+/* Delete all creatures within max_sight distance  -RAK-	*/
+/* NOTE : Winning creatures cannot be genocided  		 */
 int
 mass_genocide()
 {
@@ -1538,8 +1538,8 @@ mass_genocide()
   return (result);
 }
 
-/* Delete all creatures of a given type from level.	-RAK-	*/
-/* This does not keep creatures of type from appearing later.	 */
+/* Delete all creatures of a given type from level.  -RAK-	*/
+/* This does not keep creatures of type from appearing later.   */
 /* NOTE : Winning creatures can not be genocided. */
 int
 genocide()
@@ -1578,8 +1578,8 @@ genocide()
   return (killed);
 }
 
-/* Change speed of any creature .			-RAK-	*/
-/* NOTE: cannot slow a winning creature (BALROG)		 */
+/* Change speed of any creature .  		-RAK-	*/
+/* NOTE: cannot slow a winning creature (BALROG)  	 */
 int speed_monsters(spd) int spd;
 {
   register int i, speed;
@@ -1622,7 +1622,7 @@ int speed_monsters(spd) int spd;
   return (speed);
 }
 
-/* Sleep any creature .		-RAK-	*/
+/* Sleep any creature .  	-RAK-	*/
 int
 sleep_monsters2()
 {
@@ -1660,8 +1660,8 @@ sleep_monsters2()
   return (sleep);
 }
 
-/* Polymorph any creature that player can see.	-RAK-	*/
-/* NOTE: cannot polymorph a winning creature (BALROG)		 */
+/* Polymorph any creature that player can see.  -RAK-	*/
+/* NOTE: cannot polymorph a winning creature (BALROG)  	 */
 int
 mass_poly()
 {
@@ -1698,7 +1698,7 @@ mass_poly()
   return (mass);
 }
 
-/* Display evil creatures on current panel		-RAK-	*/
+/* Display evil creatures on current panel  	-RAK-	*/
 int
 detect_evil()
 {
@@ -1725,7 +1725,7 @@ detect_evil()
   return (flag);
 }
 
-/* Change players hit points in some manner		-RAK-	*/
+/* Change players hit points in some manner  	-RAK-	*/
 int hp_player(num) int num;
 {
   register int res;
@@ -1758,7 +1758,7 @@ int hp_player(num) int num;
   return (res);
 }
 
-/* Cure players confusion				-RAK-	*/
+/* Cure players confusion  			-RAK-	*/
 int
 cure_confusion()
 {
@@ -1774,7 +1774,7 @@ cure_confusion()
   return (cure);
 }
 
-/* Cure players blindness				-RAK-	*/
+/* Cure players blindness  			-RAK-	*/
 int
 cure_blindness()
 {
@@ -1790,7 +1790,7 @@ cure_blindness()
   return (cure);
 }
 
-/* Cure poisoning					-RAK-	*/
+/* Cure poisoning  				-RAK-	*/
 int
 cure_poison()
 {
@@ -1806,7 +1806,7 @@ cure_poison()
   return (cure);
 }
 
-/* Cure the players fear				-RAK-	*/
+/* Cure the players fear  			-RAK-	*/
 int
 remove_fear()
 {
@@ -1822,9 +1822,9 @@ remove_fear()
   return (result);
 }
 
-/* This is a fun one.  In a given block, pick some walls and	*/
-/* turn them into open spots.  Pick some open spots and turn	 */
-/* them into walls.  An "Earthquake" effect.	       -RAK-   */
+/* This is a fun one.  In a given block, pick some walls and  */
+/* turn them into open spots.  Pick some open spots and turn   */
+/* them into walls.  An "Earthquake" effect.         -RAK-   */
 void
 earthquake()
 {
@@ -1894,7 +1894,7 @@ earthquake()
       }
 }
 
-/* Evil creatures don't like this.		       -RAK-   */
+/* Evil creatures don't like this.  	       -RAK-   */
 int
 protect_evil()
 {
@@ -1910,7 +1910,7 @@ protect_evil()
   return (res);
 }
 
-/* Create some high quality mush for the player.	-RAK-	*/
+/* Create some high quality mush for the player.  -RAK-	*/
 void
 create_food()
 {
@@ -1928,8 +1928,8 @@ create_food()
   }
 }
 
-/* Attempts to destroy a type of creature.  Success depends on	*/
-/* the creatures level VS. the player's level		 -RAK-	 */
+/* Attempts to destroy a type of creature.  Success depends on  */
+/* the creatures level VS. the player's level  	 -RAK-	 */
 int dispel_creature(cflag, damage) int cflag;
 int damage;
 {
@@ -1962,7 +1962,7 @@ int damage;
   return (dispel);
 }
 
-/* Attempt to turn (confuse) undead creatures.	-RAK-	*/
+/* Attempt to turn (confuse) undead creatures.  -RAK-	*/
 int
 turn_undead()
 {
@@ -2010,7 +2010,7 @@ warding_glyph()
   }
 }
 
-/* Lose a strength point.				-RAK-	*/
+/* Lose a strength point.  			-RAK-	*/
 void
 lose_str()
 {
@@ -2021,7 +2021,7 @@ lose_str()
     msg_print("You feel sick for a moment,  it passes.");
 }
 
-/* Lose an intelligence point.				-RAK-	*/
+/* Lose an intelligence point.  			-RAK-	*/
 void
 lose_int()
 {
@@ -2032,7 +2032,7 @@ lose_int()
     msg_print("You become dizzy for a moment,  it passes.");
 }
 
-/* Lose a wisdom point.					-RAK-	*/
+/* Lose a wisdom point.  				-RAK-	*/
 void
 lose_wis()
 {
@@ -2043,7 +2043,7 @@ lose_wis()
     msg_print("You feel naive for a moment,  it passes.");
 }
 
-/* Lose a dexterity point.				-RAK-	*/
+/* Lose a dexterity point.  			-RAK-	*/
 void
 lose_dex()
 {
@@ -2054,7 +2054,7 @@ lose_dex()
     msg_print("You feel sore for a moment,  it passes.");
 }
 
-/* Lose a constitution point.				-RAK-	*/
+/* Lose a constitution point.  			-RAK-	*/
 void
 lose_con()
 {
@@ -2065,7 +2065,7 @@ lose_con()
     msg_print("You feel sick for a moment,  it passes.");
 }
 
-/* Lose a charisma point.				-RAK-	*/
+/* Lose a charisma point.  			-RAK-	*/
 void
 lose_chr()
 {
@@ -2076,7 +2076,7 @@ lose_chr()
     msg_print("Your skin starts to itch, but feels better now.");
 }
 
-/* Lose experience					-RAK-	*/
+/* Lose experience  				-RAK-	*/
 void lose_exp(amount) int32 amount;
 {
   register int i;
@@ -2112,7 +2112,7 @@ void lose_exp(amount) int32 amount;
   }
 }
 
-/* Slow Poison						-RAK-	*/
+/* Slow Poison  					-RAK-	*/
 int
 slow_poison()
 {
@@ -2130,13 +2130,13 @@ slow_poison()
   return (slow);
 }
 
-/* Bless						-RAK-	*/
+/* Bless  					-RAK-	*/
 void bless(amount) int amount;
 {
   py.flags.blessed += amount;
 }
 
-/* Detect Invisible for period of time			-RAK-	*/
+/* Detect Invisible for period of time  		-RAK-	*/
 void detect_inv2(amount) int amount;
 {
   py.flags.detect_inv += amount;
@@ -2176,10 +2176,10 @@ static void replace_spot(y, x, typ) int y, x, typ;
   if (c_ptr->cptr > 1) delete_monster((int)c_ptr->cptr);
 }
 
-/* The spell of destruction.				-RAK-	*/
-/* NOTE : Winning creatures that are deleted will be considered	 */
-/*	  as teleporting to another level.  This will NOT win the*/
-/*	  game.						       */
+/* The spell of destruction.  			-RAK-	*/
+/* NOTE : Winning creatures that are deleted will be considered   */
+/*    as teleporting to another level.  This will NOT win the*/
+/*    game.						       */
 void destroy_area(y, x) register int y, x;
 {
   register int i, j, k;
@@ -2201,7 +2201,7 @@ void destroy_area(y, x) register int y, x;
   py.flags.blind += 10 + randint(10);
 }
 
-/* Enchants a plus onto an item.			-RAK-	*/
+/* Enchants a plus onto an item.  		-RAK-	*/
 int enchant(plusses, limit) int16* plusses;
 int16 limit; /* maximum bonus allowed; usually 10, but weapon's maximum damage
                 when enchanting melee weapons to damage */
@@ -2224,7 +2224,7 @@ int16 limit; /* maximum bonus allowed; usually 10, but weapon's maximum damage
   return (res);
 }
 
-/* Removes curses from items in inventory		-RAK-	*/
+/* Removes curses from items in inventory  	-RAK-	*/
 int
 remove_curse()
 {
@@ -2255,7 +2255,7 @@ remove_curse()
   return (result);
 }
 
-/* Restores any drained experience			-RAK-	*/
+/* Restores any drained experience  		-RAK-	*/
 int
 restore_level()
 {

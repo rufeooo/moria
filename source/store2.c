@@ -150,15 +150,15 @@ static char* comment6[5] = {"I must have heard you wrong.", "What was that?",
 
 extern int16 last_store_inc;
 
-/* Comments vary.					-RAK-	*/
-/* Comment one : Finished haggling				*/
+/* Comments vary.  				-RAK-	*/
+/* Comment one : Finished haggling  			*/
 static void
 prt_comment1()
 {
   msg_print(comment1[randint(14) - 1]);
 }
 
-/* %A1 is offer, %A2 is asking.		*/
+/* %A1 is offer, %A2 is asking.  	*/
 static void prt_comment2(offer, asking, final) int32 offer, asking;
 int final;
 {
@@ -189,7 +189,7 @@ int final;
   msg_print(comment);
 }
 
-/* Kick 'da bum out.					-RAK-	*/
+/* Kick 'da bum out.  				-RAK-	*/
 static void
 prt_comment4()
 {
@@ -212,7 +212,7 @@ prt_comment6()
   msg_print(comment6[randint(5) - 1]);
 }
 
-/* Displays the set of commands				-RAK-	*/
+/* Displays the set of commands  			-RAK-	*/
 static void
 display_commands()
 {
@@ -223,7 +223,7 @@ display_commands()
   prt("ESC) Exit from Building.        ^R) Redraw the screen.", 23, 0);
 }
 
-/* Displays the set of commands				-RAK-	*/
+/* Displays the set of commands  			-RAK-	*/
 static void haggle_commands(typ) int typ;
 {
   if (typ == -1)
@@ -234,7 +234,7 @@ static void haggle_commands(typ) int typ;
   erase_line(23, 0); /* clear last line */
 }
 
-/* Displays a store's inventory				-RAK-	*/
+/* Displays a store's inventory  			-RAK-	*/
 static void display_inventory(store_num, start) int store_num, start;
 {
   register store_type* s_ptr;
@@ -278,7 +278,7 @@ static void display_inventory(store_num, start) int store_num, start;
     erase_line(17, 60);
 }
 
-/* Re-displays only a single cost			-RAK-	*/
+/* Re-displays only a single cost  		-RAK-	*/
 static void display_cost(store_num, pos) int store_num, pos;
 {
   register int i;
@@ -297,7 +297,7 @@ static void display_cost(store_num, pos) int store_num, pos;
   prt(out_val, i + 5, 59);
 }
 
-/* Displays players gold					-RAK-	*/
+/* Displays players gold  				-RAK-	*/
 static void
 store_prt_gold()
 {
@@ -307,7 +307,7 @@ store_prt_gold()
   prt(out_val, 18, 17);
 }
 
-/* Displays store					-RAK-	*/
+/* Displays store  				-RAK-	*/
 static void display_store(store_num, cur_top) int store_num, cur_top;
 {
   register store_type* s_ptr;
@@ -322,7 +322,7 @@ static void display_store(store_num, cur_top) int store_num, cur_top;
   display_inventory(store_num, cur_top);
 }
 
-/* Get the ID of a store item and return it's value	-RAK-	*/
+/* Get the ID of a store item and return it's value  -RAK-	*/
 static int get_store_item(com_val, pmt, i, j) int* com_val;
 char* pmt;
 register int i, j;
@@ -348,7 +348,7 @@ register int i, j;
   return (flag);
 }
 
-/* Increase the insult counter and get angry if too many -RAK-	*/
+/* Increase the insult counter and get angry if too many -RAK-  */
 static int increase_insults(store_num) int store_num;
 {
   register int increase;
@@ -367,7 +367,7 @@ static int increase_insults(store_num) int store_num;
   return (increase);
 }
 
-/* Decrease insults					-RAK-	*/
+/* Decrease insults  				-RAK-	*/
 static void decrease_insults(store_num) int store_num;
 {
   register store_type* s_ptr;
@@ -376,7 +376,7 @@ static void decrease_insults(store_num) int store_num;
   if (s_ptr->insult_cur != 0) s_ptr->insult_cur--;
 }
 
-/* Have insulted while haggling				-RAK-	*/
+/* Have insulted while haggling  			-RAK-	*/
 static int haggle_insults(store_num) int store_num;
 {
   register int haggle;
@@ -483,7 +483,7 @@ int num_offer, factor;
   return (receive);
 }
 
-/* Haggling routine					-RAK-	*/
+/* Haggling routine  				-RAK-	*/
 static int purchase_haggle(store_num, price, item) int store_num;
 int32* price;
 inven_type* item;
@@ -620,7 +620,7 @@ inven_type* item;
   return (purchase);
 }
 
-/* Haggling routine					-RAK-	*/
+/* Haggling routine  				-RAK-	*/
 static int sell_haggle(store_num, price, item) int store_num;
 int32* price;
 inven_type* item;
@@ -785,7 +785,7 @@ the price.");
   return (sell);
 }
 
-/* Buy an item from a store				-RAK-	*/
+/* Buy an item from a store  			-RAK-	*/
 static int store_purchase(store_num, cur_top) int store_num;
 int* cur_top;
 {
@@ -799,7 +799,7 @@ int* cur_top;
 
   purchase = FALSE;
   s_ptr = &store[store_num];
-  /* i == number of objects shown on screen	*/
+  /* i == number of objects shown on screen  */
   if (*cur_top == 12)
     i = s_ptr->store_ctr - 1 - 12;
   else if (s_ptr->store_ctr > 11)
@@ -807,10 +807,10 @@ int* cur_top;
   else
     i = s_ptr->store_ctr - 1;
   if (s_ptr->store_ctr < 1) msg_print("I am currently out of stock.");
-  /* Get the item number to be bought		*/
+  /* Get the item number to be bought  	*/
   else if (get_store_item(&item_val, "Which item are you interested in? ", 0,
                           i)) {
-    item_val = item_val + *cur_top; /* TRUE item_val	*/
+    item_val = item_val + *cur_top; /* TRUE item_val  */
     take_one_item(&sell_obj, &s_ptr->store_inven[item_val].sitem);
     if (inven_check_num(&sell_obj)) {
       if (s_ptr->store_inven[item_val].scost > 0) {
@@ -864,7 +864,7 @@ int* cur_top;
   return (purchase);
 }
 
-/* Sell an item to the store				-RAK-	*/
+/* Sell an item to the store  			-RAK-	*/
 static int store_sell(store_num, cur_top) int store_num, *cur_top;
 {
   int item_val, item_pos;
@@ -948,7 +948,7 @@ static int store_sell(store_num, cur_top) int store_num, *cur_top;
   return (sell);
 }
 
-/* Entering a store					-RAK-	*/
+/* Entering a store  				-RAK-	*/
 void enter_store(store_num) int store_num;
 {
   int cur_top, tmp_chr;
@@ -980,15 +980,15 @@ void enter_store(store_num) int store_num;
             }
             break;
           case 'E':
-          case 'e': /* Equipment List	*/
+          case 'e': /* Equipment List  */
           case 'I':
-          case 'i': /* Inventory		*/
+          case 'i': /* Inventory  	*/
           case 'T':
-          case 't': /* Take off		*/
+          case 't': /* Take off  	*/
           case 'W':
-          case 'w': /* Wear			*/
+          case 'w': /* Wear  		*/
           case 'X':
-          case 'x': /* Switch weapon		*/
+          case 'x': /* Switch weapon  	*/
             tmp_chr = py.stats.use_stat[A_CHR];
             do {
               inven_command(command);

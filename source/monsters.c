@@ -22,139 +22,139 @@
 #include "constant.h"
 #include "types.h"
 
-/* Following are creature arrays and variables			*/
-/* Creatures must be defined here				*/
-/*	See types.h under creature_type for a complete list
-        of all variables for creatures.	 Some of the less obvious
+/* Following are creature arrays and variables  		*/
+/* Creatures must be defined here  			*/
+/*  See types.h under creature_type for a complete list
+        of all variables for creatures.   Some of the less obvious
         are explained below.
 
-Hit points:	#1, #2: where #2 is the range of each roll and
+Hit points:  #1, #2: where #2 is the range of each roll and
                 #1 is the number of added up rolls to make.
                 Example: a creature with 5 eight-sided hit die
                 is given {5,8}.
 
         Attack types:
-        1	Normal attack
-        2	Poison Strength
-        3	Confusion attack
-        4	Fear attack
-        5	Fire attack
-        6	Acid attack
-        7	Cold attack
-        8	Lightning attack
-        9	Corrosion attack
-        10	Blindness attack
-        11	Paralysis attack
-        12	Steal Money
-        13	Steal Object
-        14	Poison
-        15	Lose dexterity
-        16	Lose constitution
-        17	Lose intelligence
-        18	Lose wisdom
-        19	Lose experience
-        20	Aggravation
-        21	Disenchants
-        22	Eats food
-        23	Eats light
-        24	Eats charges
-        99	Blank
+        1  Normal attack
+        2  Poison Strength
+        3  Confusion attack
+        4  Fear attack
+        5  Fire attack
+        6  Acid attack
+        7  Cold attack
+        8  Lightning attack
+        9  Corrosion attack
+        10  Blindness attack
+        11  Paralysis attack
+        12  Steal Money
+        13  Steal Object
+        14  Poison
+        15  Lose dexterity
+        16  Lose constitution
+        17  Lose intelligence
+        18  Lose wisdom
+        19  Lose experience
+        20  Aggravation
+        21  Disenchants
+        22  Eats food
+        23  Eats light
+        24  Eats charges
+        99  Blank
 
         Attack descriptions:
-        1	hits you.
-        2	bites you.
-        3	claws you.
-        4	stings you.
-        5	touches you.
-        6	kicks you.
-        7	gazes at you.
-        8	breathes on you.
-        9	spits on you.
-        10	makes a horrible wail.
-        11	embraces you.
-        12	crawls on you.
-        13	releases a cloud of spores.
-        14	begs you for money.
-        15	You've been slimed.
-        16	crushes you.
-        17	tramples you.
-        18	drools on you.
-        19	insults you.
-        99	is repelled.
+        1  hits you.
+        2  bites you.
+        3  claws you.
+        4  stings you.
+        5  touches you.
+        6  kicks you.
+        7  gazes at you.
+        8  breathes on you.
+        9  spits on you.
+        10  makes a horrible wail.
+        11  embraces you.
+        12  crawls on you.
+        13  releases a cloud of spores.
+        14  begs you for money.
+        15  You've been slimed.
+        16  crushes you.
+        17  tramples you.
+        18  drools on you.
+        19  insults you.
+        99  is repelled.
 
 Example:  For a creature which bites for 1d6, then stings for
           2d4 and loss of dex you would use:
                 {1,2,1,6},{15,4,2,4}
 
         CMOVE flags:
-Movement.	00000001	Move only to attack
-.	00000002	Move, attack normal
-.	00000008	20% random movement
-.	00000010	40% random movement
-.	00000020	75% random movement
-Special +	00010000	Invisible movement
-+	00020000	Move through door
-+	00040000	Move through wall
-+	00080000	Move through creatures
-+	00100000	Picks up objects
-+	00200000	Multiply monster
-Carries =	01000000	Carries objects.
-=	02000000	Carries gold.
-=	04000000	Has 60% of time.
-=	08000000	Has 90% of time.
-=	10000000	1d2 objects/gold.
-=	20000000	2d2 objects/gold.
-=	40000000	4d2 objects/gold.
-Special ~	80000000	Win-the-Game creature.
+Movement.  00000001	Move only to attack
+.  00000002	Move, attack normal
+.  00000008	20% random movement
+.  00000010	40% random movement
+.  00000020	75% random movement
+Special +  00010000	Invisible movement
++  00020000	Move through door
++  00040000	Move through wall
++  00080000	Move through creatures
++  00100000	Picks up objects
++  00200000	Multiply monster
+Carries =  01000000	Carries objects.
+=  02000000	Carries gold.
+=  04000000	Has 60% of time.
+=  08000000	Has 90% of time.
+=  10000000	1d2 objects/gold.
+=  20000000	2d2 objects/gold.
+=  40000000	4d2 objects/gold.
+Special ~  80000000	Win-the-Game creature.
 
         SPELL Flags:
-Frequency	000001	  1	These add up to x.  Then
-(1 in x).	000002	  2	if RANDINT(X) = 1 the
-.	000004	  4	creature casts a spell.
-.	000008	  8
-Spells	=	000010	Teleport short (blink)
-=	000020	Teleport long
-=	000040	Teleport player to monster
-=	000080	Cause light wound
-=	000100	Cause serious wound
-=	000200	Hold person (Paralysis)
-=	000400	Cause blindness
-=	000800	Cause confusion
-=	001000	Cause fear
-=	002000	Summon monster
-=	004000	Summon undead
-=	008000	Slow Person
-=	010000	Drain Mana
-=	020000	Not Used
-=	040000	Not Used
-Breath/	+	080000	Breathe/Resist Lightning
-Resist	+	100000	Breathe/Resist Gas
-+	200000	Breathe/Resist Acid
-+	400000	Breathe/Resist Frost
-+	800000	Breathe/Resist Fire
+Frequency  000001	  1	These add up to x.  Then
+(1 in x).  000002	  2	if RANDINT(X) = 1 the
+.  000004	  4	creature casts a spell.
+.  000008	  8
+Spells  =	000010	Teleport short (blink)
+=  000020	Teleport long
+=  000040	Teleport player to monster
+=  000080	Cause light wound
+=  000100	Cause serious wound
+=  000200	Hold person (Paralysis)
+=  000400	Cause blindness
+=  000800	Cause confusion
+=  001000	Cause fear
+=  002000	Summon monster
+=  004000	Summon undead
+=  008000	Slow Person
+=  010000	Drain Mana
+=  020000	Not Used
+=  040000	Not Used
+Breath/  +	080000	Breathe/Resist Lightning
+Resist  +	100000	Breathe/Resist Gas
++  200000	Breathe/Resist Acid
++  400000	Breathe/Resist Frost
++  800000	Breathe/Resist Fire
 
         CDEFENSE flags:
-        0001	Hurt by Slay Dragon.
-        0002	Hurt by Slay Animal.
-        0004	Hurt by Slay Evil.
-        0008	Hurt by Slay Undead.
-        0010	Hurt by Frost.
-        0020	Hurt by Fire.
-        0040	Hurt by Poison.
-        0080	Hurt by Acid.
-        0100	Hurt by Light-Wand.
-        0200	Hurt by Stone-to-Mud.
-        0400	Not used.
-        0800	Not used.
-        1000	Cannot be charmed or slept.
-        2000	Can be seen with infra-vision.
-        4000	Max Hit points.
-        8000	Not used.
+        0001  Hurt by Slay Dragon.
+        0002  Hurt by Slay Animal.
+        0004  Hurt by Slay Evil.
+        0008  Hurt by Slay Undead.
+        0010  Hurt by Frost.
+        0020  Hurt by Fire.
+        0040  Hurt by Poison.
+        0080  Hurt by Acid.
+        0100  Hurt by Light-Wand.
+        0200  Hurt by Stone-to-Mud.
+        0400  Not used.
+        0800  Not used.
+        1000  Cannot be charmed or slept.
+        2000  Can be seen with infra-vision.
+        4000  Max Hit points.
+        8000  Not used.
 
 
-Sleep (sleep)	:	A measure in turns of how fast creature
+Sleep (sleep)  :	A measure in turns of how fast creature
                         will notice player (on the average).
-Area of affect (aaf) :	Max range that creature is able to "notice"
+Area of affect (aaf) :  Max range that creature is able to "notice"
                         the player.
                                                                 */
 
@@ -3035,9 +3035,9 @@ creature_type c_list[MAX_CREATURES] = {
      {3, 3},
      {132, 0, 0, 0},
      29},
-    /* Now things are going to get tough.			 */
+    /* Now things are going to get tough.  		 */
     /* Some of the creatures have Max hit points, denoted in */
-    /* their CDEFENSE flags as the '4000' bit set		 */
+    /* their CDEFENSE flags as the '4000' bit set  	 */
     {"Skeleton Troll",
      0x00020002L,
      0x00000000L,
@@ -3766,9 +3766,9 @@ creature_type c_list[MAX_CREATURES] = {
      {52, 40},
      {57, 57, 42, 0},
      40},
-    /* Winning creatures should follow here.			 */
-    /* Winning creatures are denoted by the 32 bit in CMOVE		 */
-    /* Iggy is not a win creature, just a royal pain in the ass.	 */
+    /* Winning creatures should follow here.  		 */
+    /* Winning creatures are denoted by the 32 bit in CMOVE  	 */
+    /* Iggy is not a win creature, just a royal pain in the ass.   */
     {"Evil Iggy",
      0x7F130002L,
      0x0001D713L,
@@ -3782,7 +3782,7 @@ creature_type c_list[MAX_CREATURES] = {
      {60, 40},
      {81, 150, 0, 0},
      50},
-    /* Here is the only actual win creature.			 */
+    /* Here is the only actual win creature.  		 */
     {"Balrog",
      0xFF1F0002L,
      0x0081C743L,
@@ -4019,7 +4019,7 @@ struct m_attack_type monster_attacks[N_MONS_ATTS] = {
 monster_type m_list[MAX_MALLOC];
 int16 m_level[MAX_MONS_LEVEL + 1];
 
-/* Blank monster values	*/
+/* Blank monster values  */
 monster_type blank_monster = {0, 0, 0, 0, 0, 0, 0, FALSE, 0, FALSE};
-int16 mfptr;        /* Cur free monster ptr	*/
-int16 mon_tot_mult; /* # of repro's of creature	*/
+int16 mfptr;        /* Cur free monster ptr  */
+int16 mon_tot_mult; /* # of repro's of creature  */

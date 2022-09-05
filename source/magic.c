@@ -23,7 +23,7 @@
 #include "externs.h"
 #include "types.h"
 
-/* Throw a magic spell					-RAK-	*/
+/* Throw a magic spell  				-RAK-	*/
 void
 cast()
 {
@@ -183,7 +183,7 @@ cast()
           default:
             break;
         }
-        /* End of spells.				     */
+        /* End of spells.  			     */
         if (!free_turn_flag) {
           p_ptr = &py.misc;
           if ((spell_worked & (1L << choice)) == 0) {

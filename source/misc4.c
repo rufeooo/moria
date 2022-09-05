@@ -38,7 +38,7 @@
 #include <strings.h>
 #endif
 
-/* Add a comment to an object description.		-CJS- */
+/* Add a comment to an object description.  	-CJS- */
 void
 scribe_object()
 {
@@ -65,7 +65,7 @@ scribe_object()
     msg_print("You are not carrying anything to inscribe.");
 }
 
-/* Append an additional comment to an object description.	-CJS- */
+/* Append an additional comment to an object description.  -CJS- */
 void add_inscribe(i_ptr, type) inven_type* i_ptr;
 int8u type;
 {
@@ -79,7 +79,7 @@ char* str;
   (void)strcpy(i_ptr->inscrip, str);
 }
 
-/* We need to reset the view of things.			-CJS- */
+/* We need to reset the view of things.  		-CJS- */
 void
 check_view()
 {
@@ -87,15 +87,15 @@ check_view()
   register cave_type *c_ptr, *d_ptr;
 
   c_ptr = &cave[char_row][char_col];
-  /* Check for new panel		   */
+  /* Check for new panel  	   */
   if (get_panel(char_row, char_col, FALSE)) prt_map();
-  /* Move the light source		   */
+  /* Move the light source  	   */
   move_light(char_row, char_col, char_row, char_col);
-  /* A room of light should be lit.	 */
+  /* A room of light should be lit.   */
   if (c_ptr->fval == LIGHT_FLOOR) {
     if ((py.flags.blind < 1) && !c_ptr->pl) light_room(char_row, char_col);
   }
-  /* In doorway of light-room?		   */
+  /* In doorway of light-room?  	   */
   else if (c_ptr->lr && (py.flags.blind < 1)) {
     for (i = (char_row - 1); i <= (char_row + 1); i++)
       for (j = (char_col - 1); j <= (char_col + 1); j++) {

@@ -39,7 +39,7 @@ static void insert_store();
 static void store_create();
 #endif
 
-/* Returns the value for any given object		-RAK-	*/
+/* Returns the value for any given object  	-RAK-	*/
 int32 item_value(i_ptr) register inven_type* i_ptr;
 {
   register int32 value;
@@ -50,7 +50,7 @@ int32 item_value(i_ptr) register inven_type* i_ptr;
     value = 0;
   else if (((i_ptr->tval >= TV_BOW) && (i_ptr->tval <= TV_SWORD)) ||
            ((i_ptr->tval >= TV_BOOTS) &&
-            (i_ptr->tval <= TV_SOFT_ARMOR))) { /* Weapons and armor	*/
+            (i_ptr->tval <= TV_SOFT_ARMOR))) { /* Weapons and armor  */
     if (!known2_p(i_ptr))
       value = object_list[i_ptr->index].cost;
     else if ((i_ptr->tval >= TV_BOW) && (i_ptr->tval <= TV_SWORD)) {
@@ -69,7 +69,7 @@ int32 item_value(i_ptr) register inven_type* i_ptr;
         value = i_ptr->cost + i_ptr->toac * 100;
     }
   } else if ((i_ptr->tval >= TV_SLING_AMMO) &&
-             (i_ptr->tval <= TV_SPIKE)) { /* Ammo			*/
+             (i_ptr->tval <= TV_SPIKE)) { /* Ammo  		*/
     if (!known2_p(i_ptr))
       value = object_list[i_ptr->index].cost;
     else {
@@ -86,15 +86,14 @@ int32 item_value(i_ptr) register inven_type* i_ptr;
     }
   } else if ((i_ptr->tval == TV_SCROLL1) || (i_ptr->tval == TV_SCROLL2) ||
              (i_ptr->tval == TV_POTION1) ||
-             (i_ptr->tval ==
-              TV_POTION2)) { /* Potions, Scrolls, and Food	*/
+             (i_ptr->tval == TV_POTION2)) { /* Potions, Scrolls, and Food  */
     if (!known1_p(i_ptr)) value = 20;
   } else if (i_ptr->tval == TV_FOOD) {
     if ((i_ptr->subval < (ITEM_SINGLE_STACK_MIN + MAX_MUSH)) &&
         !known1_p(i_ptr))
       value = 1;
   } else if ((i_ptr->tval == TV_AMULET) ||
-             (i_ptr->tval == TV_RING)) { /* Rings and amulets	*/
+             (i_ptr->tval == TV_RING)) { /* Rings and amulets  */
     if (!known1_p(i_ptr))
       /* player does not know what type of ring/amulet this is */
       value = 45;
@@ -134,7 +133,7 @@ int32 item_value(i_ptr) register inven_type* i_ptr;
   return (value);
 }
 
-/* Asking price for an item				-RAK-	*/
+/* Asking price for an item  			-RAK-	*/
 int32 sell_price(snum, max_sell, min_sell, item) int snum;
 int32 *max_sell, *min_sell;
 inven_type* item;
@@ -157,7 +156,7 @@ inven_type* item;
     return (0);
 }
 
-/* Check to see if he will be carrying too many objects	-RAK-	*/
+/* Check to see if he will be carrying too many objects  -RAK-	*/
 int store_check_num(t_ptr, store_num) inven_type* t_ptr;
 int store_num;
 {
@@ -182,7 +181,7 @@ int store_num;
   return (store_check);
 }
 
-/* Insert INVEN_MAX at given location	*/
+/* Insert INVEN_MAX at given location  */
 static void insert_store(store_num, pos, icost, i_ptr) register int pos;
 int store_num;
 int32 icost;
@@ -199,7 +198,7 @@ inven_type* i_ptr;
   s_ptr->store_ctr++;
 }
 
-/* Add the item in INVEN_MAX to stores inventory.	-RAK-	*/
+/* Add the item in INVEN_MAX to stores inventory.  -RAK-	*/
 void store_carry(store_num, ipos, t_ptr) int store_num;
 int* ipos;
 inven_type* t_ptr;
@@ -221,7 +220,7 @@ inven_type* t_ptr;
     do {
       i_ptr = &s_ptr->store_inven[item_val].sitem;
       if (typ == i_ptr->tval) {
-        if (subt == i_ptr->subval && /* Adds to other item	*/
+        if (subt == i_ptr->subval && /* Adds to other item  */
             subt >= ITEM_SINGLE_STACK_MIN &&
             (subt < ITEM_GROUP_MIN || i_ptr->p1 == t_ptr->p1)) {
           *ipos = item_val;
@@ -239,14 +238,14 @@ inven_type* t_ptr;
             i_ptr->number = 24;
           flag = TRUE;
         }
-      } else if (typ > i_ptr->tval) { /* Insert into list		*/
+      } else if (typ > i_ptr->tval) { /* Insert into list  	*/
         insert_store(store_num, item_val, icost, t_ptr);
         flag = TRUE;
         *ipos = item_val;
       }
       item_val++;
     } while ((item_val < s_ptr->store_ctr) && (!flag));
-    if (!flag) /* Becomes last item in list	*/
+    if (!flag) /* Becomes last item in list  */
     {
       insert_store(store_num, (int)s_ptr->store_ctr, icost, t_ptr);
       *ipos = s_ptr->store_ctr - 1;
@@ -254,8 +253,8 @@ inven_type* t_ptr;
   }
 }
 
-/* Destroy an item in the stores inventory.  Note that if	*/
-/* "one_of" is false, an entire slot is destroyed	-RAK-	*/
+/* Destroy an item in the stores inventory.  Note that if  */
+/* "one_of" is false, an entire slot is destroyed  -RAK-	*/
 void store_destroy(store_num, item_val, one_of) int store_num, item_val;
 int one_of;
 {
@@ -289,7 +288,7 @@ int one_of;
   }
 }
 
-/* Initializes the stores with owners			-RAK-	*/
+/* Initializes the stores with owners  		-RAK-	*/
 void
 store_init()
 {
@@ -312,7 +311,7 @@ store_init()
   }
 }
 
-/* Creates an item and inserts it into store's inven	-RAK-	*/
+/* Creates an item and inserts it into store's inven  -RAK-	*/
 static void store_create(store_num) int store_num;
 {
   register int i, tries;
@@ -329,7 +328,7 @@ static void store_create(store_num) int store_num;
     magic_treasure(cur_pos, OBJ_TOWN_LEVEL);
     t_ptr = &t_list[cur_pos];
     if (store_check_num(t_ptr, store_num)) {
-      if ((t_ptr->cost > 0) && /* Item must be good	*/
+      if ((t_ptr->cost > 0) && /* Item must be good  */
           (t_ptr->cost < owners[s_ptr->owner].max_cost)) {
         /* equivalent to calling ident_spell(), except will not
            change the object_ident array */
@@ -343,7 +342,7 @@ static void store_create(store_num) int store_num;
   pusht((int8u)cur_pos);
 }
 
-/* Initialize and up-keep the store's inventory.		-RAK-	*/
+/* Initialize and up-keep the store's inventory.  	-RAK-	*/
 void
 store_maint()
 {
@@ -386,7 +385,7 @@ int32 minprice;
   return (flagnoneed);
 }
 
-/* update the bargin info					-DJB- */
+/* update the bargin info  				-DJB- */
 void updatebargain(store_num, price, minprice) int store_num;
 int32 price, minprice;
 {

@@ -151,11 +151,11 @@ struct screen {
 };
 #endif
 
-/* Fooling lint. Unfortunately, c defines all the TIO.	  -CJS-
+/* Fooling lint. Unfortunately, c defines all the TIO.    -CJS-
    constants to be long, and lint expects them to be int. Also,
    ioctl is sometimes called with just two arguments. The
    following definition keeps lint happy. It may need to be
-   reset for different systems.	 */
+   reset for different systems.   */
 #ifndef MAC
 #ifdef lint
 #ifdef Pyramid
@@ -180,7 +180,7 @@ static Ioctl(i, l, p) char* p;
 
 #if !defined(USG) && defined(lint)
 /* This use_value hack is for curses macros which return a value,
-   but don't shut up about it when you try to tell them (void).	 */
+   but don't shut up about it when you try to tell them (void).   */
 /* only needed for Berkeley UNIX */
 int Use_value;
 #define use_value Use_value +=
@@ -255,7 +255,7 @@ static WINDOW* tempscr; /* Spare window for VMS CTRL('R'). */
 
 #ifndef MAC
 #ifdef SIGTSTP
-/* suspend()							   -CJS-
+/* suspend()  						   -CJS-
    Handle the stop and start signals. This ensures that the log
    is up to date, and that the terminal is fully reset and
    restored.  */
@@ -394,7 +394,7 @@ init_curses()
       (void) addch('\t');
       getyx(stdscr, y, x);
       if (y != 0 || x != i*8)
-	break;
+  break;
     }
   if (i != 10)
     {
@@ -405,7 +405,7 @@ init_curses()
 }
 #endif
 
-/* Set up the terminal into a suitable state for moria.	 -CJS- */
+/* Set up the terminal into a suitable state for moria.   -CJS- */
 void
 moriaterm()
 #ifdef MAC
@@ -500,7 +500,7 @@ moriaterm()
 }
 #endif
 
-/* Dump IO to buffer					-RAK-	*/
+/* Dump IO to buffer  				-RAK-	*/
 void put_buffer(out_str, row, col) char* out_str;
 int row, col;
 #ifdef MAC
@@ -533,7 +533,7 @@ int row, col;
 }
 #endif
 
-/* Dump the IO buffer to terminal			-RAK-	*/
+/* Dump the IO buffer to terminal  		-RAK-	*/
 void
 put_qio()
 {
@@ -545,7 +545,7 @@ put_qio()
 #endif
 }
 
-/* Put the terminal in the original mode.			   -CJS- */
+/* Put the terminal in the original mode.  		   -CJS- */
 void
 restore_term()
 #ifdef MAC
@@ -821,10 +821,10 @@ shell_out()
 #endif
 #endif
 
-/* Returns a single character input from the terminal.	This silently -CJS-
+/* Returns a single character input from the terminal.  This silently -CJS-
    consumes ^R to redraw the screen and reset the terminal, so that this
    operation can always be performed at any input prompt.  inkey() never
-   returns ^R.	*/
+   returns ^R.  */
 char
 inkey()
 #ifdef MAC
@@ -856,7 +856,7 @@ inkey()
   vtype tmp_str;
 #endif
 
-  put_qio();         /* Dump IO buffer		*/
+  put_qio();         /* Dump IO buffer  	*/
   command_count = 0; /* Just to be safe -CJS- */
   while (TRUE) {
 #ifdef MSDOS
@@ -1008,7 +1008,7 @@ inkeydir()
 }
 #endif
 
-/* Flush the buffer					-RAK-	*/
+/* Flush the buffer  				-RAK-	*/
 void
 flush()
 #ifdef MAC
@@ -1039,7 +1039,7 @@ flush()
 }
 #endif
 
-/* Clears given line of text				-RAK-	*/
+/* Clears given line of text  			-RAK-	*/
 void erase_line(row, col) int row;
 int col;
 #ifdef MAC
@@ -1108,7 +1108,7 @@ void clear_from(row) int row;
 }
 #endif
 
-/* Outputs a char to a given interpolated y, x position	-RAK-	*/
+/* Outputs a char to a given interpolated y, x position  -RAK-	*/
 /* sign bit of a character used to indicate standout mode. -CJS */
 void print(ch, row, col) char ch;
 int row;
@@ -1146,7 +1146,7 @@ int col;
 }
 #endif
 
-/* Moves the cursor to a given interpolated y, x position	-RAK-	*/
+/* Moves the cursor to a given interpolated y, x position  -RAK-	*/
 void move_cursor_relative(row, col) int row;
 int col;
 #ifdef MAC
@@ -1186,7 +1186,7 @@ void count_msg_print(p) char* p;
   command_count = i;
 }
 
-/* Outputs a line to a given y, x position		-RAK-	*/
+/* Outputs a line to a given y, x position  	-RAK-	*/
 void prt(str_buff, row, col) char* str_buff;
 int row;
 int col;
@@ -1225,8 +1225,8 @@ void move_cursor(row, col) int row, col;
 }
 #endif
 
-/* Outputs message to top line of screen				*/
-/* These messages are kept for later reference.	 */
+/* Outputs message to top line of screen  			*/
+/* These messages are kept for later reference.   */
 void msg_print(str_buff) char* str_buff;
 {
   register int old_len, new_len;
@@ -1340,8 +1340,8 @@ int get_check(prompt) char* prompt;
     return FALSE;
 }
 
-/* Prompts (optional) and returns ord value of input char	*/
-/* Function returns false if <ESCAPE> is input	*/
+/* Prompts (optional) and returns ord value of input char  */
+/* Function returns false if <ESCAPE> is input  */
 int get_com(prompt, command) char* prompt;
 char* command;
 {
@@ -1375,8 +1375,8 @@ char* command;
 }
 #endif
 
-/* Gets a string terminated by <RETURN>		*/
-/* Function returns false if <ESCAPE> is input	*/
+/* Gets a string terminated by <RETURN>  	*/
+/* Function returns false if <ESCAPE> is input  */
 int get_string(in_str, row, column, slen) char* in_str;
 int row, column, slen;
 {
@@ -1444,13 +1444,13 @@ int row, column, slen;
     }
   } while ((!flag) && (!aborted));
   if (aborted) return (FALSE);
-  /* Remove trailing blanks	*/
+  /* Remove trailing blanks  */
   while (p > in_str && p[-1] == ' ') p--;
   *p = '\0';
   return (TRUE);
 }
 
-/* Pauses for user response before returning		-RAK-	*/
+/* Pauses for user response before returning  	-RAK-	*/
 void pause_line(prt_line) int prt_line;
 {
   prt("[Press any key to continue.]", prt_line, 23);
@@ -1458,9 +1458,9 @@ void pause_line(prt_line) int prt_line;
   erase_line(prt_line, 0);
 }
 
-/* Pauses for user response before returning		-RAK-	*/
-/* NOTE: Delay is for players trying to roll up "perfect"	*/
-/*	characters.  Make them wait a bit.			*/
+/* Pauses for user response before returning  	-RAK-	*/
+/* NOTE: Delay is for players trying to roll up "perfect"  */
+/*  characters.  Make them wait a bit.			*/
 void pause_exit(prt_line, delay) int prt_line;
 int delay;
 {

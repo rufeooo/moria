@@ -25,8 +25,8 @@
 #include "externs.h"
 #include "types.h"
 
-/* Chance of treasure having magic abilities		-RAK-	*/
-/* Chance increases with each dungeon level			 */
+/* Chance of treasure having magic abilities  	-RAK-	*/
+/* Chance increases with each dungeon level  		 */
 void magic_treasure(x, level) int x, level;
 {
   register inven_type* t_ptr;
@@ -67,7 +67,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->toac += 5;
               t_ptr->cost += 2500;
               break;
-            case 2: /* Resist Acid	  */
+            case 2: /* Resist Acid    */
 #ifdef ATARIST_MWC
               t_ptr->flags |= (holder = TR_RES_ACID);
 #else
@@ -77,7 +77,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += 1000;
               break;
             case 3:
-            case 4: /* Resist Fire	  */
+            case 4: /* Resist Fire    */
 #ifdef ATARIST_MWC
               t_ptr->flags |= (holder = TR_RES_FIRE);
 #else
@@ -87,7 +87,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += 600;
               break;
             case 5:
-            case 6: /* Resist Cold	 */
+            case 6: /* Resist Cold   */
 #ifdef ATARIST_MWC
               t_ptr->flags |= (holder = TR_RES_COLD);
 #else
@@ -133,7 +133,7 @@ void magic_treasure(x, level) int x, level;
            before change to treasure distribution, this helps keep same
            number of ego weapons same as before, see also missiles */
         if (magik(3 * special / 2)) switch (randint(16)) {
-            case 1: /* Holy Avenger	 */
+            case 1: /* Holy Avenger   */
 #ifdef ATARIST_MWC
               t_ptr->flags |= (holder = TR_SEE_INVIS | TR_SUST_STAT |
                                         TR_SLAY_UNDEAD | TR_SLAY_EVIL | TR_STR);
@@ -151,7 +151,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += t_ptr->p1 * 500;
               t_ptr->cost += 10000;
               break;
-            case 2: /* Defender	 */
+            case 2: /* Defender   */
 #ifdef ATARIST_MWC
               t_ptr->flags |=
                   (holder = TR_FFALL | TR_RES_LIGHT | TR_SEE_INVIS |
@@ -180,7 +180,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += 3000;
               break;
             case 5:
-            case 6: /* Slay Dragon	 */
+            case 6: /* Slay Dragon   */
               t_ptr->flags |= TR_SLAY_DRAGON;
               t_ptr->tohit += 3;
               t_ptr->todam += 3;
@@ -188,7 +188,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += 4000;
               break;
             case 7:
-            case 8: /* Slay Evil	   */
+            case 8: /* Slay Evil     */
               t_ptr->flags |= TR_SLAY_EVIL;
               t_ptr->tohit += 3;
               t_ptr->todam += 3;
@@ -196,7 +196,7 @@ void magic_treasure(x, level) int x, level;
               t_ptr->cost += 4000;
               break;
             case 9:
-            case 10: /* Slay Undead	  */
+            case 10: /* Slay Undead    */
 #ifdef ATARIST_MWC
               t_ptr->flags |= (holder = TR_SEE_INVIS | TR_SLAY_UNDEAD);
 #else
@@ -529,7 +529,7 @@ void magic_treasure(x, level) int x, level;
       }
       break;
 
-    case TV_RING: /* Rings	      */
+    case TV_RING: /* Rings        */
       switch (t_ptr->subval) {
         case 0:
         case 1:
@@ -573,7 +573,7 @@ void magic_treasure(x, level) int x, level;
             t_ptr->cost = -t_ptr->cost;
           }
           break;
-        case 19: /* Increase damage	      */
+        case 19: /* Increase damage        */
           t_ptr->todam += m_bonus(1, 20, level);
           t_ptr->cost += t_ptr->todam * 100;
           if (magik(cursed)) {
@@ -586,7 +586,7 @@ void magic_treasure(x, level) int x, level;
             t_ptr->cost = -t_ptr->cost;
           }
           break;
-        case 20: /* Increase To-Hit	      */
+        case 20: /* Increase To-Hit        */
           t_ptr->tohit += m_bonus(1, 20, level);
           t_ptr->cost += t_ptr->tohit * 100;
           if (magik(cursed)) {
@@ -599,7 +599,7 @@ void magic_treasure(x, level) int x, level;
             t_ptr->cost = -t_ptr->cost;
           }
           break;
-        case 21: /* Protection	      */
+        case 21: /* Protection        */
           t_ptr->toac += m_bonus(1, 20, level);
           t_ptr->cost += t_ptr->toac * 100;
           if (magik(cursed)) {
@@ -620,7 +620,7 @@ void magic_treasure(x, level) int x, level;
         case 29:
           t_ptr->ident |= ID_NOSHOW_P1;
           break;
-        case 30: /* Slaying	      */
+        case 30: /* Slaying        */
           t_ptr->ident |= ID_SHOW_HITDAM;
           t_ptr->todam += m_bonus(1, 25, level);
           t_ptr->tohit += m_bonus(1, 25, level);
@@ -641,7 +641,7 @@ void magic_treasure(x, level) int x, level;
       }
       break;
 
-    case TV_AMULET: /* Amulets	      */
+    case TV_AMULET: /* Amulets        */
       if (t_ptr->subval < 2) {
         if (magik(cursed)) {
           t_ptr->p1 = -m_bonus(1, 20, level);
@@ -675,7 +675,7 @@ void magic_treasure(x, level) int x, level;
       break;
 
       /* Subval should be even for store, odd for dungeon*/
-      /* Dungeon found ones will be partially charged	 */
+      /* Dungeon found ones will be partially charged   */
     case TV_LIGHT:
       if ((t_ptr->subval % 2) == 1) {
         t_ptr->p1 = randint(t_ptr->p1);
@@ -1064,7 +1064,7 @@ static struct opt_desc {
                {"Display rest/repeat counts", &display_counts},
                {0, 0}};
 
-/* Set or unset various boolean options.		-CJS- */
+/* Set or unset various boolean options.  	-CJS- */
 void
 set_options()
 {

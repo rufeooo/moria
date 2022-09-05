@@ -56,7 +56,7 @@ static char* stat_names[] = {
 #define BLANK_LENGTH 24
 static char blank_string[] = "                        ";
 
-/* Places a particular trap at location y, x		-RAK-	*/
+/* Places a particular trap at location y, x  	-RAK-	*/
 void place_trap(y, x, subval) int y, x, subval;
 {
   register int cur_pos;
@@ -66,7 +66,7 @@ void place_trap(y, x, subval) int y, x, subval;
   invcopy(&t_list[cur_pos], OBJ_TRAP_LIST + subval);
 }
 
-/* Places rubble at location y, x			-RAK-	*/
+/* Places rubble at location y, x  		-RAK-	*/
 void place_rubble(y, x) int y, x;
 {
   register int cur_pos;
@@ -79,7 +79,7 @@ void place_rubble(y, x) int y, x;
   invcopy(&t_list[cur_pos], OBJ_RUBBLE);
 }
 
-/* Places a treasure (Gold or Gems) at given row, column -RAK-	*/
+/* Places a treasure (Gold or Gems) at given row, column -RAK-  */
 void place_gold(y, x) int y, x;
 {
   register int i, cur_pos;
@@ -102,7 +102,7 @@ void place_gold(y, x) int y, x;
     msg_print("You feel something roll beneath your feet.");
 }
 
-/* Returns the array number of a random object		-RAK-	*/
+/* Returns the array number of a random object  	-RAK-	*/
 int get_obj_num(level, must_be_small) int level, must_be_small;
 {
   register int i, j;
@@ -118,7 +118,7 @@ int get_obj_num(level, must_be_small) int level, must_be_small;
     }
 
     /* This code has been added to make it slightly more likely to get the
-       higher level objects.	Originally a uniform distribution over all
+       higher level objects.  Originally a uniform distribution over all
        objects less than or equal to the dungeon level.  This distribution
        makes a level n objects occur approx 2/n% of the time on level n,
        and 1/2n are 0th level. */
@@ -144,7 +144,7 @@ int get_obj_num(level, must_be_small) int level, must_be_small;
   return (i);
 }
 
-/* Places an object at given row, column co-ordinate	-RAK-	*/
+/* Places an object at given row, column co-ordinate  -RAK-	*/
 void place_object(y, x, must_be_small) int y, x, must_be_small;
 {
   register int cur_pos, tmp;
@@ -159,7 +159,7 @@ void place_object(y, x, must_be_small) int y, x, must_be_small;
     msg_print("You feel something roll beneath your feet."); /* -CJS- */
 }
 
-/* Allocates an object for tunnels and rooms		-RAK-	*/
+/* Allocates an object for tunnels and rooms  	-RAK-	*/
 void alloc_object(alloc_set, typ, num) int (*alloc_set)();
 int typ, num;
 {
@@ -188,7 +188,7 @@ int typ, num;
   }
 }
 
-/* Creates objects nearby the coordinates given		-RAK-	*/
+/* Creates objects nearby the coordinates given  	-RAK-	*/
 void random_object(y, x, num) int y, x, num;
 {
   register int i, j, k;
@@ -214,7 +214,7 @@ void random_object(y, x, num) int y, x, num;
   } while (num != 0);
 }
 
-/* Converts stat num into string			-RAK-	*/
+/* Converts stat num into string  		-RAK-	*/
 void cnv_stat(stat, out_val) int8u stat;
 char* out_val;
 {
@@ -231,7 +231,7 @@ char* out_val;
     (void)sprintf(out_val, "%6d", stat);
 }
 
-/* Print character stat in given row, column		-RAK-	*/
+/* Print character stat in given row, column  	-RAK-	*/
 void prt_stat(stat) int stat;
 {
   stat_type out_val1;
@@ -241,7 +241,7 @@ void prt_stat(stat) int stat;
   put_buffer(out_val1, 6 + stat, STAT_COLUMN + 6);
 }
 
-/* Print character info in given row, column		-RAK-	*/
+/* Print character info in given row, column  	-RAK-	*/
 /* the longest title is 13 characters, so only pad to 13 */
 void prt_field(info, row, column) char* info;
 int row, column;
@@ -272,7 +272,7 @@ int row, column;
   put_buffer(out_val, row, column);
 }
 
-/* Print number with header at given row, column	-RAK-	*/
+/* Print number with header at given row, column  -RAK-	*/
 static void prt_num(header, num, row, column) char* header;
 int num, row, column;
 {
@@ -292,7 +292,7 @@ int row, column;
   put_buffer(out_val, row, column);
 }
 
-/* Print number at given row, column	-RAK-	*/
+/* Print number at given row, column  -RAK-	*/
 static void prt_int(num, row, column) int num, row, column;
 {
   vtype out_val;
@@ -301,7 +301,7 @@ static void prt_int(num, row, column) int num, row, column;
   put_buffer(out_val, row, column);
 }
 
-/* Adjustment for wisdom/intelligence				-JWT-	*/
+/* Adjustment for wisdom/intelligence  			-JWT-	*/
 int stat_adj(stat) int stat;
 {
   register int value;
@@ -325,8 +325,8 @@ int stat_adj(stat) int stat;
     return (0);
 }
 
-/* Adjustment for charisma				-RAK-	*/
-/* Percent decrease or increase in price of goods		 */
+/* Adjustment for charisma  			-RAK-	*/
+/* Percent decrease or increase in price of goods  	 */
 int
 chr_adj()
 {
@@ -382,7 +382,7 @@ chr_adj()
     }
 }
 
-/* Returns a character's adjustment to hit points	 -JWT-	 */
+/* Returns a character's adjustment to hit points   -JWT-	 */
 int
 con_adj()
 {
@@ -419,56 +419,56 @@ title_string()
   return p;
 }
 
-/* Prints title of character				-RAK-	*/
+/* Prints title of character  			-RAK-	*/
 void
 prt_title()
 {
   prt_field(title_string(), 4, STAT_COLUMN);
 }
 
-/* Prints level						-RAK-	*/
+/* Prints level  					-RAK-	*/
 void
 prt_level()
 {
   prt_int((int)py.misc.lev, 13, STAT_COLUMN + 6);
 }
 
-/* Prints players current mana points.		 -RAK-	*/
+/* Prints players current mana points.  	 -RAK-	*/
 void
 prt_cmana()
 {
   prt_int(py.misc.cmana, 15, STAT_COLUMN + 6);
 }
 
-/* Prints Max hit points				-RAK-	*/
+/* Prints Max hit points  			-RAK-	*/
 void
 prt_mhp()
 {
   prt_int(py.misc.mhp, 16, STAT_COLUMN + 6);
 }
 
-/* Prints players current hit points			-RAK-	*/
+/* Prints players current hit points  		-RAK-	*/
 void
 prt_chp()
 {
   prt_int(py.misc.chp, 17, STAT_COLUMN + 6);
 }
 
-/* prints current AC					-RAK-	*/
+/* prints current AC  				-RAK-	*/
 void
 prt_pac()
 {
   prt_int(py.misc.dis_ac, 19, STAT_COLUMN + 6);
 }
 
-/* Prints current gold					-RAK-	*/
+/* Prints current gold  				-RAK-	*/
 void
 prt_gold()
 {
   prt_long(py.misc.au, 20, STAT_COLUMN + 6);
 }
 
-/* Prints depth in stat area				-RAK-	*/
+/* Prints depth in stat area  			-RAK-	*/
 void
 prt_depth()
 {
@@ -483,7 +483,7 @@ prt_depth()
   prt(depths, 23, 65);
 }
 
-/* Prints status of hunger				-RAK-	*/
+/* Prints status of hunger  			-RAK-	*/
 void
 prt_hunger()
 {
@@ -495,7 +495,7 @@ prt_hunger()
     put_buffer(&blank_string[BLANK_LENGTH - 6], 23, 0);
 }
 
-/* Prints Blind status					-RAK-	*/
+/* Prints Blind status  				-RAK-	*/
 void
 prt_blind()
 {
@@ -505,7 +505,7 @@ prt_blind()
     put_buffer(&blank_string[BLANK_LENGTH - 5], 23, 7);
 }
 
-/* Prints Confusion status				-RAK-	*/
+/* Prints Confusion status  			-RAK-	*/
 void
 prt_confused()
 {
@@ -515,7 +515,7 @@ prt_confused()
     put_buffer(&blank_string[BLANK_LENGTH - 8], 23, 13);
 }
 
-/* Prints Fear status					-RAK-	*/
+/* Prints Fear status  				-RAK-	*/
 void
 prt_afraid()
 {
@@ -525,7 +525,7 @@ prt_afraid()
     put_buffer(&blank_string[BLANK_LENGTH - 6], 23, 22);
 }
 
-/* Prints Poisoned status				-RAK-	*/
+/* Prints Poisoned status  			-RAK-	*/
 void
 prt_poisoned()
 {
@@ -535,7 +535,7 @@ prt_poisoned()
     put_buffer(&blank_string[BLANK_LENGTH - 8], 23, 29);
 }
 
-/* Prints Searching, Resting, Paralysis, or 'count' status	-RAK-	*/
+/* Prints Searching, Resting, Paralysis, or 'count' status  -RAK-	*/
 void
 prt_state()
 {
@@ -577,7 +577,7 @@ prt_state()
     put_buffer(&blank_string[BLANK_LENGTH - 10], 23, 38);
 }
 
-/* Prints the speed of a character.			-CJS- */
+/* Prints the speed of a character.  		-CJS- */
 void
 prt_speed()
 {
@@ -616,7 +616,7 @@ prt_study()
     put_buffer("Study", 23, 59);
 }
 
-/* Prints winner status on display			-RAK-	*/
+/* Prints winner status on display  		-RAK-	*/
 void
 prt_winner()
 {
@@ -661,7 +661,7 @@ int16 amount;
   return tmp_stat;
 }
 
-/* Set the value of the stat which is actually used.	 -CJS- */
+/* Set the value of the stat which is actually used.   -CJS- */
 void set_use_stat(stat) int stat;
 {
 #ifdef ATARIST_MWC
@@ -689,7 +689,7 @@ void set_use_stat(stat) int stat;
     calc_hitpoints();
 }
 
-/* Increases a stat by one randomized level		-RAK-	*/
+/* Increases a stat by one randomized level  	-RAK-	*/
 int inc_stat(stat) register int stat;
 {
   register int tmp_stat, gain;
@@ -714,7 +714,7 @@ int inc_stat(stat) register int stat;
     return FALSE;
 }
 
-/* Decreases a stat by one randomized level		-RAK-	*/
+/* Decreases a stat by one randomized level  	-RAK-	*/
 int dec_stat(stat) register int stat;
 {
   register int tmp_stat, loss;
@@ -772,7 +772,7 @@ void bst_stat(stat, amount) int stat, amount;
 #endif
 }
 
-/* Returns a character's adjustment to hit.		 -JWT-	 */
+/* Returns a character's adjustment to hit.  	 -JWT-	 */
 int
 tohit_adj()
 {
@@ -817,7 +817,7 @@ tohit_adj()
   return (total);
 }
 
-/* Returns a character's adjustment to armor class	 -JWT-	 */
+/* Returns a character's adjustment to armor class   -JWT-	 */
 int
 toac_adj()
 {
@@ -846,7 +846,7 @@ toac_adj()
     return (5);
 }
 
-/* Returns a character's adjustment to disarm		 -RAK-	 */
+/* Returns a character's adjustment to disarm  	 -RAK-	 */
 int
 todis_adj()
 {
@@ -879,7 +879,7 @@ todis_adj()
     return (8);
 }
 
-/* Returns a character's adjustment to damage		 -JWT-	 */
+/* Returns a character's adjustment to damage  	 -JWT-	 */
 int
 todam_adj()
 {
@@ -906,7 +906,7 @@ todam_adj()
     return (6);
 }
 
-/* Prints character-screen info				-RAK-	*/
+/* Prints character-screen info  			-RAK-	*/
 void
 prt_stat_block()
 {
@@ -940,7 +940,7 @@ prt_stat_block()
   prt_study();
 }
 
-/* Draws entire screen					-RAK-	*/
+/* Draws entire screen  				-RAK-	*/
 void
 draw_cave()
 {
@@ -950,7 +950,7 @@ draw_cave()
   prt_depth();
 }
 
-/* Prints the following information on the screen.	-JWT-	*/
+/* Prints the following information on the screen.  -JWT-	*/
 void
 put_character()
 {
@@ -970,7 +970,7 @@ put_character()
   }
 }
 
-/* Prints the following information on the screen.	-JWT-	*/
+/* Prints the following information on the screen.  -JWT-	*/
 void
 put_stats()
 {
@@ -994,7 +994,7 @@ put_stats()
   prt_num("  Total AC  ", m_ptr->dis_ac, 12, 1);
 }
 
-/* Returns a rating of x depending on y			-JWT-	*/
+/* Returns a rating of x depending on y  		-JWT-	*/
 char *likert(x, y) int x, y;
 {
   switch ((x / y)) {
@@ -1022,7 +1022,7 @@ char *likert(x, y) int x, y;
   }
 }
 
-/* Prints age, height, weight, and SC			-JWT-	*/
+/* Prints age, height, weight, and SC  		-JWT-	*/
 void
 put_misc1()
 {
@@ -1035,7 +1035,7 @@ put_misc1()
   prt_num("Social Class ", (int)m_ptr->sc, 5, 38);
 }
 
-/* Prints the following information on the screen.	-JWT-	*/
+/* Prints the following information on the screen.  -JWT-	*/
 void
 put_misc2()
 {
@@ -1058,7 +1058,7 @@ put_misc2()
   prt_num("Cur Mana       ", m_ptr->cmana, 12, 52);
 }
 
-/* Prints ratings on certain abilities			-RAK-	*/
+/* Prints ratings on certain abilities  		-RAK-	*/
 void
 put_misc3()
 {
@@ -1110,7 +1110,7 @@ put_misc3()
   put_buffer(xinfra, 18, 69);
 }
 
-/* Used to display the character on the screen.		-RAK-	*/
+/* Used to display the character on the screen.  	-RAK-	*/
 void
 display_char()
 {
@@ -1121,7 +1121,7 @@ display_char()
   put_misc3();
 }
 
-/* Gets a name for the character			-JWT-	*/
+/* Gets a name for the character  		-JWT-	*/
 void
 get_name()
 {
@@ -1145,7 +1145,7 @@ get_name()
 #endif
 }
 
-/* Changes the name of the character			-JWT-	*/
+/* Changes the name of the character  		-JWT-	*/
 void
 change_name()
 {
@@ -1188,7 +1188,7 @@ change_name()
   } while (!flag);
 }
 
-/* Destroy an item in the inventory			-RAK-	*/
+/* Destroy an item in the inventory  		-RAK-	*/
 void inven_destroy(item_val) int item_val;
 {
   register int j;
@@ -1224,7 +1224,7 @@ void take_one_item(s_ptr, i_ptr) register inven_type *s_ptr, *i_ptr;
     s_ptr->number = 1;
 }
 
-/* Drops an item from inventory to given location	-RAK-	*/
+/* Drops an item from inventory to given location  -RAK-	*/
 void inven_drop(item_val, drop_all) register int item_val, drop_all;
 {
   int i;
@@ -1268,7 +1268,7 @@ void inven_drop(item_val, drop_all) register int item_val, drop_all;
 #endif
 }
 
-/* Destroys a type of item on a given percent chance	-RAK-	*/
+/* Destroys a type of item on a given percent chance  -RAK-	*/
 int inven_damage(typ, perc) int (*typ)();
 register int perc;
 {
@@ -1283,7 +1283,7 @@ register int perc;
   return (j);
 }
 
-/* Computes current weight limit			-RAK-	*/
+/* Computes current weight limit  		-RAK-	*/
 int
 weight_limit()
 {
@@ -1333,7 +1333,7 @@ int inven_check_weight(i_ptr) register inven_type* i_ptr;
     return TRUE;
 }
 
-/* Are we strong enough for the current pack and weapon?  -CJS-	 */
+/* Are we strong enough for the current pack and weapon?  -CJS-   */
 void
 check_strength()
 {
@@ -1377,8 +1377,8 @@ check_strength()
 #endif
 }
 
-/* Add an item to players inventory.  Return the	*/
-/* item position for a description if needed.	       -RAK-   */
+/* Add an item to players inventory.  Return the  */
+/* item position for a description if needed.         -RAK-   */
 /* this code must be identical to the inven_check_num() code above */
 int inven_carry(i_ptr) register inven_type* i_ptr;
 {
@@ -1426,7 +1426,7 @@ int inven_carry(i_ptr) register inven_type* i_ptr;
   return locn;
 }
 
-/* Returns spell chance of failure for spell		-RAK-	*/
+/* Returns spell chance of failure for spell  	-RAK-	*/
 int spell_chance(spell) int spell;
 {
   register spell_type* s_ptr;
@@ -1449,7 +1449,7 @@ int spell_chance(spell) int spell;
   return chance;
 }
 
-/* Print list of spells					-RAK-	*/
+/* Print list of spells  				-RAK-	*/
 /* if nonconsec is -1: spells numbered consecutively from 'a' to 'a'+num
                   >=0: spells numbered by offset from nonconsec */
 void print_spells(spell, num, comment, nonconsec) int* spell;
@@ -1500,7 +1500,7 @@ int comment, nonconsec;
   }
 }
 
-/* Returns spell pointer				-RAK-	*/
+/* Returns spell pointer  			-RAK-	*/
 int get_spell(spell, num, sn, sc, prompt, first_spell) int* spell;
 register int num;
 register int *sn, *sc;
@@ -1717,7 +1717,7 @@ void calc_spells(stat) int stat;
   }
 }
 
-/* gain spells when player wants to		- jw */
+/* gain spells when player wants to  	- jw */
 void
 gain_spells()
 {
@@ -1842,7 +1842,7 @@ gain_spells()
   }
 }
 
-/* Gain some mana if you know at least one spell	-RAK-	*/
+/* Gain some mana if you know at least one spell  -RAK-	*/
 void calc_mana(stat) int stat;
 {
   register int new_mana, levels;
@@ -1915,7 +1915,7 @@ void calc_mana(stat) int stat;
   }
 }
 
-/* Increases hit points and level			-RAK-	*/
+/* Increases hit points and level  		-RAK-	*/
 static void
 gain_level()
 {
@@ -1948,7 +1948,7 @@ gain_level()
   }
 }
 
-/* Prints experience					-RAK-	*/
+/* Prints experience  				-RAK-	*/
 void
 prt_experience()
 {
@@ -2004,7 +2004,7 @@ calc_hitpoints()
   }
 }
 
-/* Inserts a string into a string				*/
+/* Inserts a string into a string  			*/
 void insert_str(object_str, mtc_str, insert) char *object_str, *mtc_str,
     *insert;
 {
@@ -2042,7 +2042,7 @@ void insert_str(object_str, mtc_str, insert) char *object_str, *mtc_str,
 
 #if 0
 /* this is no longer used anywhere */
-/* Inserts a number into a string				*/
+/* Inserts a number into a string  			*/
 void insert_num(object_str, mtc_str, number, show_sign)
 char *object_str;
 register char *mtc_str;
@@ -2061,13 +2061,13 @@ int show_sign;
     {
       string = index(tmp_str, mtc_str[0]);
       if (string == CNIL)
-	flag = 0;
+  flag = 0;
       else
-	{
-	  flag = strncmp(string, mtc_str, mlen);
-	  if (flag)
-	    tmp_str = string+1;
-	}
+  {
+    flag = strncmp(string, mtc_str, mlen);
+    if (flag)
+      tmp_str = string+1;
+  }
     }
   while (flag);
   if (string)
@@ -2082,9 +2082,9 @@ int show_sign;
       str1[(int)(string - object_str)] = '\0';
       (void) strcpy(str2, string + mlen);
       if ((number >= 0) && (show_sign))
-	(void) sprintf(object_str, "%s+%d%s", str1, number, str2);
+  (void) sprintf(object_str, "%s+%d%s", str1, number, str2);
       else
-	(void) sprintf(object_str, "%s%d%s", str1, number, str2);
+  (void) sprintf(object_str, "%s%d%s", str1, number, str2);
     }
 }
 #endif
@@ -2122,7 +2122,7 @@ int show_sign;
   }
 }
 
-/* lets anyone enter wizard mode after a disclaimer...		- JEW - */
+/* lets anyone enter wizard mode after a disclaimer...  	- JEW - */
 int
 enter_wiz_mode()
 {
@@ -2141,7 +2141,7 @@ enter_wiz_mode()
   return (FALSE);
 }
 
-/* Weapon weight VS strength and dexterity		-RAK-	*/
+/* Weapon weight VS strength and dexterity  	-RAK-	*/
 int attack_blows(weight, wtohit) int weight;
 int* wtohit;
 {
@@ -2186,7 +2186,7 @@ int* wtohit;
   }
 }
 
-/* Special damage due to magical abilities of object	-RAK-	*/
+/* Special damage due to magical abilities of object  -RAK-	*/
 int tot_dam(i_ptr, tdam, monster) register inven_type* i_ptr;
 register int tdam;
 int monster;
@@ -2233,7 +2233,7 @@ int monster;
       tdam = tdam * 2;
       r_ptr->r_cdefense |= CD_EVIL;
     }
-    /* Frost	       */
+    /* Frost         */
 #ifdef ATARIST_MWC
     else if ((m_ptr->cdefense & CD_FROST) &&
              (i_ptr->flags & (holder = TR_FROST_BRAND)))
@@ -2244,7 +2244,7 @@ int monster;
       tdam = tdam * 3 / 2;
       r_ptr->r_cdefense |= CD_FROST;
     }
-    /* Fire	      */
+    /* Fire        */
 #ifdef ATARIST_MWC
     else if ((m_ptr->cdefense & CD_FIRE) &&
              (i_ptr->flags & (holder = TR_FLAME_TONGUE)))
@@ -2259,7 +2259,7 @@ int monster;
   return (tdam);
 }
 
-/* Critical hits, Nasty way to die.			-RAK-	*/
+/* Critical hits, Nasty way to die.  		-RAK-	*/
 int critical_blow(weight, plus, dam, attack_type) register int weight, plus,
     dam;
 int attack_type;
@@ -2267,12 +2267,17 @@ int attack_type;
   register int critical;
 
   critical = dam;
-  /* Weight of weapon, plusses to hit, and character level all	    */
-  /* contribute to the chance of a critical			   */
+  /* Weight of weapon, plusses to hit, and character level all      */
+  /* contribute to the chance of a critical  		   */
   if (randint(5000) <=
       (int)(weight + 5 * plus +
             (class_level_adj[py.misc.pclass][attack_type] * py.misc.lev))) {
     weight += randint(650);
+    // 380 max itemization (you can wield iron chests apparently)
+    // 280 for two-handed great flail (TV_HAFTED)
+    // 300 for lance (TV_POLEARM)
+    // 280 for zweihander (TV_SWORD)
+
     if (weight < 400) {
       critical = 2 * dam + 5;
       msg_print("It was a good hit! (x2 damage)");
@@ -2345,7 +2350,7 @@ register int *y, *x;
   return (b);
 }
 
-/* Saving throws for player character.		-RAK-	*/
+/* Saving throws for player character.  	-RAK-	*/
 int
 player_saves()
 {
@@ -2359,7 +2364,7 @@ player_saves()
     return (FALSE);
 }
 
-/* Finds range of item in inventory list		-RAK-	*/
+/* Finds range of item in inventory list  	-RAK-	*/
 int find_range(item1, item2, j, k) int item1, item2;
 register int *j, *k;
 {
@@ -2391,7 +2396,7 @@ register int *j, *k;
   return (flag);
 }
 
-/* Teleport the player to a new location		-RAK-	*/
+/* Teleport the player to a new location  	-RAK-	*/
 void teleport(dis) int dis;
 {
   register int y, x, i, j;

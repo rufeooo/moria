@@ -140,7 +140,7 @@ static void date(day) char* day;
   (void)strcpy(day, tmp);
 }
 
-/* Centers a string within a 31 character string		-JWT-	 */
+/* Centers a string within a 31 character string  	-JWT-	 */
 static char* center_string(centered_str, in_str) char* centered_str;
 char* in_str;
 {
@@ -159,8 +159,8 @@ char* in_str;
 #include <errno.h>
 #include <sys/stat.h>
 
-/* The following code is provided especially for systems which		-CJS-
-   have no flock system call. It has never been tested.		*/
+/* The following code is provided especially for systems which  	-CJS-
+   have no flock system call. It has never been tested.  	*/
 
 /* DEBIAN_LINUX defined because fcntlbits.h defines EX and SH the       -RJW-
  * other way.  The comment below indicates that they're not
@@ -409,7 +409,7 @@ umoria.");
 #endif /* ! unix && ! VMS */
 }
 
-/* Prints the gravestone of the character		-RAK-	 */
+/* Prints the gravestone of the character  	-RAK-	 */
 static void
 print_tomb()
 {
@@ -551,7 +551,7 @@ retry:
   }
 }
 
-/* Calculates the total number of points earned		-JWT-	 */
+/* Calculates the total number of points earned  	-JWT-	 */
 int32
 total_points()
 {
@@ -569,7 +569,7 @@ total_points()
   return total;
 }
 
-/* Enters a players name on the top twenty list		-JWT-	 */
+/* Enters a players name on the top twenty list  	-JWT-	 */
 static void
 highscores()
 {
@@ -814,14 +814,14 @@ are not saved.");
 #endif
 }
 
-/* Change the player into a King!			-RAK-	 */
+/* Change the player into a King!  		-RAK-	 */
 static void
 kingly()
 {
   register struct misc* p_ptr;
   register char* p;
 
-  /* Change the character attributes.		 */
+  /* Change the character attributes.  	 */
   dun_level = 0;
   (void)strcpy(died_from, "Ripe Old Age");
   p_ptr = &py.misc;
@@ -831,7 +831,7 @@ kingly()
   p_ptr->max_exp += 5000000L;
   p_ptr->exp = p_ptr->max_exp;
 
-  /* Let the player know that he did good.	 */
+  /* Let the player know that he did good.   */
   clear_screen();
   put_buffer("#", 1, 34);
   put_buffer("#####", 2, 32);
@@ -856,7 +856,7 @@ kingly()
   pause_line(23);
 }
 
-/* Handles the gravestone end top-twenty routines	-RAK-	 */
+/* Handles the gravestone end top-twenty routines  -RAK-	 */
 void
 exit_game()
 {
@@ -865,12 +865,12 @@ exit_game()
   enablefilemenu(FALSE);
 #endif
 
-  /* What happens upon dying.				-RAK-	 */
+  /* What happens upon dying.  			-RAK-	 */
   msg_print(CNIL);
   flush();     /* flush all input */
   nosignals(); /* Can't interrupt or suspend. */
   /* If the game has been saved, then save sets turn back to -1, which
-     inhibits the printing of the tomb.	 */
+     inhibits the printing of the tomb.   */
   if (turn >= 0) {
     if (total_winner) kingly();
     print_tomb();

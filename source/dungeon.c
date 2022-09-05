@@ -69,18 +69,18 @@ static void refill_lamp();
 #include <stdlib.h>
 #endif
 
-/* Moria game module					-RAK-	*/
+/* Moria game module  				-RAK-	*/
 /* The code in this section has gone through many revisions, and */
-/* some of it could stand some more hard work.	-RAK-	       */
+/* some of it could stand some more hard work.  -RAK-	       */
 
-/* It has had a bit more hard work.			-CJS- */
+/* It has had a bit more hard work.  		-CJS- */
 
 void
 dungeon()
 {
   int find_count, i;
   int regen_amount; /* Regenerate hp and mana*/
-  char command;     /* Last command		 */
+  char command;     /* Last command  	 */
   register struct misc* p_ptr;
   register inven_type* i_ptr;
   register struct flags* f_ptr;
@@ -88,20 +88,20 @@ dungeon()
   int32u holder;
 #endif
 
-  /* Main procedure for dungeon.			-RAK-	*/
+  /* Main procedure for dungeon.  		-RAK-	*/
   /* Note: There is a lot of preliminary magic going on here at first*/
 
   /* init pointers. */
   f_ptr = &py.flags;
   p_ptr = &py.misc;
 
-  /* Check light status for setup	   */
+  /* Check light status for setup     */
   i_ptr = &inventory[INVEN_LIGHT];
   if (i_ptr->p1 > 0)
     player_light = TRUE;
   else
     player_light = FALSE;
-  /* Check for a maximum level		   */
+  /* Check for a maximum level  	   */
   if (dun_level > p_ptr->max_dlv) p_ptr->max_dlv = dun_level;
 
   /* Reset flags and initialize variables  */
@@ -114,15 +114,15 @@ dungeon()
   cave[char_row][char_col].cptr = 1;
   /* Ensure we display the panel. Used to do this with a global var. -CJS- */
   panel_row = panel_col = -1;
-  /* Light up the area around character	   */
+  /* Light up the area around character     */
   check_view();
   /* must do this after panel_row/col set to -1, because search_off() will
      call check_view(), and so the panel_* variables must be valid before
      search_off() is called */
   if (py.flags.status & PY_SEARCH) search_off();
-  /* Light,  but do not move critters	    */
+  /* Light,  but do not move critters      */
   creatures(FALSE);
-  /* Print the depth			   */
+  /* Print the depth  		   */
   prt_depth();
 #if 0
   /* This can't be right.  */
@@ -131,17 +131,17 @@ dungeon()
 #endif
 #endif
 
-  /* Loop until dead,  or new level		*/
+  /* Loop until dead,  or new level  	*/
   do {
-    /* Increment turn counter			*/
+    /* Increment turn counter  		*/
     turn++;
 
     /* turn over the store contents every, say, 1000 turns */
     if ((dun_level != 0) && ((turn % 1000) == 0)) store_maint();
 
-    /* Check for creature generation		*/
+    /* Check for creature generation  	*/
     if (randint(MAX_MALLOC_CHANCE) == 1) alloc_monster(1, MAX_SIGHT, FALSE);
-    /* Check light status			       */
+    /* Check light status  		       */
     i_ptr = &inventory[INVEN_LIGHT];
     if (player_light)
       if (i_ptr->p1 > 0) {
@@ -171,7 +171,7 @@ dungeon()
       creatures(FALSE);
     }
 
-    /* Update counters and messages			*/
+    /* Update counters and messages  		*/
     /* Heroism (must precede anything that can damage player)      */
     if (f_ptr->hero > 0) {
       if ((PY_HERO & f_ptr->status) == 0) {
@@ -238,7 +238,7 @@ dungeon()
         prt_mhp();
       }
     }
-    /* Check food status	       */
+    /* Check food status         */
     regen_amount = PLAYER_REGEN_NORMAL;
     if (f_ptr->food < PLAYER_FOOD_ALERT) {
       if (f_ptr->food < PLAYER_FOOD_WEAK) {
@@ -266,7 +266,7 @@ dungeon()
         prt_hunger();
       }
     }
-    /* Food consumption	*/
+    /* Food consumption  */
     /* Note: Speeded up characters really burn up the food!  */
     if (f_ptr->speed < 0) f_ptr->food -= f_ptr->speed * f_ptr->speed;
     f_ptr->food -= f_ptr->food_digested;
@@ -274,14 +274,14 @@ dungeon()
       take_hit(-f_ptr->food / 16, "starvation"); /* -CJS- */
       disturb(1, 0);
     }
-    /* Regenerate	       */
+    /* Regenerate         */
     if (f_ptr->regenerate) regen_amount = regen_amount * 3 / 2;
     if ((py.flags.status & PY_SEARCH) || f_ptr->rest != 0)
       regen_amount = regen_amount * 2;
     if ((py.flags.poisoned < 1) && (p_ptr->chp < p_ptr->mhp))
       regenhp(regen_amount);
     if (p_ptr->cmana < p_ptr->mana) regenmana(regen_amount);
-    /* Blindness	       */
+    /* Blindness         */
     if (f_ptr->blind > 0) {
       if ((PY_BLIND & f_ptr->status) == 0) {
         f_ptr->status |= PY_BLIND;
@@ -306,7 +306,7 @@ dungeon()
         msg_print("The veil of darkness lifts.");
       }
     }
-    /* Confusion	       */
+    /* Confusion         */
     if (f_ptr->confused > 0) {
       if ((PY_CONFUSED & f_ptr->status) == 0) {
         f_ptr->status |= PY_CONFUSED;
@@ -324,7 +324,7 @@ dungeon()
         if (py.flags.rest != 0) rest_off();
       }
     }
-    /* Afraid		       */
+    /* Afraid  	       */
     if (f_ptr->afraid > 0) {
       if ((PY_FEAR & f_ptr->status) == 0) {
         if ((f_ptr->shero + f_ptr->hero) > 0)
@@ -347,7 +347,7 @@ dungeon()
         disturb(0, 0);
       }
     }
-    /* Poisoned	       */
+    /* Poisoned         */
     if (f_ptr->poisoned > 0) {
       if ((PY_POISONED & f_ptr->status) == 0) {
         f_ptr->status |= PY_POISONED;
@@ -395,7 +395,7 @@ dungeon()
         disturb(1, 0);
       }
     }
-    /* Fast		       */
+    /* Fast  	       */
     if (f_ptr->fast > 0) {
       if ((PY_FAST & f_ptr->status) == 0) {
         f_ptr->status |= PY_FAST;
@@ -415,7 +415,7 @@ dungeon()
         disturb(0, 0);
       }
     }
-    /* Slow		       */
+    /* Slow  	       */
     if (f_ptr->slow > 0) {
       if ((PY_SLOW & f_ptr->status) == 0) {
         f_ptr->status |= PY_SLOW;
@@ -438,7 +438,7 @@ dungeon()
     /* Resting is over?      */
     if (f_ptr->rest > 0) {
       f_ptr->rest--;
-      if (f_ptr->rest == 0) /* Resting over	       */
+      if (f_ptr->rest == 0) /* Resting over         */
         rest_off();
     } else if (f_ptr->rest < 0) {
       /* Rest until reach max mana and max hit points.  */
@@ -474,13 +474,13 @@ dungeon()
     }
 #endif
 
-    /* Hallucinating?	 (Random characters appear!)*/
+    /* Hallucinating?   (Random characters appear!)*/
     if (f_ptr->image > 0) {
       end_find();
       f_ptr->image--;
       if (f_ptr->image == 0) prt_map(); /* Used to draw entire screen! -CJS- */
     }
-    /* Paralysis	       */
+    /* Paralysis         */
     if (f_ptr->paralysis > 0) {
       /* when paralysis true, you can not see any movement that occurs */
       f_ptr->paralysis--;
@@ -491,7 +491,7 @@ dungeon()
       f_ptr->protevil--;
       if (f_ptr->protevil == 0) msg_print("You no longer feel safe from evil.");
     }
-    /* Invulnerability	*/
+    /* Invulnerability  */
     if (f_ptr->invuln > 0) {
       if ((PY_INVULN & f_ptr->status) == 0) {
         f_ptr->status |= PY_INVULN;
@@ -614,7 +614,7 @@ dungeon()
         creatures(FALSE);
       }
     }
-    /* Word-of-Recall  Note: Word-of-Recall is a delayed action	 */
+    /* Word-of-Recall  Note: Word-of-Recall is a delayed action   */
     if (f_ptr->word_recall > 0)
       if (f_ptr->word_recall == 1) {
         new_level_flag = TRUE;
@@ -773,7 +773,7 @@ dungeon()
 
     if ((py.flags.paralysis < 1) && /* Accept a command?     */
         (py.flags.rest == 0) && (!death))
-    /* Accept a command and execute it				 */
+    /* Accept a command and execute it  			 */
     {
       do {
 #ifdef ATARIST_MWC
@@ -899,7 +899,7 @@ dungeon()
           else if (command_count)
             command_count--;
         }
-        /* End of commands				     */
+        /* End of commands  			     */
       } while (free_turn_flag && !new_level_flag && !eof_flag);
     } else {
       /* if paralyzed, resting, or dead, flush output */
@@ -908,9 +908,9 @@ dungeon()
       put_qio();
     }
 
-    /* Teleport?		       */
+    /* Teleport?  	       */
     if (teleport_flag) teleport(100);
-    /* Move the creatures	       */
+    /* Move the creatures         */
     if (!new_level_flag) creatures(TRUE);
     /* Exit when new_level_flag is set   */
   } while (!new_level_flag && !eof_flag);
@@ -1185,7 +1185,7 @@ static void do_command(com_val) char com_val;
     do_pickup = TRUE;
 
   switch (com_val) {
-    case 'Q': /* (Q)uit		(^K)ill */
+    case 'Q': /* (Q)uit  	(^K)ill */
       flush();
       if (get_check("Do you really want to quit?")) {
         new_level_flag = TRUE;
@@ -1280,52 +1280,52 @@ static void do_command(com_val) char com_val;
     case ' ':    /* (space) do nothing. */
       free_turn_flag = TRUE;
       break;
-    case 'b': /* (b) down, left	(1) */
+    case 'b': /* (b) down, left  (1) */
       move_char(1, do_pickup);
       break;
-    case 'j': /* (j) down		(2) */
+    case 'j': /* (j) down  	(2) */
       move_char(2, do_pickup);
       break;
-    case 'n': /* (n) down, right	(3) */
+    case 'n': /* (n) down, right  (3) */
       move_char(3, do_pickup);
       break;
-    case 'h': /* (h) left		(4) */
+    case 'h': /* (h) left  	(4) */
       move_char(4, do_pickup);
       break;
-    case 'l': /* (l) right		(6) */
+    case 'l': /* (l) right  	(6) */
       move_char(6, do_pickup);
       break;
-    case 'y': /* (y) up, left		(7) */
+    case 'y': /* (y) up, left  	(7) */
       move_char(7, do_pickup);
       break;
-    case 'k': /* (k) up		(8) */
+    case 'k': /* (k) up  	(8) */
       move_char(8, do_pickup);
       break;
-    case 'u': /* (u) up, right	(9) */
+    case 'u': /* (u) up, right  (9) */
       move_char(9, do_pickup);
       break;
-    case 'B': /* (B) run down, left	(. 1) */
+    case 'B': /* (B) run down, left  (. 1) */
       find_init(1);
       break;
-    case 'J': /* (J) run down		(. 2) */
+    case 'J': /* (J) run down  	(. 2) */
       find_init(2);
       break;
-    case 'N': /* (N) run down, right	(. 3) */
+    case 'N': /* (N) run down, right  (. 3) */
       find_init(3);
       break;
-    case 'H': /* (H) run left		(. 4) */
+    case 'H': /* (H) run left  	(. 4) */
       find_init(4);
       break;
-    case 'L': /* (L) run right	(. 6) */
+    case 'L': /* (L) run right  (. 6) */
       find_init(6);
       break;
-    case 'Y': /* (Y) run up, left	(. 7) */
+    case 'Y': /* (Y) run up, left  (. 7) */
       find_init(7);
       break;
-    case 'K': /* (K) run up		(. 8) */
+    case 'K': /* (K) run up  	(. 8) */
       find_init(8);
       break;
-    case 'U': /* (U) run up, right	(. 9) */
+    case 'U': /* (U) run up, right  (. 9) */
       find_init(9);
       break;
     case '/': /* (/) identify a symbol */
@@ -1352,7 +1352,7 @@ static void do_command(com_val) char com_val;
         helpfile(MORIA_ORIG_HELP);
       free_turn_flag = TRUE;
       break;
-    case 'f': /* (f)orce		(B)ash */
+    case 'f': /* (f)orce  	(B)ash */
       bash();
       break;
     case 'C': /* (C)haracter description */
@@ -1383,7 +1383,7 @@ static void do_command(com_val) char com_val;
       restore_screen();
       free_turn_flag = TRUE;
       break;
-    case 'W': /* (W)here are we on the map	(L)ocate on map */
+    case 'W': /* (W)here are we on the map  (L)ocate on map */
       if ((py.flags.blind > 0) || no_light())
         msg_print("You can't see your map.");
       else {
@@ -1408,7 +1408,7 @@ static void do_command(com_val) char com_val;
                         "which direction?",
                         p_y, p_x, tmp_str);
           if (!get_dir(out_val, &dir_val)) break;
-          /*								      -CJS-
+          /*  							      -CJS-
           // Should really use the move function, but what the hell. This
           // is nicer, as it moves exactly to the same place in another
           // section. The direction calculation is not intuitive. Sorry.
@@ -1436,46 +1436,46 @@ static void do_command(com_val) char com_val;
     case 'R': /* (R)est a while */
       rest();
       break;
-    case '#': /* (#) search toggle	(S)earch toggle */
+    case '#': /* (#) search toggle  (S)earch toggle */
       if (py.flags.status & PY_SEARCH)
         search_off();
       else
         search_on();
       free_turn_flag = TRUE;
       break;
-    case CTRL('B'): /* (^B) tunnel down left	(T 1) */
+    case CTRL('B'): /* (^B) tunnel down left  (T 1) */
       tunnel(1);
       break;
     case CTRL('M'): /* cr must be treated same as lf. */
-    case CTRL('J'): /* (^J) tunnel down		(T 2) */
+    case CTRL('J'): /* (^J) tunnel down  	(T 2) */
       tunnel(2);
       break;
-    case CTRL('N'): /* (^N) tunnel down right	(T 3) */
+    case CTRL('N'): /* (^N) tunnel down right  (T 3) */
       tunnel(3);
       break;
-    case CTRL('H'): /* (^H) tunnel left		(T 4) */
+    case CTRL('H'): /* (^H) tunnel left  	(T 4) */
       tunnel(4);
       break;
-    case CTRL('L'): /* (^L) tunnel right		(T 6) */
+    case CTRL('L'): /* (^L) tunnel right  	(T 6) */
       tunnel(6);
       break;
-    case CTRL('Y'): /* (^Y) tunnel up left		(T 7) */
+    case CTRL('Y'): /* (^Y) tunnel up left  	(T 7) */
       tunnel(7);
       break;
-    case CTRL('K'): /* (^K) tunnel up		(T 8) */
+    case CTRL('K'): /* (^K) tunnel up  	(T 8) */
       tunnel(8);
       break;
-    case CTRL('U'): /* (^U) tunnel up right		(T 9) */
+    case CTRL('U'): /* (^U) tunnel up right  	(T 9) */
       tunnel(9);
       break;
-    case 'z': /* (z)ap a wand		(a)im a wand */
+    case 'z': /* (z)ap a wand  	(a)im a wand */
       aim();
       break;
     case 'M':
       screen_map();
       free_turn_flag = TRUE;
       break;
-    case 'P': /* (P)eruse a book	(B)rowse in a book */
+    case 'P': /* (P)eruse a book  (B)rowse in a book */
       examine_book();
       free_turn_flag = TRUE;
       break;
@@ -1488,16 +1488,16 @@ static void do_command(com_val) char com_val;
     case 'e': /* (e)quipment list */
       inven_command('e');
       break;
-    case 't': /* (t)hrow something	(f)ire something */
+    case 't': /* (t)hrow something  (f)ire something */
       throw_object();
       break;
     case 'i': /* (i)nventory list */
       inven_command('i');
       break;
-    case 'S': /* (S)pike a door	(j)am a door */
+    case 'S': /* (S)pike a door  (j)am a door */
       jamdoor();
       break;
-    case 'x': /* e(x)amine surrounds	(l)ook about */
+    case 'x': /* e(x)amine surrounds  (l)ook about */
       look();
       free_turn_flag = TRUE;
       break;
@@ -1519,10 +1519,10 @@ static void do_command(com_val) char com_val;
     case 's': /* (s)earch for a turn */
       search(char_row, char_col, py.misc.srh);
       break;
-    case 'T': /* (T)ake off something	(t)ake off */
+    case 'T': /* (T)ake off something  (t)ake off */
       inven_command('t');
       break;
-    case 'Z': /* (Z)ap a staff	(u)se a staff */
+    case 'Z': /* (Z)ap a staff  (u)se a staff */
       use();
       break;
     case 'v': /* (v)ersion of game */
@@ -1532,7 +1532,7 @@ static void do_command(com_val) char com_val;
     case 'w': /* (w)ear or wield */
       inven_command('w');
       break;
-    case 'X': /* e(X)change weapons	e(x)change */
+    case 'X': /* e(X)change weapons  e(x)change */
       inven_command('x');
       break;
     default:
@@ -1736,7 +1736,7 @@ static int valid_countcommand(c) char c;
   }
 }
 
-/* Regenerate hit points				-RAK-	*/
+/* Regenerate hit points  			-RAK-	*/
 static void regenhp(percent) int percent;
 {
   register struct misc* p_ptr;
@@ -1764,7 +1764,7 @@ static void regenhp(percent) int percent;
   if (old_chp != p_ptr->chp) prt_chp();
 }
 
-/* Regenerate mana points				-RAK-	*/
+/* Regenerate mana points  			-RAK-	*/
 static void regenmana(percent) int percent;
 {
   register struct misc* p_ptr;
@@ -1816,7 +1816,7 @@ static int enchanted(t_ptr) register inven_type* t_ptr;
   return FALSE;
 }
 
-/* Examine a Book					-RAK-	*/
+/* Examine a Book  				-RAK-	*/
 static void
 examine_book()
 {
@@ -1865,7 +1865,7 @@ examine_book()
   }
 }
 
-/* Go up one level					-RAK-	*/
+/* Go up one level  				-RAK-	*/
 static void
 go_up()
 {
@@ -1890,7 +1890,7 @@ go_up()
   }
 }
 
-/* Go down one level					-RAK-	*/
+/* Go down one level  				-RAK-	*/
 static void
 go_down()
 {
@@ -1915,7 +1915,7 @@ go_down()
   }
 }
 
-/* Jam a closed door					-RAK-	*/
+/* Jam a closed door  				-RAK-	*/
 static void
 jamdoor()
 {
@@ -1965,7 +1965,7 @@ jamdoor()
   }
 }
 
-/* Refill the players lamp				-RAK-	*/
+/* Refill the players lamp  			-RAK-	*/
 static void
 refill_lamp()
 {

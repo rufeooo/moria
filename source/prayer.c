@@ -23,7 +23,7 @@
 #include "externs.h"
 #include "types.h"
 
-/* Pray like HELL.					-RAK-	*/
+/* Pray like HELL.  				-RAK-	*/
 void
 pray()
 {
@@ -61,7 +61,7 @@ pray()
       if (randint(100) < chance)
         msg_print("You lost your concentration!");
       else {
-        /* Prayers.					*/
+        /* Prayers.  				*/
         switch (choice + 1) {
           case 1:
             (void)detect_evil();
@@ -182,7 +182,7 @@ pray()
           default:
             break;
         }
-        /* End of prayers.				*/
+        /* End of prayers.  			*/
         if (!free_turn_flag) {
           m_ptr = &py.misc;
           if ((spell_worked & (1L << choice)) == 0) {

@@ -1,4 +1,4 @@
-/* source/recall.c: print out monster memory info			-CJS-
+/* source/recall.c: print out monster memory info  		-CJS-
 
    Copyright (C) 1989-2008 James E. Wilson, Robert A. Koeneke,
                            David J. Grabiner

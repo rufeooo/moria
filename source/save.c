@@ -126,10 +126,10 @@ static int8u xor_byte;
 static int from_savefile; /* can overwrite old savefile when save */
 static int32u start_time; /* time that play started */
 
-/* This save package was brought to by			-JWT-
-   and							-RAK-
-   and has been completely rewritten for UNIX by	-JEW-  */
-/* and has been completely rewritten again by	 -CJS-	*/
+/* This save package was brought to by  		-JWT-
+   and  						-RAK-
+   and has been completely rewritten for UNIX by  -JEW-  */
+/* and has been completely rewritten again by   -CJS-	*/
 /* and completely rewritten again! for portability by -JEW- */
 
 static int
@@ -648,7 +648,7 @@ int get_char(generate) int* generate;
 
 #ifndef MAC
   /* Not required for Mac, because the file name is obtained through a dialog.
-     There is no way for a non existnat file to be specified.  -BS-	*/
+     There is no way for a non existnat file to be specified.  -BS-  */
   if (access(savefile, 0) != 0) {
     signals();
     msg_print("Savefile does not exist.");
@@ -715,11 +715,11 @@ int get_char(generate) int* generate;
     /* support savefiles from 5.1.0 to present */
     if ((version_maj != CUR_VERSION_MAJ)
 #if 0
-	  /* As of version 5.4, accept savefiles even if they have higher
-	     version numbers.  The savefile format was frozen as of version
-	     5.2.2.  */
-	  || (version_min > CUR_VERSION_MIN)
-	  || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
+    /* As of version 5.4, accept savefiles even if they have higher
+       version numbers.  The savefile format was frozen as of version
+       5.2.2.  */
+    || (version_min > CUR_VERSION_MIN)
+    || (version_min == CUR_VERSION_MIN && patch_level > PATCH_LEVEL)
 #endif
         || (version_min == 0 && patch_level < 14)) {
       prt("Sorry. This savefile is from a different version of umoria.", 2, 0);

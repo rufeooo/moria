@@ -51,10 +51,10 @@ static void sub3_move_light(int, int, int, int);
 #include <stdlib.h>
 #endif
 
-/* Changes speed of monsters relative to player		-RAK-	*/
-/* Note: When the player is sped up or slowed down, I simply	 */
-/*	 change the speed of all the monsters.	This greatly	 */
-/*	 simplified the logic.				       */
+/* Changes speed of monsters relative to player  	-RAK-	*/
+/* Note: When the player is sped up or slowed down, I simply   */
+/*   change the speed of all the monsters.	This greatly	 */
+/*   simplified the logic.				       */
 void change_speed(num) register int num;
 {
   register int i;
@@ -71,9 +71,9 @@ void change_speed(num) register int num;
   for (i = mfptr - 1; i >= MIN_MONIX; i--) m_list[i].cspeed += num;
 }
 
-/* Player bonuses					-RAK-	*/
+/* Player bonuses  				-RAK-	*/
 /* When an item is worn or taken off, this re-adjusts the player */
-/* bonuses.  Factor=1 : wear; Factor=-1 : removed		 */
+/* bonuses.  Factor=1 : wear; Factor=-1 : removed  	 */
 /* Only calculates properties with cumulative effect.  Properties that
    depend on everything being worn are recalculated by calc_bonuses() -CJS- */
 void py_bonuses(t_ptr, factor) register inven_type* t_ptr;
@@ -108,7 +108,7 @@ register int factor;
 #endif
 }
 
-/* Recalculate the effect of all the stuff we use.		  -CJS- */
+/* Recalculate the effect of all the stuff we use.  	  -CJS- */
 void
 calc_bonuses()
 {
@@ -148,11 +148,11 @@ calc_bonuses()
   m_ptr->ptohit = tohit_adj();   /* Real To Hit   */
   m_ptr->ptodam = todam_adj();   /* Real To Dam   */
   m_ptr->ptoac = toac_adj();     /* Real To AC    */
-  m_ptr->pac = 0;                /* Real AC	     */
-  m_ptr->dis_th = m_ptr->ptohit; /* Display To Hit	    */
-  m_ptr->dis_td = m_ptr->ptodam; /* Display To Dam	    */
-  m_ptr->dis_ac = 0;             /* Display AC		 */
-  m_ptr->dis_tac = m_ptr->ptoac; /* Display To AC	    */
+  m_ptr->pac = 0;                /* Real AC       */
+  m_ptr->dis_th = m_ptr->ptohit; /* Display To Hit      */
+  m_ptr->dis_td = m_ptr->ptodam; /* Display To Dam      */
+  m_ptr->dis_ac = 0;             /* Display AC  	 */
+  m_ptr->dis_tac = m_ptr->ptoac; /* Display To AC      */
   for (i = INVEN_WIELD; i < INVEN_LIGHT; i++) {
     i_ptr = &inventory[i];
     if (i_ptr->tval != TV_NOTHING) {
@@ -179,7 +179,7 @@ calc_bonuses()
     m_ptr->dis_th +=
         (py.stats.use_stat[A_STR] * 15 - inventory[INVEN_WIELD].weight);
 
-  /* Add in temporary spell increases	*/
+  /* Add in temporary spell increases  */
   if (p_ptr->invuln > 0) {
     m_ptr->pac += 100;
     m_ptr->dis_ac += 100;
@@ -278,7 +278,7 @@ calc_bonuses()
   if (p_ptr->regenerate) p_ptr->food_digested += 3;
 }
 
-/* Displays inventory items from r1 to r2	-RAK-	*/
+/* Displays inventory items from r1 to r2  -RAK-	*/
 /* Designed to keep the display as far to the right as possible.  The  -CJS-
    parameter col gives a column at which to start, but if the display does
    not fit, it may be moved left.  The return value is the left edge used. */
@@ -299,7 +299,7 @@ char* mask;
   else
     lim = 76;
 
-  for (i = r1; i <= r2; i++) /* Print the items	  */
+  for (i = r1; i <= r2; i++) /* Print the items    */
   {
     if (mask == CNIL || mask[i]) {
       objdes(tmp_val, &inventory[i], TRUE);
@@ -385,7 +385,7 @@ char* describe_use(i) register int i;
   return p;
 }
 
-/* Displays equipment items from r1 to end	-RAK-	*/
+/* Displays equipment items from r1 to end  -RAK-	*/
 /* Keep display as far right as possible. -CJS- */
 int show_equip(weight, col) int weight, col;
 {
@@ -406,7 +406,7 @@ int show_equip(weight, col) int weight, col;
   {
     i_ptr = &inventory[i];
     if (i_ptr->tval != TV_NOTHING) {
-      switch (i) /* Get position	      */
+      switch (i) /* Get position        */
       {
         case INVEN_WIELD:
           if (py.stats.use_stat[A_STR] * 15 < i_ptr->weight)
@@ -488,7 +488,7 @@ int show_equip(weight, col) int weight, col;
   return col;
 }
 
-/* Remove item from equipment list		-RAK-	*/
+/* Remove item from equipment list  	-RAK-	*/
 void takeoff(item_val, posn) int item_val, posn;
 {
   register char* p;
@@ -525,7 +525,7 @@ void takeoff(item_val, posn) int item_val, posn;
   invcopy(t_ptr, OBJ_NOTHING);
 }
 
-/* Used to verify if this really is the item we wish to	 -CJS-
+/* Used to verify if this really is the item we wish to   -CJS-
    wear or read. */
 int verify(prompt, item) char* prompt;
 int item;
@@ -562,7 +562,7 @@ int item;
   if the screen has been flushed.
 
   The display of inventory items is kept to the right of the screen to
-  minimize the work done to restore the screen afterwards.		-CJS-*/
+  minimize the work done to restore the screen afterwards.  	-CJS-*/
 
 /* Inventory command screen states. */
 #define BLANK_SCR 0
@@ -666,19 +666,19 @@ void inven_command(command) char command;
     /* Simple command getting and screen selection. */
     selecting = FALSE;
     switch (command) {
-      case 'i': /* Inventory	    */
+      case 'i': /* Inventory      */
         if (inven_ctr == 0)
           msg_print("You are not carrying anything.");
         else
           inven_screen(INVEN_SCR);
         break;
-      case 'e': /* Equipment	   */
+      case 'e': /* Equipment     */
         if (equip_ctr == 0)
           msg_print("You are not using any equipment.");
         else
           inven_screen(EQUIP_SCR);
         break;
-      case 't': /* Take off	   */
+      case 't': /* Take off     */
         if (equip_ctr == 0) msg_print("You are not using any equipment.");
         /* don't print message restarting inven command after taking off
            something, it is confusing */
@@ -703,7 +703,7 @@ void inven_command(command) char command;
             inven_screen(INVEN_SCR);
         }
         break;
-      case 'w': /* Wear/wield	   */
+      case 'w': /* Wear/wield     */
         for (wear_low = 0;
              wear_low < inven_ctr && inventory[wear_low].tval > TV_MAX_WEAR;
              wear_low++)
@@ -761,7 +761,7 @@ void inven_command(command) char command;
         inven_screen(HELP_SCR);
         break;
       default:
-        /* Nonsense command					   */
+        /* Nonsense command  				   */
         bell();
         break;
     }
@@ -899,7 +899,7 @@ void inven_command(command) char command;
               if (isupper((int)which) && !verify(prompt, item))
                 item = -1;
               else
-                switch (inventory[item].tval) { /* Slot for equipment	   */
+                switch (inventory[item].tval) { /* Slot for equipment     */
                   case TV_SLING_AMMO:
                   case TV_BOLT:
                   case TV_ARROW:
@@ -1003,7 +1003,7 @@ void inven_command(command) char command;
                 i_ptr = &tmp_obj;
 
                 wear_high--;
-                /* Fix for torches	   */
+                /* Fix for torches     */
                 if (i_ptr->number > 1 &&
                     i_ptr->subval <= ITEM_SINGLE_STACK_MAX) {
                   i_ptr->number = 1;
@@ -1144,7 +1144,7 @@ void inven_command(command) char command;
   calc_bonuses();
 }
 
-/* Get the ID of an item and return the CTR value of it	-RAK-	*/
+/* Get the ID of an item and return the CTR value of it  -RAK-	*/
 int get_item(com_val, pmt, i, j, mask, message) int* com_val;
 char* pmt;
 int i, j;
@@ -1298,11 +1298,11 @@ char* message;
   return (item);
 }
 
-/* I may have written the town level code, but I'm not exactly	 */
-/* proud of it.	 Adding the stores required some real slucky	 */
-/* hooks which I have not had time to re-think.		 -RAK-	 */
+/* I may have written the town level code, but I'm not exactly   */
+/* proud of it.   Adding the stores required some real slucky	 */
+/* hooks which I have not had time to re-think.  	 -RAK-	 */
 
-/* Returns true if player has no light			-RAK-	*/
+/* Returns true if player has no light  		-RAK-	*/
 int
 no_light()
 {
@@ -1348,7 +1348,7 @@ static char map_roguedir(comval) register char comval;
   return (comval);
 }
 
-/* Prompts for a direction				-RAK-	*/
+/* Prompts for a direction  			-RAK-	*/
 /* Direction memory added, for repeated commands.  -CJS */
 int get_dir(prompt, dir) char* prompt;
 int* dir;
@@ -1385,7 +1385,7 @@ int* dir;
   }
 }
 
-/* Similar to get_dir, except that no memory exists, and it is		-CJS-
+/* Similar to get_dir, except that no memory exists, and it is  	-CJS-
    allowed to enter the null direction. */
 int get_alldir(prompt, dir) char* prompt;
 int* dir;
@@ -1411,7 +1411,7 @@ int* dir;
   }
 }
 
-/* Moves creature record from one space to another	-RAK-	*/
+/* Moves creature record from one space to another  -RAK-	*/
 void move_rec(y1, x1, y2, x2) register int y1, x1, y2, x2;
 {
   int tmp;
@@ -1422,7 +1422,7 @@ void move_rec(y1, x1, y2, x2) register int y1, x1, y2, x2;
   cave[y2][x2].cptr = tmp;
 }
 
-/* Room is lit, make it appear				-RAK-	*/
+/* Room is lit, make it appear  			-RAK-	*/
 void light_room(y, x) int y, x;
 {
   register int i, j, start_col, end_col;
@@ -1452,14 +1452,14 @@ void light_room(y, x) int y, x;
     }
 }
 
-/* Lights up given location				-RAK-	*/
+/* Lights up given location  			-RAK-	*/
 void lite_spot(y, x) register int y, x;
 {
   if (panel_contains(y, x)) print(loc_symbol(y, x), y, x);
 }
 
-/* Normal movement					*/
-/* When FIND_FLAG,  light only permanent features	*/
+/* Normal movement  				*/
+/* When FIND_FLAG,  light only permanent features  */
 static void sub1_move_light(y1, x1, y2, x2) register int x1, x2;
 int y1, y2;
 {
@@ -1468,7 +1468,7 @@ int y1, y2;
   int tval, top, left, bottom, right;
 
   if (light_flag) {
-    for (i = y1 - 1; i <= y1 + 1; i++) /* Turn off lamp light	*/
+    for (i = y1 - 1; i <= y1 + 1; i++) /* Turn off lamp light  */
       for (j = x1 - 1; j <= x1 + 1; j++) cave[i][j].tl = FALSE;
     if (find_flag && !find_prself) light_flag = FALSE;
   } else if (!find_flag || find_prself)
@@ -1488,7 +1488,7 @@ int y1, y2;
       }
     }
 
-  /* From uppermost to bottom most lines player was on.	 */
+  /* From uppermost to bottom most lines player was on.   */
   if (y1 < y2) {
     top = y1 - 1;
     bottom = y2 + 1;
@@ -1508,8 +1508,8 @@ int y1, y2;
       print(loc_symbol(i, j), i, j);
 }
 
-/* When blinded,  move only the player symbol.		*/
-/* With no light,  movement becomes involved.		*/
+/* When blinded,  move only the player symbol.  	*/
+/* With no light,  movement becomes involved.  	*/
 static void sub3_move_light(y1, x1, y2, x2) register int y1, x1;
 int y2, x2;
 {
@@ -1528,8 +1528,8 @@ int y2, x2;
   if (!find_flag || find_prself) print('@', y2, x2);
 }
 
-/* Package for moving the character's light about the screen	 */
-/* Four cases : Normal, Finding, Blind, and Nolight	 -RAK-	 */
+/* Package for moving the character's light about the screen   */
+/* Four cases : Normal, Finding, Blind, and Nolight   -RAK-	 */
 void move_light(y1, x1, y2, x2) int y1, x1, y2, x2;
 {
   if (py.flags.blind > 0 || !player_light)
@@ -1538,7 +1538,7 @@ void move_light(y1, x1, y2, x2) int y1, x1, y2, x2;
     sub1_move_light(y1, x1, y2, x2);
 }
 
-/* Something happens to disturb the player.		-CJS-
+/* Something happens to disturb the player.  	-CJS-
    The first arg indicates a major disturbance, which affects search.
    The second arg indicates a light change. */
 void disturb(s, l) int s, l;
@@ -1553,7 +1553,7 @@ void disturb(s, l) int s, l;
   flush();
 }
 
-/* Search Mode enhancement				-RAK-	*/
+/* Search Mode enhancement  			-RAK-	*/
 void
 search_on()
 {
@@ -1583,7 +1583,7 @@ search_off()
   py.flags.food_digested--;
 }
 
-/* Resting allows a player to safely restore his hp	-RAK-	*/
+/* Resting allows a player to safely restore his hp  -RAK-	*/
 void
 rest()
 {
@@ -1638,7 +1638,7 @@ rest_off()
   py.flags.food_digested++;
 }
 
-/* Attacker's level and plusses,  defender's AC		-RAK-	*/
+/* Attacker's level and plusses,  defender's AC  	-RAK-	*/
 int test_hit(bth, level, pth, ac, attack_type) int bth, level, pth, ac,
     attack_type;
 {
@@ -1658,7 +1658,7 @@ int test_hit(bth, level, pth, ac, attack_type) int bth, level, pth, ac,
 }
 
 /* Decreases players hit points and sets death flag if necessary*/
-/*							 -RAK-	 */
+/*  						 -RAK-	 */
 void take_hit(damage, hit_from) int damage;
 char* hit_from;
 {

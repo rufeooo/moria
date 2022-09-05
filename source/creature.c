@@ -52,7 +52,7 @@ static void mon_move(int, int32u*);
 #include <stdlib.h>
 #endif
 
-/* Updates screen when monsters move about		-RAK-	*/
+/* Updates screen when monsters move about  	-RAK-	*/
 void update_mon(monptr) int monptr;
 {
   register int flag;
@@ -67,9 +67,9 @@ void update_mon(monptr) int monptr;
   flag = FALSE;
   if ((m_ptr->cdis <= MAX_SIGHT) && !(py.flags.status & PY_BLIND) &&
       (panel_contains((int)m_ptr->fy, (int)m_ptr->fx))) {
-    /* Wizard sight.	     */
+    /* Wizard sight.       */
     if (wizard) flag = TRUE;
-    /* Normal sight.	     */
+    /* Normal sight.       */
     else if (los(char_row, char_col, (int)m_ptr->fy, (int)m_ptr->fx)) {
       c_ptr = &cave[m_ptr->fy][m_ptr->fx];
       r_ptr = &c_list[m_ptr->mptr];
@@ -91,7 +91,7 @@ void update_mon(monptr) int monptr;
 #endif
         }
       }
-      /* Infra vision.	 */
+      /* Infra vision.   */
       else if ((py.flags.see_infra > 0) &&
                (m_ptr->cdis <= py.flags.see_infra) &&
                (CD_INFRA & r_ptr->cdefense)) {
@@ -100,7 +100,7 @@ void update_mon(monptr) int monptr;
       }
     }
   }
-  /* Light it up.	 */
+  /* Light it up.   */
   if (flag) {
     if (!m_ptr->ml) {
       disturb(1, 0);
@@ -109,7 +109,7 @@ void update_mon(monptr) int monptr;
       screen_change = TRUE; /* notify inven_command */
     }
   }
-  /* Turn it off.	 */
+  /* Turn it off.   */
   else if (m_ptr->ml) {
     m_ptr->ml = FALSE;
     lite_spot((int)m_ptr->fy, (int)m_ptr->fx);
@@ -117,9 +117,9 @@ void update_mon(monptr) int monptr;
   }
 }
 
-/* Given speed,	 returns number of moves this turn.	-RAK-	*/
-/* NOTE: Player must always move at least once per iteration,	  */
-/*	 a slowed player is handled by moving monsters faster	 */
+/* Given speed,   returns number of moves this turn.	-RAK-	*/
+/* NOTE: Player must always move at least once per iteration,    */
+/*   a slowed player is handled by moving monsters faster	 */
 static int movement_rate(speed) register int16 speed;
 {
   if (speed > 0) {
@@ -133,7 +133,7 @@ static int movement_rate(speed) register int16 speed;
   }
 }
 
-/* Makes sure a new creature gets lit up.			-CJS- */
+/* Makes sure a new creature gets lit up.  		-CJS- */
 static int check_mon_lite(y, x) int y, x;
 {
   register int monptr;
@@ -147,7 +147,7 @@ static int check_mon_lite(y, x) int y, x;
   }
 }
 
-/* Choose correct directions for monster movement	-RAK-	*/
+/* Choose correct directions for monster movement  -RAK-	*/
 static void get_moves(monptr, mm) int monptr;
 register int* mm;
 {
@@ -292,7 +292,7 @@ register int* mm;
   }
 }
 
-/* Make an attack on the player (chuckle.)		-RAK-	*/
+/* Make an attack on the player (chuckle.)  	-RAK-	*/
 static void make_attack(monptr) int monptr;
 {
   int attype, adesc, adice, asides;
@@ -318,7 +318,7 @@ static void make_attack(monptr) int monptr;
     (void)strcpy(cdesc, "It ");
   else
     (void)sprintf(cdesc, "The %s ", r_ptr->name);
-    /* For "DIED_FROM" string	   */
+    /* For "DIED_FROM" string     */
 #ifdef ATARIST_MWC
   holder = CM_WIN;
   if (holder & r_ptr->cmove)
@@ -330,7 +330,7 @@ static void make_attack(monptr) int monptr;
     (void)sprintf(ddesc, "an %s", r_ptr->name);
   else
     (void)sprintf(ddesc, "a %s", r_ptr->name);
-  /* End DIED_FROM		   */
+  /* End DIED_FROM  	   */
 
   attackn = 0;
   attstr = r_ptr->damage;
@@ -416,7 +416,7 @@ static void make_attack(monptr) int monptr;
             (inven_ctr > 0))
           flag = TRUE;
         break;
-      case 14: /*Poison	       */
+      case 14: /*Poison         */
         if (test_hit(5, (int)r_ptr->level, 0, p_ptr->pac + p_ptr->ptoac,
                      CLA_MISC_HIT))
           flag = TRUE;
@@ -449,22 +449,22 @@ static void make_attack(monptr) int monptr;
       case 20: /*Aggravate monsters*/
         flag = TRUE;
         break;
-      case 21: /*Disenchant	  */
+      case 21: /*Disenchant    */
         if (test_hit(20, (int)r_ptr->level, 0, p_ptr->pac + p_ptr->ptoac,
                      CLA_MISC_HIT))
           flag = TRUE;
         break;
-      case 22: /*Eat food	  */
+      case 22: /*Eat food    */
         if (test_hit(5, (int)r_ptr->level, 0, p_ptr->pac + p_ptr->ptoac,
                      CLA_MISC_HIT))
           flag = TRUE;
         break;
-      case 23: /*Eat light	  */
+      case 23: /*Eat light    */
         if (test_hit(5, (int)r_ptr->level, 0, p_ptr->pac + p_ptr->ptoac,
                      CLA_MISC_HIT))
           flag = TRUE;
         break;
-      case 24: /*Eat charges	  */
+      case 24: /*Eat charges    */
         if ((test_hit(15, (int)r_ptr->level, 0, p_ptr->pac + p_ptr->ptoac,
                       CLA_MISC_HIT)) &&
             (inven_ctr > 0)) /* check to make sure an object exists */
@@ -498,7 +498,7 @@ static void make_attack(monptr) int monptr;
           msg_print(strcat(tmp_str, "touches you."));
           break;
 #if 0
-	    case 6: msg_print(strcat(tmp_str, "kicks you.")); break;
+      case 6: msg_print(strcat(tmp_str, "kicks you.")); break;
 #endif
         case 7:
           msg_print(strcat(tmp_str, "gazes at you."));
@@ -513,7 +513,7 @@ static void make_attack(monptr) int monptr;
           msg_print(strcat(tmp_str, "makes a horrible wail."));
           break;
 #if 0
-	    case 11: msg_print(strcat(tmp_str, "embraces you.")); break;
+      case 11: msg_print(strcat(tmp_str, "embraces you.")); break;
 #endif
         case 12:
           msg_print(strcat(tmp_str, "crawls on you."));
@@ -586,7 +586,7 @@ static void make_attack(monptr) int monptr;
 
       damage = damroll(adice, asides);
       switch (attype) {
-        case 1: /*Normal attack	*/
+        case 1: /*Normal attack  */
           /* round half-way case down */
           damage -= ((p_ptr->pac + p_ptr->ptoac) * damage) / 200;
           take_hit(damage, ddesc);
@@ -614,7 +614,7 @@ static void make_attack(monptr) int monptr;
           } else
             notice = FALSE;
           break;
-        case 4: /*Fear attack	*/
+        case 4: /*Fear attack  */
           f_ptr = &py.flags;
           take_hit(damage, ddesc);
           if (player_saves())
@@ -627,15 +627,15 @@ static void make_attack(monptr) int monptr;
             notice = FALSE;
           }
           break;
-        case 5: /*Fire attack	*/
+        case 5: /*Fire attack  */
           msg_print("You are enveloped in flames!");
           fire_dam(damage, ddesc);
           break;
-        case 6: /*Acid attack	*/
+        case 6: /*Acid attack  */
           msg_print("You are covered in acid!");
           acid_dam(damage, ddesc);
           break;
-        case 7: /*Cold attack	*/
+        case 7: /*Cold attack  */
           msg_print("You are covered with frost!");
           cold_dam(damage, ddesc);
           break;
@@ -674,7 +674,7 @@ static void make_attack(monptr) int monptr;
           } else
             notice = FALSE;
           break;
-        case 12: /*Steal Money	  */
+        case 12: /*Steal Money    */
           if ((py.flags.paralysis < 1) &&
               (randint(124) < py.stats.use_stat[A_DEX]))
             msg_print("You quickly protect your money pouch!");
@@ -692,7 +692,7 @@ static void make_attack(monptr) int monptr;
             teleport_away(monptr, MAX_SIGHT);
           }
           break;
-        case 13: /*Steal Object	 */
+        case 13: /*Steal Object   */
           if ((py.flags.paralysis < 1) &&
               (randint(124) < py.stats.use_stat[A_DEX]))
             msg_print("You grab hold of your backpack!");
@@ -706,7 +706,7 @@ static void make_attack(monptr) int monptr;
             teleport_away(monptr, MAX_SIGHT);
           }
           break;
-        case 14: /*Poison	 */
+        case 14: /*Poison   */
           f_ptr = &py.flags;
           take_hit(damage, ddesc);
           msg_print("You feel very sick.");
@@ -741,7 +741,7 @@ static void make_attack(monptr) int monptr;
           else
             (void)dec_stat(A_INT);
           break;
-        case 18: /*Lose wisdom	   */
+        case 18: /*Lose wisdom     */
           f_ptr = &py.flags;
           take_hit(damage, ddesc);
           if (f_ptr->sustain_wis)
@@ -758,7 +758,7 @@ static void make_attack(monptr) int monptr;
         case 20: /*Aggravate monster*/
           (void)aggravate_monster(20);
           break;
-        case 21: /*Disenchant	   */
+        case 21: /*Disenchant     */
           flag = FALSE;
           switch (randint(7)) {
             case 1:
@@ -808,14 +808,14 @@ static void make_attack(monptr) int monptr;
           } else
             notice = FALSE;
           break;
-        case 22: /*Eat food	   */
+        case 22: /*Eat food     */
           if (find_range(TV_FOOD, TV_NEVER, &i, &j)) {
             inven_destroy(i);
             msg_print("It got at your rations!");
           } else
             notice = FALSE;
           break;
-        case 23: /*Eat light	   */
+        case 23: /*Eat light     */
           i_ptr = &inventory[INVEN_LIGHT];
           if (i_ptr->p1 > 0) {
             i_ptr->p1 -= (250 + randint(250));
@@ -827,7 +827,7 @@ static void make_attack(monptr) int monptr;
           } else
             notice = FALSE;
           break;
-        case 24: /*Eat charges	  */
+        case 24: /*Eat charges    */
           i = randint(inven_ctr) - 1;
           j = r_ptr->level;
           i_ptr = &inventory[i];
@@ -894,7 +894,7 @@ static void make_attack(monptr) int monptr;
   }
 }
 
-/* Make the move if possible, five choices		-RAK-	*/
+/* Make the move if possible, five choices  	-RAK-	*/
 static void make_move(monptr, mm, rcmove) int monptr;
 int* mm;
 int32u* rcmove;
@@ -914,13 +914,13 @@ int32u* rcmove;
   m_ptr = &m_list[monptr];
   movebits = c_list[m_ptr->mptr].cmove;
   do {
-    /* Get new position		*/
+    /* Get new position  	*/
     newy = m_ptr->fy;
     newx = m_ptr->fx;
     (void)mmove(mm[i], &newy, &newx);
     c_ptr = &cave[newy][newx];
     if (c_ptr->fval != BOUNDARY_WALL) {
-      /* Floor is open?		   */
+      /* Floor is open?  	   */
       if (c_ptr->fval <= MAX_OPEN_SPACE) do_move = TRUE;
         /* Creature moves through walls? */
 #ifdef ATARIST_MWC
@@ -936,7 +936,7 @@ int32u* rcmove;
         *rcmove |= CM_PHASE;
 #endif
       }
-      /* Creature can open doors?	   */
+      /* Creature can open doors?     */
       else if (c_ptr->tptr != 0) {
         t_ptr = &t_list[c_ptr->tptr];
 #ifdef ATARIST_MWC
@@ -944,18 +944,18 @@ int32u* rcmove;
 #else
         if (movebits & CM_OPEN_DOOR)
 #endif
-        { /* Creature can open doors.		     */
+        { /* Creature can open doors.  	     */
           stuck_door = FALSE;
           if (t_ptr->tval == TV_CLOSED_DOOR) {
             do_turn = TRUE;
-            if (t_ptr->p1 == 0) /* Closed doors	 */
+            if (t_ptr->p1 == 0) /* Closed doors   */
               do_move = TRUE;
-            else if (t_ptr->p1 > 0) /* Locked doors	*/
+            else if (t_ptr->p1 > 0) /* Locked doors  */
             {
               if (randint((m_ptr->hp + 1) * (50 + t_ptr->p1)) <
                   40 * (m_ptr->hp - 10 - t_ptr->p1))
                 t_ptr->p1 = 0;
-            } else if (t_ptr->p1 < 0) /* Stuck doors	*/
+            } else if (t_ptr->p1 < 0) /* Stuck doors  */
             {
               if (randint((m_ptr->hp + 1) * (50 - t_ptr->p1)) <
                   40 * (m_ptr->hp - 10 + t_ptr->p1)) {
@@ -998,7 +998,7 @@ int32u* rcmove;
           }
         }
       }
-      /* Glyph of warding present?	   */
+      /* Glyph of warding present?     */
       if (do_move && (c_ptr->tptr != 0) &&
           (t_list[c_ptr->tptr].tval == TV_VIS_TRAP) &&
           (t_list[c_ptr->tptr].subval == 99)) {
@@ -1014,7 +1014,7 @@ int32u* rcmove;
           if (movebits & CM_ATTACK_ONLY) do_turn = TRUE;
         }
       }
-      /* Creature has attempted to move on player?	   */
+      /* Creature has attempted to move on player?     */
       if (do_move)
         if (c_ptr->cptr == 1) {
           /* if the monster is not lit, must call update_mon, it may
@@ -1025,10 +1025,10 @@ int32u* rcmove;
           do_move = FALSE;
           do_turn = TRUE;
         }
-        /* Creature is attempting to move on other creature?	   */
+        /* Creature is attempting to move on other creature?     */
         else if ((c_ptr->cptr > 1) &&
                  ((newy != m_ptr->fy) || (newx != m_ptr->fx))) {
-          /* Creature eats other creatures?	 */
+          /* Creature eats other creatures?   */
 #ifdef ATARIST_MWC
           if ((movebits & (holder = CM_EATS_OTHER)) &&
 #else
@@ -1052,9 +1052,9 @@ int32u* rcmove;
           } else
             do_move = FALSE;
         }
-      /* Creature has been allowed move.	 */
+      /* Creature has been allowed move.   */
       if (do_move) {
-        /* Pick up or eat an object	       */
+        /* Pick up or eat an object         */
 #ifdef ATARIST_MWC
         if (movebits & (holder = CM_PICKS_UP))
 #else
@@ -1073,7 +1073,7 @@ int32u* rcmove;
             (void)delete_object(newy, newx);
           }
         }
-        /* Move creature record		       */
+        /* Move creature record  	       */
         move_rec((int)m_ptr->fy, (int)m_ptr->fx, newy, newx);
         if (m_ptr->ml) {
           m_ptr->ml = FALSE;
@@ -1086,13 +1086,13 @@ int32u* rcmove;
       }
     }
     i++;
-    /* Up to 5 attempts at moving,   give up.	  */
+    /* Up to 5 attempts at moving,   give up.    */
   } while ((!do_turn) && (i < 5));
 }
 
-/* Creatures can cast spells too.  (Dragon Breath)	-RAK-	*/
-/* cast_spell = true if creature changes position	*/
-/* took_turn  = true if creature casts a spell		*/
+/* Creatures can cast spells too.  (Dragon Breath)  -RAK-	*/
+/* cast_spell = true if creature changes position  */
+/* took_turn  = true if creature casts a spell  	*/
 static void mon_cast_spell(monptr, took_turn) int monptr;
 int* took_turn;
 {
@@ -1112,25 +1112,25 @@ int* took_turn;
   m_ptr = &m_list[monptr];
   r_ptr = &c_list[m_ptr->mptr];
   chance = (int)(r_ptr->spells & CS_FREQ);
-  /* 1 in x chance of casting spell		   */
+  /* 1 in x chance of casting spell  	   */
   if (randint(chance) != 1) *took_turn = FALSE;
-  /* Must be within certain range		   */
+  /* Must be within certain range  	   */
   else if (m_ptr->cdis > MAX_SPELL_DIS)
     *took_turn = FALSE;
-  /* Must have unobstructed Line-Of-Sight	   */
+  /* Must have unobstructed Line-Of-Sight     */
   else if (!los(char_row, char_col, (int)m_ptr->fy, (int)m_ptr->fx))
     *took_turn = FALSE;
-  else /* Creature is going to cast a spell	 */
+  else /* Creature is going to cast a spell   */
   {
     *took_turn = TRUE;
     /* Check to see if monster should be lit. */
     update_mon(monptr);
-    /* Describe the attack			       */
+    /* Describe the attack  		       */
     if (m_ptr->ml)
       (void)sprintf(cdesc, "The %s ", r_ptr->name);
     else
       (void)strcpy(cdesc, "It ");
-      /* For "DIED_FROM" string	 */
+      /* For "DIED_FROM" string   */
 #ifdef ATARIST_MWC
     holder = CM_WIN;
     if (holder & r_ptr->cmove)
@@ -1142,7 +1142,7 @@ int* took_turn;
       (void)sprintf(ddesc, "an %s", r_ptr->name);
     else
       (void)sprintf(ddesc, "a %s", r_ptr->name);
-      /* End DIED_FROM		       */
+      /* End DIED_FROM  	       */
 
       /* Extract all possible spells into spell_choice */
 #ifdef ATARIST_MWC
@@ -1156,7 +1156,7 @@ int* took_turn;
       spell_choice[k] = bit_pos(&i);
       k++;
     }
-    /* Choose a spell to cast			       */
+    /* Choose a spell to cast  		       */
     thrown_spell = spell_choice[randint(k) - 1];
     thrown_spell++;
     /* all except teleport_away() and drain mana spells always disturb */
@@ -1166,7 +1166,7 @@ int* took_turn;
       (void)strcat(cdesc, "casts a spell.");
       msg_print(cdesc);
     }
-    /* Cast the spell.			     */
+    /* Cast the spell.  		     */
     switch (thrown_spell) {
       case 5: /*Teleport Short*/
         teleport_away(monptr, 5);
@@ -1174,10 +1174,10 @@ int* took_turn;
       case 6: /*Teleport Long */
         teleport_away(monptr, MAX_SIGHT);
         break;
-      case 7: /*Teleport To	 */
+      case 7: /*Teleport To   */
         teleport_to((int)m_ptr->fy, (int)m_ptr->fx);
         break;
-      case 8: /*Light Wound	 */
+      case 8: /*Light Wound   */
         if (player_saves())
           msg_print("You resist the effects of the spell.");
         else
@@ -1189,7 +1189,7 @@ int* took_turn;
         else
           take_hit(damroll(8, 8), ddesc);
         break;
-      case 10: /*Hold Person	  */
+      case 10: /*Hold Person    */
         if (py.flags.free_act)
           msg_print("You are unaffected.");
         else if (player_saves())
@@ -1215,7 +1215,7 @@ int* took_turn;
         else
           py.flags.confused = randint(5) + 3;
         break;
-      case 13: /*Cause Fear	  */
+      case 13: /*Cause Fear    */
         if (player_saves())
           msg_print("You resist the effects of the spell.");
         else if (py.flags.afraid > 0)
@@ -1245,7 +1245,7 @@ int* took_turn;
         hack_monptr = -1;
         update_mon((int)cave[y][x].cptr);
         break;
-      case 16: /*Slow Person	 */
+      case 16: /*Slow Person   */
         if (py.flags.free_act)
           msg_print("You are unaffected.");
         else if (player_saves())
@@ -1255,7 +1255,7 @@ int* took_turn;
         else
           py.flags.slow = randint(5) + 3;
         break;
-      case 17: /*Drain Mana	 */
+      case 17: /*Drain Mana   */
         if (py.misc.cmana > 0) {
           disturb(1, 0);
           (void)sprintf(outval, "%sdraws psychic energy from you!", cdesc);
@@ -1281,13 +1281,13 @@ int* took_turn;
         breath(GF_LIGHTNING, char_row, char_col, (m_ptr->hp / 4), ddesc,
                monptr);
         break;
-      case 21: /*Breath Gas	 */
+      case 21: /*Breath Gas   */
         (void)strcat(cdesc, "breathes gas.");
         msg_print(cdesc);
         breath(GF_POISON_GAS, char_row, char_col, (m_ptr->hp / 3), ddesc,
                monptr);
         break;
-      case 22: /*Breath Acid	 */
+      case 22: /*Breath Acid   */
         (void)strcat(cdesc, "breathes acid.");
         msg_print(cdesc);
         breath(GF_ACID, char_row, char_col, (m_ptr->hp / 3), ddesc, monptr);
@@ -1297,7 +1297,7 @@ int* took_turn;
         msg_print(cdesc);
         breath(GF_FROST, char_row, char_col, (m_ptr->hp / 3), ddesc, monptr);
         break;
-      case 24: /*Breath Fire	 */
+      case 24: /*Breath Fire   */
         (void)strcat(cdesc, "breathes fire.");
         msg_print(cdesc);
         breath(GF_FIRE, char_row, char_col, (m_ptr->hp / 3), ddesc, monptr);
@@ -1306,7 +1306,7 @@ int* took_turn;
         (void)strcat(cdesc, "cast unknown spell.");
         msg_print(cdesc);
     }
-    /* End of spells				       */
+    /* End of spells  			       */
     if (m_ptr->ml) {
       c_recall[m_ptr->mptr].r_spells |= 1L << (thrown_spell - 1);
       if ((c_recall[m_ptr->mptr].r_spells & CS_FREQ) != CS_FREQ)
@@ -1317,8 +1317,8 @@ int* took_turn;
   }
 }
 
-/* Places creature adjacent to given location		-RAK-	*/
-/* Rats and Flys are fun!					 */
+/* Places creature adjacent to given location  	-RAK-	*/
+/* Rats and Flys are fun!  				 */
 int multiply_monster(y, x, cr_index, monptr) int y, x, cr_index;
 int monptr;
 {
@@ -1339,9 +1339,9 @@ int monptr;
       c_ptr = &cave[j][k];
       if ((c_ptr->fval <= MAX_OPEN_SPACE) && (c_ptr->tptr == 0) &&
           (c_ptr->cptr != 1)) {
-        if (c_ptr->cptr > 1) /* Creature there already?	*/
+        if (c_ptr->cptr > 1) /* Creature there already?  */
         {
-          /* Some critters are cannibalistic!	    */
+          /* Some critters are cannibalistic!      */
 #ifdef ATARIST_MWC
           holder = CM_EATS_OTHER;
           if ((c_list[cr_index].cmove & holder)
@@ -1369,7 +1369,7 @@ int monptr;
             return check_mon_lite(j, k);
           }
         } else
-        /* All clear,  place a monster	  */
+        /* All clear,  place a monster    */
         {
           /* in case compact_monster() is called,it needs monptr */
           hack_monptr = monptr;
@@ -1387,7 +1387,7 @@ int monptr;
   return FALSE;
 }
 
-/* Move the critters about the dungeon			-RAK-	*/
+/* Move the critters about the dungeon  		-RAK-	*/
 static void mon_move(monptr, rcmove) int monptr;
 int32u* rcmove;
 {
@@ -1408,7 +1408,7 @@ int32u* rcmove;
 
   m_ptr = &m_list[monptr];
   r_ptr = &c_list[m_ptr->mptr];
-  /* Does the critter multiply?				   */
+  /* Does the critter multiply?  			   */
   /* rest could be negative, to be safe, only use mod with positive values. */
   rest_val = abs(py.flags.rest);
 #ifdef ATARIST_MWC
@@ -1586,7 +1586,7 @@ int32u* rcmove;
   }
 }
 
-/* Creatures movement and attacking are done from here	-RAK-	*/
+/* Creatures movement and attacking are done from here  -RAK-	*/
 void creatures(attack) int attack;
 {
   register int i, k;
@@ -1689,5 +1689,5 @@ void creatures(attack) int attack;
       continue;
     }
   }
-  /* End processing monsters	   */
+  /* End processing monsters     */
 }

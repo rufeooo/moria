@@ -39,7 +39,7 @@ static void carry(int, int, int);
 static int summon_object(int, int, int, int);
 #endif
 
-/* Player hit a trap.	(Chuckle)			-RAK-	*/
+/* Player hit a trap.  (Chuckle)			-RAK-	*/
 static void hit_trap(y, x) int y, x;
 {
   int i, ty, tx, num, dam;
@@ -200,17 +200,17 @@ static void hit_trap(y, x) int y, x;
     case 99: /* Scare Mon*/
       break;
 
-      /* Town level traps are special,	the stores.	*/
+      /* Town level traps are special,  the stores.	*/
     case 101: /* General    */
       enter_store(0);
       break;
-    case 102: /* Armory	    */
+    case 102: /* Armory      */
       enter_store(1);
       break;
     case 103: /* Weaponsmith*/
       enter_store(2);
       break;
-    case 104: /* Temple	    */
+    case 104: /* Temple      */
       enter_store(3);
       break;
     case 105: /* Alchemy    */
@@ -226,7 +226,7 @@ static void hit_trap(y, x) int y, x;
   }
 }
 
-/* Return spell number and failure chance		-RAK-	*/
+/* Return spell number and failure chance  	-RAK-	*/
 /* returns -1 if no spells in book
    returns 1 if choose a spell in book to cast
    returns 0 if don't choose a spell, i.e. exit with an escape */
@@ -269,10 +269,10 @@ this! Confirm?");
   return (result);
 }
 
-/* Player is on an object.  Many things can happen based -RAK-	*/
+/* Player is on an object.  Many things can happen based -RAK-  */
 /* on the TVAL of the object.  Traps are set off, money and most */
 /* objects are picked up.  Some objects, such as open doors, just*/
-/* sit there.						       */
+/* sit there.  					       */
 static void carry(y, x, pickup) int y, x;
 int pickup;
 {
@@ -296,7 +296,7 @@ int pickup;
       (void)delete_object(y, x);
       msg_print(out_val);
     } else {
-      if (inven_check_num(i_ptr)) /* Too many objects?	    */
+      if (inven_check_num(i_ptr)) /* Too many objects?      */
       {                           /* Okay,  pick it up      */
         if (pickup && prompt_carry_flag) {
           objdes(tmp_str, i_ptr, TRUE);
@@ -314,7 +314,7 @@ int pickup;
                         tmp_str);
           pickup = get_check(out_val);
         }
-        /* Attempt to pick up an object.	       */
+        /* Attempt to pick up an object.         */
         if (pickup) {
           locn = inven_carry(i_ptr);
           objdes(tmp_str, &inventory[locn], TRUE);
@@ -329,12 +329,12 @@ int pickup;
       }
     }
   }
-  /* OPPS!				   */
+  /* OPPS!  			   */
   else if (i == TV_INVIS_TRAP || i == TV_VIS_TRAP || i == TV_STORE_DOOR)
     hit_trap(y, x);
 }
 
-/* Deletes a monster entry from the level		-RAK-	*/
+/* Deletes a monster entry from the level  	-RAK-	*/
 void delete_monster(j) int j;
 {
   register monster_type* m_ptr;
@@ -389,7 +389,7 @@ void fix2_delete_monster(j) int j;
   mfptr--;
 }
 
-/* Creates objects nearby the coordinates given		-RAK-	  */
+/* Creates objects nearby the coordinates given  	-RAK-	  */
 static int summon_object(y, x, num, typ) int y, x, num, typ;
 {
   register int i, j, k;
@@ -433,7 +433,7 @@ static int summon_object(y, x, num, typ) int y, x, num, typ;
   return res;
 }
 
-/* Deletes object from given location			-RAK-	*/
+/* Deletes object from given location  		-RAK-	*/
 int delete_object(y, x) int y, x;
 {
   register int delete;
@@ -452,9 +452,9 @@ int delete_object(y, x) int y, x;
   return (delete);
 }
 
-/* Allocates objects upon a creatures death		-RAK-	*/
+/* Allocates objects upon a creatures death  	-RAK-	*/
 /* Oh well,  another creature bites the dust.  Reward the victor*/
-/* based on flags set in the main creature record		 */
+/* based on flags set in the main creature record  	 */
 /* Returns a mask of bits from the given flags which indicates what the
    monster is seen to have dropped.  This may be added to monster memory. */
 int32u monster_death(y, x, flags) int y, x;
@@ -559,8 +559,8 @@ register int32u flags;
   return res;
 }
 
-/* Decreases monsters hit points and deletes monster if needed.	*/
-/* (Picking on my babies.)			       -RAK-   */
+/* Decreases monsters hit points and deletes monster if needed.  */
+/* (Picking on my babies.)  		       -RAK-   */
 int mon_take_hit(monptr, dam) int monptr, dam;
 {
   register int32u i;
@@ -633,7 +633,7 @@ int mon_take_hit(monptr, dam) int monptr, dam;
   return (m_take_hit);
 }
 
-/* Player attacks a (poor, defenseless) creature	-RAK-	*/
+/* Player attacks a (poor, defenseless) creature  -RAK-	*/
 void py_attack(y, x) int y, x;
 {
   register int k, blows;
@@ -649,7 +649,7 @@ void py_attack(y, x) int y, x;
   monptr = m_list[crptr].mptr;
   m_list[crptr].csleep = 0;
   i_ptr = &inventory[INVEN_WIELD];
-  /* Does the player know what he's fighting?	   */
+  /* Does the player know what he's fighting?     */
   if (!m_list[crptr].ml)
     (void)strcpy(m_name, "it");
   else
@@ -673,7 +673,7 @@ void py_attack(y, x) int y, x;
     base_tohit = (p_ptr->bth / 2) - (tot_tohit * (BTH_PLUS_ADJ - 1)) -
                  (p_ptr->lev * class_level_adj[p_ptr->pclass][CLA_BTH] / 2);
 
-  /* Loop for number of blows,	trying to hit the critter.	  */
+  /* Loop for number of blows,  trying to hit the critter.	  */
   do {
     if (test_hit(base_tohit, (int)p_ptr->lev, tot_tohit, (int)c_list[monptr].ac,
                  CLA_BTH)) {
@@ -709,7 +709,7 @@ void py_attack(y, x) int y, x;
           c_recall[monptr].r_cdefense |= c_list[monptr].cdefense & CD_NO_SLEEP;
       }
 
-      /* See if we done it in.				 */
+      /* See if we done it in.  			 */
       if (mon_take_hit(crptr, k) >= 0) {
         (void)sprintf(out_val, "You have slain %s.", m_name);
         msg_print(out_val);
@@ -742,7 +742,7 @@ void py_attack(y, x) int y, x;
   } while (blows >= 1);
 }
 
-/* Moves player from one space to another.		-RAK-	*/
+/* Moves player from one space to another.  	-RAK-	*/
 /* Note: This routine has been pre-declared; see that for argument*/
 void move_char(dir, do_pickup) int dir, do_pickup;
 {
@@ -751,7 +751,7 @@ void move_char(dir, do_pickup) int dir, do_pickup;
   register int i, j;
   register cave_type *c_ptr, *d_ptr;
 
-  if ((py.flags.confused > 0) && /* Confused?	     */
+  if ((py.flags.confused > 0) && /* Confused?       */
       (randint(4) > 1) &&        /* 75% random movement   */
       (dir != 5))                /* Never random if sitting*/
   {
@@ -760,7 +760,7 @@ void move_char(dir, do_pickup) int dir, do_pickup;
   }
   y = char_row;
   x = char_col;
-  if (mmove(dir, &y, &x)) /* Legal move?	      */
+  if (mmove(dir, &y, &x)) /* Legal move?        */
   {
     c_ptr = &cave[y][x];
     /* if there is no creature, or an unlit creature in the walls then... */
@@ -770,29 +770,29 @@ void move_char(dir, do_pickup) int dir, do_pickup;
        instead force player to tunnel into walls which always takes a turn */
     if ((c_ptr->cptr < 2) ||
         (!m_list[c_ptr->cptr].ml && c_ptr->fval >= MIN_CLOSED_SPACE)) {
-      if (c_ptr->fval <= MAX_OPEN_SPACE) /* Open floor spot	*/
+      if (c_ptr->fval <= MAX_OPEN_SPACE) /* Open floor spot  */
       {
         /* Make final assignments of char co-ords */
         old_row = char_row;
         old_col = char_col;
         char_row = y;
         char_col = x;
-        /* Move character record (-1)	       */
+        /* Move character record (-1)         */
         move_rec(old_row, old_col, char_row, char_col);
-        /* Check for new panel		       */
+        /* Check for new panel  	       */
         if (get_panel(char_row, char_col, FALSE)) prt_map();
-        /* Check to see if he should stop	       */
+        /* Check to see if he should stop         */
         if (find_flag) area_affect(dir, char_row, char_col);
         /* Check to see if he notices something  */
         /* fos may be negative if have good rings of searching */
         if ((py.misc.fos <= 1) || (randint(py.misc.fos) == 1) ||
             (py.flags.status & PY_SEARCH))
           search(char_row, char_col, py.misc.srh);
-        /* A room of light should be lit.	     */
+        /* A room of light should be lit.       */
         if (c_ptr->fval == LIGHT_FLOOR) {
           if (!c_ptr->pl && !py.flags.blind) light_room(char_row, char_col);
         }
-        /* In doorway of light-room?	       */
+        /* In doorway of light-room?         */
         else if (c_ptr->lr && (py.flags.blind < 1))
           for (i = (char_row - 1); i <= (char_row + 1); i++)
             for (j = (char_col - 1); j <= (char_col + 1); j++) {
@@ -800,9 +800,9 @@ void move_char(dir, do_pickup) int dir, do_pickup;
               if ((d_ptr->fval == LIGHT_FLOOR) && (!d_ptr->pl))
                 light_room(i, j);
             }
-        /* Move the light source		       */
+        /* Move the light source  	       */
         move_light(old_row, old_col, char_row, char_col);
-        /* An object is beneath him.	     */
+        /* An object is beneath him.       */
         if (c_ptr->tptr != 0) {
           carry(char_row, char_col, do_pickup);
           /* if stepped on falling rock trap, and space contains
@@ -842,17 +842,17 @@ void move_char(dir, do_pickup) int dir, do_pickup;
         /* did not do anything this turn */
         free_turn_flag = TRUE;
       } else {
-        if (py.flags.afraid < 1) /* Coward?	*/
+        if (py.flags.afraid < 1) /* Coward?  */
           py_attack(y, x);
-        else /* Coward!	*/
+        else /* Coward!  */
           msg_print("You are too afraid!");
       }
     }
   }
 }
 
-/* Chests have traps too.				-RAK-	*/
-/* Note: Chest traps are based on the FLAGS value		 */
+/* Chests have traps too.  			-RAK-	*/
+/* Note: Chest traps are based on the FLAGS value  	 */
 void chest_trap(y, x) int y, x;
 {
   register int i;
@@ -897,7 +897,7 @@ void chest_trap(y, x) int y, x;
   }
 }
 
-/* Opens a closed door or closed chest.		-RAK-	*/
+/* Opens a closed door or closed chest.  	-RAK-	*/
 void
 openobject()
 {
@@ -929,10 +929,10 @@ openobject()
       (void)sprintf(out_val, "%s is in your way!", m_name);
       msg_print(out_val);
     } else if (c_ptr->tptr != 0)
-      /* Closed door		 */
+      /* Closed door  	 */
       if (t_list[c_ptr->tptr].tval == TV_CLOSED_DOOR) {
         t_ptr = &t_list[c_ptr->tptr];
-        if (t_ptr->p1 > 0) /* It's locked.	*/
+        if (t_ptr->p1 > 0) /* It's locked.  */
         {
           p_ptr = &py.misc;
           i = p_ptr->disarm + 2 * todis_adj() + stat_adj(A_INT) +
@@ -946,7 +946,7 @@ openobject()
             t_ptr->p1 = 0;
           } else
             count_msg_print("You failed to pick the lock.");
-        } else if (t_ptr->p1 < 0) /* It's stuck	  */
+        } else if (t_ptr->p1 < 0) /* It's stuck    */
           msg_print("It appears to be stuck.");
         if (t_ptr->p1 == 0) {
           invcopy(&t_list[c_ptr->tptr], OBJ_OPEN_DOOR);
@@ -955,7 +955,7 @@ openobject()
           command_count = 0;
         }
       }
-      /* Open a closed chest.		     */
+      /* Open a closed chest.  	     */
       else if (t_list[c_ptr->tptr].tval == TV_CHEST) {
         p_ptr = &py.misc;
         i = p_ptr->disarm + 2 * todis_adj() + stat_adj(A_INT) +
@@ -981,13 +981,13 @@ openobject()
           t_ptr->cost = 0;
         }
         flag = FALSE;
-        /* Was chest still trapped?	 (Snicker)   */
+        /* Was chest still trapped?   (Snicker)   */
         if ((CH_LOCKED & t_ptr->flags) == 0) {
           chest_trap(y, x);
           if (c_ptr->tptr != 0) flag = TRUE;
         }
         /* Chest treasure is allocated as if a creature   */
-        /* had been killed.				   */
+        /* had been killed.  			   */
         if (flag) {
           /* clear the cursed chest/monster win flag, so that people
              can not win by opening a cursed chest */
@@ -1011,7 +1011,7 @@ openobject()
   }
 }
 
-/* Closes an open door.				-RAK-	*/
+/* Closes an open door.  			-RAK-	*/
 void
 closeobject()
 {
@@ -1056,8 +1056,8 @@ closeobject()
   }
 }
 
-/* Tunneling through real wall: 10, 11, 12		-RAK-	*/
-/* Used by TUNNEL and WALL_TO_MUD				 */
+/* Tunneling through real wall: 10, 11, 12  	-RAK-	*/
+/* Used by TUNNEL and WALL_TO_MUD  			 */
 int twall(y, x, t1, t2) int y, x, t1, t2;
 {
   register int i, j;

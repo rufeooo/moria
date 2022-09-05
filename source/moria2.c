@@ -32,8 +32,8 @@ static int see_nothing(int, int, int);
 static int see_wall();
 #endif
 
-/* Change a trap from invisible to visible		-RAK-	*/
-/* Note: Secret doors are handled here				 */
+/* Change a trap from invisible to visible  	-RAK-	*/
+/* Note: Secret doors are handled here  			 */
 void change_trap(y, x) register int y, x;
 {
   register cave_type* c_ptr;
@@ -53,7 +53,7 @@ void change_trap(y, x) register int y, x;
   }
 }
 
-/* Searches for hidden things.			-RAK-	*/
+/* Searches for hidden things.  		-RAK-	*/
 void search(y, x, chance) int y, x, chance;
 {
   register int i, j;
@@ -71,10 +71,10 @@ void search(y, x, chance) int y, x, chance;
       if (randint(100) < chance) /* always in_bounds here */
       {
         c_ptr = &cave[i][j];
-        /* Search for hidden objects		   */
+        /* Search for hidden objects  	   */
         if (c_ptr->tptr != 0) {
           t_ptr = &t_list[c_ptr->tptr];
-          /* Trap on floor?		       */
+          /* Trap on floor?  	       */
           if (t_ptr->tval == TV_INVIS_TRAP) {
             objdes(tmp_str2, t_ptr, TRUE);
             (void)sprintf(tmp_str, "You have found %s", tmp_str2);
@@ -82,13 +82,13 @@ void search(y, x, chance) int y, x, chance;
             change_trap(i, j);
             end_find();
           }
-          /* Secret door?		       */
+          /* Secret door?  	       */
           else if (t_ptr->tval == TV_SECRET_DOOR) {
             msg_print("You have found a secret door.");
             change_trap(i, j);
             end_find();
           }
-          /* Chest is trapped?	       */
+          /* Chest is trapped?         */
           else if (t_ptr->tval == TV_CHEST) {
             /* mask out the treasure bits */
             if ((t_ptr->flags & CH_TRAPPED) > 1)
@@ -102,7 +102,7 @@ void search(y, x, chance) int y, x, chance;
       }
 }
 
-/* The running algorithm:			-CJS-
+/* The running algorithm:  		-CJS-
 
    Overview: You keep moving until something interesting happens.
    If you are in an enclosed space, you follow corners. This is
@@ -119,11 +119,11 @@ void search(y, x, chance) int y, x, chance;
    corridors, rooms, mine tailings, earthquake rubble, etc, etc.
 
    These conditions are kept in static memory:
-        find_openarea	 You are in the open on at least one
+        find_openarea   You are in the open on at least one
                          side.
-        find_breakleft	 You have a wall on the left, and will
+        find_breakleft   You have a wall on the left, and will
                          stop if it opens
-        find_breakright	 You have a wall on the right, and will
+        find_breakright   You have a wall on the right, and will
                          stop if it opens
 
    To initialize these conditions is the task of find_init. If
@@ -133,9 +133,9 @@ void search(y, x, chance) int y, x, chance;
    be closed, then that side is considered to be closed. If both
    sides are closed, then it is an enclosed (corridor) run.
 
-         LL		L
-        @.	       L.R
-         RR	       @R
+         LL  	L
+        @.         L.R
+         RR         @R
 
    Looking at more than just the immediate squares is
    significant. Consider the following case. A run along the
@@ -160,9 +160,9 @@ void search(y, x, chance) int y, x, chance;
    stop at 1. Another run right and down will enter the corridor
    and make the corner, stopping at the 2.
 
-        #@	  1
+        #@    1
         ########### ######
-        2	    #
+        2      #
         #############
         #
 
@@ -175,9 +175,9 @@ void search(y, x, chance) int y, x, chance;
    (for straight and diagonal moves) to which you were not
    previously adjacent.
 
-       ...!	  ...	       EG Moving from 1 to 2.
-       .12!	  .1.!		  . means previously adjacent
-       ...!	  ..2!		  ! means newly adjacent
+       ...!    ...	       EG Moving from 1 to 2.
+       .12!    .1.!		  . means previously adjacent
+       ...!    ..2!		  ! means newly adjacent
                    !!!
 
    You STOP if you can't even make the move in the chosen
@@ -215,7 +215,7 @@ void search(y, x, chance) int y, x, chance;
    are both blank, then it is a potential corner and enter if find_examine
    is set, otherwise must stop because it is not a corner. */
 
-/* The cycle lists the directions in anticlockwise order, for	-CJS-
+/* The cycle lists the directions in anticlockwise order, for  -CJS-
    over two complete cycles. The chome array maps a direction on
    to its position in the cycle.
 */
@@ -312,7 +312,7 @@ end_find()
   }
 }
 
-/* Do we see a wall? Used in running.		-CJS- */
+/* Do we see a wall? Used in running.  	-CJS- */
 static int see_wall(dir, y, x) int dir, y, x;
 {
   char c;
@@ -333,7 +333,7 @@ static int see_wall(dir, y, x) int dir, y, x;
     return FALSE;
 }
 
-/* Do we see anything? Used in running.		-CJS- */
+/* Do we see anything? Used in running.  	-CJS- */
 static int see_nothing(dir, y, x) int dir, y, x;
 {
   if (!mmove(dir, &y, &x)) /* check to see if movement there possible */
@@ -373,7 +373,7 @@ void area_affect(dir, y, x) int dir, y, x;
               return;
             }
           }
-          /* Also Creatures		*/
+          /* Also Creatures  	*/
           /* the monster should be visible since update_mon() checks
              for the special case of being in find mode */
           if (c_ptr->cptr > 1 && m_list[c_ptr->cptr].ml) {
@@ -482,9 +482,9 @@ void area_affect(dir, y, x) int dir, y, x;
   }
 }
 
-/* AC gets worse					-RAK-	*/
-/* Note: This routine affects magical AC bonuses so that stores	  */
-/*	 can detect the damage.					 */
+/* AC gets worse  				-RAK-	*/
+/* Note: This routine affects magical AC bonuses so that stores    */
+/*   can detect the damage.					 */
 int minus_ac(typ_dam) int32u typ_dam;
 {
   register int i, j;
@@ -539,7 +539,7 @@ int minus_ac(typ_dam) int32u typ_dam;
   return (minus);
 }
 
-/* Corrode the unsuspecting person's armor		 -RAK-	 */
+/* Corrode the unsuspecting person's armor  	 -RAK-	 */
 void corrode_gas(kb_str) char* kb_str;
 {
 #ifdef ATARIST_MWC
@@ -556,7 +556,7 @@ void corrode_gas(kb_str) char* kb_str;
     msg_print("There is an acrid smell coming from your pack.");
 }
 
-/* Poison gas the idiot.				-RAK-	*/
+/* Poison gas the idiot.  			-RAK-	*/
 void poison_gas(dam, kb_str) int dam;
 char* kb_str;
 {
@@ -564,7 +564,7 @@ char* kb_str;
   py.flags.poisoned += 12 + randint(dam);
 }
 
-/* Burn the fool up.					-RAK-	*/
+/* Burn the fool up.  				-RAK-	*/
 void fire_dam(dam, kb_str) int dam;
 char* kb_str;
 {
@@ -575,7 +575,7 @@ char* kb_str;
     msg_print("There is smoke coming from your pack!");
 }
 
-/* Freeze him to death.				-RAK-	*/
+/* Freeze him to death.  			-RAK-	*/
 void cold_dam(dam, kb_str) int dam;
 char* kb_str;
 {
@@ -586,7 +586,7 @@ char* kb_str;
     msg_print("Something shatters inside your pack!");
 }
 
-/* Lightning bolt the sucker away.			-RAK-	*/
+/* Lightning bolt the sucker away.  		-RAK-	*/
 void light_dam(dam, kb_str) int dam;
 char* kb_str;
 {
@@ -598,7 +598,7 @@ char* kb_str;
     msg_print("There are sparks coming from your pack!");
 }
 
-/* Throw acid on the hapless victim			-RAK-	*/
+/* Throw acid on the hapless victim  		-RAK-	*/
 void acid_dam(dam, kb_str) int dam;
 char* kb_str;
 {

@@ -29,7 +29,7 @@
 #include <strings.h>
 #endif
 
-/* Potions for the quaffing				-RAK-	*/
+/* Potions for the quaffing  			-RAK-	*/
 void
 quaff()
 {
@@ -61,7 +61,7 @@ quaff()
       while (i != 0) {
         j = bit_pos(&i) + 1;
         if (i_ptr->tval == TV_POTION2) j += 32;
-        /* Potions						*/
+        /* Potions  					*/
         switch (j) {
           case 1:
             if (inc_stat(A_STR)) {
@@ -225,43 +225,43 @@ quaff()
             ident = cure_poison();
             break;
 #if 0
-	    case 33:
-	      /* this is no longer useful, now that there is a 'G'ain magic
-		 spells command */
-	      m_ptr = &py.misc;
-	      c_ptr = &class[m_ptr->pclass];
-	      if (c_ptr->spell == MAGE)
-		{
-		  calc_spells(A_INT);
-		  calc_mana(A_INT);
-		}
-	      else if (c_ptr->spell == PRIEST)
-		{
-		  calc_spells(A_WIS);
-		  calc_mana(A_WIS);
-		}
-	      else
-		{
-		  /* A warrior learns something about his equipment. -CJS- */
-		  inven_type *w_ptr;
-		  vtype tmp_str;
-		  extern char *describe_use ();
+      case 33:
+        /* this is no longer useful, now that there is a 'G'ain magic
+  	 spells command */
+        m_ptr = &py.misc;
+        c_ptr = &class[m_ptr->pclass];
+        if (c_ptr->spell == MAGE)
+  	{
+  	  calc_spells(A_INT);
+  	  calc_mana(A_INT);
+  	}
+        else if (c_ptr->spell == PRIEST)
+  	{
+  	  calc_spells(A_WIS);
+  	  calc_mana(A_WIS);
+  	}
+        else
+  	{
+  	  /* A warrior learns something about his equipment. -CJS- */
+  	  inven_type *w_ptr;
+  	  vtype tmp_str;
+  	  extern char *describe_use ();
 
-		  for (k = 22; k < INVEN_ARRAY_SIZE; k++)
-		    {
-		      w_ptr = &inventory[k];
-		      if (w_ptr->tval != TV_NOTHING && enchanted (w_ptr))
-			{
-			  (void) sprintf (tmp_str,
-				  "There's something about what you are %s...",
-					  describe_use(k));
-			  msg_print (tmp_str);
-			  add_inscribe(w_ptr, ID_MAGIK);
-			  ident = TRUE;
-			}
-		    }
-		}
-	      break;
+  	  for (k = 22; k < INVEN_ARRAY_SIZE; k++)
+  	    {
+  	      w_ptr = &inventory[k];
+  	      if (w_ptr->tval != TV_NOTHING && enchanted (w_ptr))
+  		{
+  		  (void) sprintf (tmp_str,
+  			  "There's something about what you are %s...",
+  				  describe_use(k));
+  		  msg_print (tmp_str);
+  		  add_inscribe(w_ptr, ID_MAGIK);
+  		  ident = TRUE;
+  		}
+  	    }
+  	}
+        break;
 #endif
           case 34:
             if (py.misc.exp > 0) {
@@ -345,7 +345,7 @@ quaff()
             msg_print("Internal error in potion()");
             break;
         }
-        /* End of Potions.					*/
+        /* End of Potions.  				*/
       }
     if (ident) {
       if (!known1_p(i_ptr)) {

@@ -31,12 +31,12 @@ int16 char_col;
    drain life + restore life does not affect hit points */
 int16u player_hp[MAX_PLAYER_LEVEL];
 
-/* Class titles for different levels				*/
+/* Class titles for different levels  			*/
 #ifdef MACGAME
 char* (*player_title)[MAX_PLAYER_LEVEL];
 #else
 char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
-    /* Warrior	 */
+    /* Warrior   */
     {"Rookie",       "Private",      "Soldier",      "Mercenary",
      "Veteran(1st)", "Veteran(2nd)", "Veteran(3rd)", "Warrior(1st)",
      "Warrior(2nd)", "Warrior(3rd)", "Warrior(4th)", "Swordsman-1",
@@ -47,7 +47,7 @@ char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
      "Lord (1st)",   "Lord (2nd)",   "Lord (3rd)",   "Lord (4th)",
      "Lord (5th)",   "Lord (6th)",   "Lord (7th)",   "Lord (8th)",
      "Lord (9th)",   "Lord Gallant", "Lord Keeper",  "Lord Noble"},
-    /* Mage		 */
+    /* Mage  	 */
     {"Novice",       "Apprentice",   "Trickster-1",  "Trickster-2",
      "Trickster-3",  "Cabalist-1",   "Cabalist-2",   "Cabalist-3",
      "Visionist",    "Phantasmist",  "Shadowist",    "Spellbinder",
@@ -58,7 +58,7 @@ char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
      "Mage (4th)",   "Mage (5th)",   "Wizard (1st)", "Wizard (2nd)",
      "Wizard (3rd)", "Wizard (4th)", "Wizard (5th)", "Wizard (6th)",
      "Wizard (7th)", "Wizard (8th)", "Wizard (9th)", "Wizard Lord"},
-    /* Priests	 */
+    /* Priests   */
     {"Believer",     "Acolyte(1st)", "Acolyte(2nd)", "Acolyte(3rd)",
      "Adept (1st)",  "Adept (2nd)",  "Adept (3rd)",  "Priest (1st)",
      "Priest (2nd)", "Priest (3rd)", "Priest (4th)", "Priest (5th)",
@@ -69,7 +69,7 @@ char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
      "Canon (4th)",  "Canon (5th)",  "Low Lama",     "Lama-1",
      "Lama-2",       "Lama-3",       "High Lama",    "Great Lama",
      "Patriarch",    "High Priest",  "Great Priest", "Noble Priest"},
-    /* Rogues	 */
+    /* Rogues   */
     {"Vagabond",     "Footpad",     "Cutpurse",      "Robber",
      "Burglar",      "Filcher",     "Sharper",       "Magsman",
      "Common Rogue", "Rogue (1st)", "Rogue (2nd)",   "Rogue (3rd)",
@@ -80,7 +80,7 @@ char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
      "Thief (5th)",  "Thief (6th)", "Thief (7th)",   "Thief (8th)",
      "Thief (9th)",  "High Thief",  "Master Thief",  "Executioner",
      "Low Assassin", "Assassin",    "High Assassin", "Guildsmaster"},
-    /* Rangers	 */
+    /* Rangers   */
     {"Runner (1st)",  "Runner (2nd)",  "Runner (3rd)",  "Strider (1st)",
      "Strider (2nd)", "Strider (3rd)", "Scout (1st)",   "Scout (2nd)",
      "Scout (3rd)",   "Scout (4th)",   "Scout (5th)",   "Courser (1st)",
@@ -91,7 +91,7 @@ char* player_title[MAX_CLASS][MAX_PLAYER_LEVEL] = {
      "Guide (4th)",   "Guide (5th)",   "Guide (6th)",   "Guide (7th)",
      "Guide (8th)",   "Guide (9th)",   "Pathfinder-1",  "Pathfinder-2",
      "Pathfinder-3",  "Ranger",        "High Ranger",   "Ranger Lord"},
-    /* Paladins	 */
+    /* Paladins   */
     {"Gallant",      "Keeper (1st)", "Keeper (2nd)", "Keeper (3rd)",
      "Keeper (4th)", "Keeper (5th)", "Keeper (6th)", "Keeper (7th)",
      "Keeper (8th)", "Keeper (9th)", "Protector-1",  "Protector-2",
@@ -113,7 +113,7 @@ int32u player_exp[MAX_PLAYER_LEVEL] = {
     75000L,  100000L,  150000L,  200000L,  300000L,  400000L, 500000L,
     750000L, 1500000L, 2500000L, 5000000L, 10000000L};
 
-/*Race	STR,INT,WIS,DEX,CON,CHR,
+/*Race  STR,INT,WIS,DEX,CON,CHR,
         Ages, heights, and weights (male then female)
         Racial Bases for: dis,srh,stl,fos,bth,bthb,bsav,hitdie,
         infra, exp base, choice-classes */
@@ -155,7 +155,7 @@ race_type race[MAX_RACES] = {
     }};
 #endif
 
-/* Background information					*/
+/* Background information  				*/
 #ifdef MACGAME
 background_type* background;
 #else
@@ -290,9 +290,9 @@ background_type background[MAX_BACKGROUND] = {
     {"leprous skin.", 100, 66, 0, 50}};
 #endif
 
-/* Classes.							*/
+/* Classes.  						*/
 class_type class[MAX_CLASS] = {
-    /*	  HP Dis Src Stl Fos bth btb sve S  I  W  D Co Ch  Spell Exp  spl */
+    /*    HP Dis Src Stl Fos bth btb sve S  I  W  D Co Ch  Spell Exp  spl */
     {"Warrior", 9, 25, 14, 1, 38, 70, 55, 18, 5, -2, -2, 2, 2, -1, NONE, 0, 0},
     {"Mage", 0, 30, 16, 2, 20, 34, 20, 36, -5, 3, 0, 1, -2, 1, MAGE, 30, 1},
     {"Priest", 2, 25, 16, 2, 32, 48, 35, 30, -3, -3, 3, -1, 0, 2, PRIEST, 20,
@@ -307,7 +307,7 @@ class_type class[MAX_CLASS] = {
 /* CLA_MISC_HIT is identical to CLA_SAVE, which takes advantage of
    the fact that the save values are independent of the class */
 int16 class_level_adj[MAX_CLASS][MAX_LEV_ADJ] = {
-    /*	       bth    bthb   device  disarm   save/misc hit  */
+    /*         bth    bthb   device  disarm   save/misc hit  */
     /* Warrior */ {4, 4, 2, 2, 3},
     /* Mage    */ {2, 2, 4, 3, 3},
     /* Priest  */ {2, 2, 4, 3, 3},
@@ -327,7 +327,7 @@ int8u spell_order[32];      /* order spells learned/remembered/forgotten */
 spell_type (*magic_spell)[31];
 #else
 spell_type magic_spell[MAX_CLASS - 1][31] = {
-    {/* Mage	   */
+    {/* Mage     */
      {1, 1, 22, 1},    {1, 1, 23, 1},     {1, 2, 24, 1},    {1, 2, 26, 1},
      {3, 3, 25, 2},    {3, 3, 25, 1},     {3, 3, 27, 2},    {3, 4, 30, 1},
      {5, 4, 30, 6},    {5, 5, 30, 8},     {5, 5, 30, 5},    {5, 5, 35, 6},
@@ -336,7 +336,7 @@ spell_type magic_spell[MAX_CLASS - 1][31] = {
      {11, 7, 99, 19},  {13, 7, 50, 22},   {15, 9, 50, 25},  {17, 9, 50, 31},
      {19, 12, 55, 38}, {21, 12, 90, 44},  {23, 12, 60, 50}, {25, 12, 65, 63},
      {29, 18, 65, 88}, {33, 21, 80, 125}, {37, 25, 95, 200}},
-    {/* Priest	   */
+    {/* Priest     */
      {1, 1, 10, 1},    {1, 2, 15, 1},     {1, 2, 20, 1},    {1, 2, 25, 1},
      {3, 2, 25, 1},    {3, 3, 27, 2},     {3, 3, 27, 2},    {3, 3, 28, 3},
      {5, 4, 29, 4},    {5, 4, 30, 5},     {5, 4, 32, 5},    {5, 5, 34, 5},
@@ -346,7 +346,7 @@ spell_type magic_spell[MAX_CLASS - 1][31] = {
      {15, 12, 50, 20}, {15, 14, 50, 22},  {17, 14, 55, 32}, {21, 16, 60, 38},
      {25, 20, 70, 75}, {33, 24, 90, 125}, {39, 32, 80, 200}},
     {
-        /* Rogue	   */
+        /* Rogue     */
         {99, 99, 0, 0},   {5, 1, 50, 1},    {7, 2, 55, 1},  {9, 3, 60, 2},
         {11, 4, 65, 2},   {13, 5, 70, 3},   {99, 99, 0, 0}, {15, 6, 75, 3},
         {99, 99, 0, 0},   {17, 7, 80, 4},   {19, 8, 85, 5}, {21, 9, 90, 6},
@@ -356,7 +356,7 @@ spell_type magic_spell[MAX_CLASS - 1][31] = {
         {99, 99, 0, 0},   {99, 99, 0, 0},   {99, 99, 0, 0}, {99, 99, 0, 0},
         {99, 99, 0, 0},   {99, 99, 0, 0},   {99, 99, 0, 0},
     },
-    {/* Ranger	    */
+    {/* Ranger      */
      {3, 1, 30, 1},    {3, 2, 35, 2},     {3, 2, 35, 2},    {5, 3, 35, 2},
      {5, 3, 40, 2},    {5, 4, 45, 3},     {7, 5, 40, 6},    {7, 6, 40, 5},
      {9, 7, 40, 7},    {9, 8, 45, 8},     {11, 8, 40, 10},  {11, 9, 45, 10},
@@ -365,7 +365,7 @@ spell_type magic_spell[MAX_CLASS - 1][31] = {
      {23, 25, 95, 20}, {23, 20, 60, 20},  {25, 20, 60, 20}, {25, 21, 65, 20},
      {27, 21, 65, 22}, {29, 23, 95, 23},  {31, 25, 70, 25}, {33, 25, 75, 38},
      {35, 25, 80, 50}, {37, 30, 95, 100}, {99, 99, 0, 0}},
-    {/* Paladin	   */
+    {/* Paladin     */
      {1, 1, 30, 1},    {2, 2, 35, 2},    {3, 3, 35, 3},    {5, 3, 35, 5},
      {5, 4, 35, 5},    {7, 5, 40, 6},    {7, 5, 40, 6},    {9, 7, 40, 7},
      {9, 7, 40, 8},    {9, 8, 40, 8},    {11, 9, 40, 10},  {11, 10, 45, 10},
@@ -396,16 +396,16 @@ char* spell_names[62] = {
     "Cure Critical Wounds", "Turn Undead", "Prayer", "Dispel Undead", "Heal",
     "Dispel Evil", "Glyph of Warding", "Holy Word"};
 
-/* Each type of character starts out with a few provisions.	*/
+/* Each type of character starts out with a few provisions.  */
 /* Note that the entries refer to elements of the object_list[] array*/
 /* 344 = Food Ration, 365 = Wooden Torch, 123 = Cloak, 318 = Beginners-Majik,
    103 = Soft Leather Armor, 30 = Stiletto, 322 = Beginners Handbook */
 
 int16u player_init[MAX_CLASS][5] = {
-    {344, 365, 123, 30, 103}, /* Warrior	 */
-    {344, 365, 123, 30, 318}, /* Mage		 */
-    {344, 365, 123, 30, 322}, /* Priest	 */
-    {344, 365, 123, 30, 318}, /* Rogue	 */
-    {344, 365, 123, 30, 318}, /* Ranger	 */
-    {344, 365, 123, 30, 322}  /* Paladin	 */
+    {344, 365, 123, 30, 103}, /* Warrior   */
+    {344, 365, 123, 30, 318}, /* Mage  	 */
+    {344, 365, 123, 30, 322}, /* Priest   */
+    {344, 365, 123, 30, 318}, /* Rogue   */
+    {344, 365, 123, 30, 318}, /* Ranger   */
+    {344, 365, 123, 30, 322}  /* Paladin   */
 };

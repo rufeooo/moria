@@ -22,9 +22,9 @@
 #include "constant.h"
 #include "types.h"
 
-/* Following are treasure arrays	and variables			*/
+/* Following are treasure arrays  and variables			*/
 
-/* Object description:	Objects are defined here.  Each object has
+/* Object description:  Objects are defined here.  Each object has
   the following attributes:
         Descriptor : Name of item and formats.
                 & is replaced with 'a', 'an', or a number.
@@ -42,20 +42,20 @@
                 Objects which have two type values, e.g. potions and
                 scrolls, need to have distinct subvals for
                 each item regardless of its tval
-        Damage	   : amount of damage item can cause.
-        Weight	   : relative weight of an item.
-        Number	   : number of items appearing in group.
-        To hit	   : magical plusses to hit.
+        Damage     : amount of damage item can cause.
+        Weight     : relative weight of an item.
+        Number     : number of items appearing in group.
+        To hit     : magical plusses to hit.
         To damage  : magical plusses to damage.
-        AC	   : objects relative armor class.
+        AC     : objects relative armor class.
                 1 is worse than 5 is worse than 10 etc.
-        To AC	   : Magical bonuses to AC.
-        P1	   : Catch all for magical abilities such as
+        To AC     : Magical bonuses to AC.
+        P1     : Catch all for magical abilities such as
                      plusses to strength, minuses to searching.
-        Flags	   : Abilities of object.  Each ability is a
+        Flags     : Abilities of object.  Each ability is a
                      bit.  Bits 1-31 are used. (Signed integer)
-        Level	   : Minimum level on which item can be found.
-        Cost	   : Relative cost of item.
+        Level     : Minimum level on which item can be found.
+        Cost     : Relative cost of item.
 
         Special Abilities can be added to item by magic_init(),
         found in misc.c.
@@ -71,9 +71,9 @@
         for item.  p1 is set in magic_init() in misc.c.
 
         Chests:
-        Traps are added randomly by magic_init() in misc.c.	*/
+        Traps are added randomly by magic_init() in misc.c.  */
 
-/* Object list (All objects must be defined here)		 */
+/* Object list (All objects must be defined here)  	 */
 
 #if defined(MACGAME) || defined(RSRC_PART2)
 treasure_type* object_list;
@@ -5593,8 +5593,8 @@ treasure_type object_list[MAX_OBJECTS] = {
      1},
     /* end store items */
     /* start doors */
-    /* Secret door must have same subval as closed door in	*/
-    /* TRAP_LISTB.	See CHANGE_TRAP. Must use & because of stone_to_mud. */
+    /* Secret door must have same subval as closed door in  */
+    /* TRAP_LISTB.  See CHANGE_TRAP. Must use & because of stone_to_mud. */
     {"& open door",
      0x00000000L,
      TV_OPEN_DOOR,
@@ -5680,7 +5680,7 @@ treasure_type object_list[MAX_OBJECTS] = {
      {1, 1},
      0},
     /* store door */
-    /* Stores are just special traps		*/
+    /* Stores are just special traps  	*/
     {"General Store",
      0x00000000L,
      TV_STORE_DOOR,
@@ -5772,8 +5772,8 @@ treasure_type object_list[MAX_OBJECTS] = {
      {0, 0},
      0},
     /* end store door */
-    /* Traps are just Nasty treasures.				*/
-    /* Traps: Level represents the relative difficulty of disarming;	*/
+    /* Traps are just Nasty treasures.  			*/
+    /* Traps: Level represents the relative difficulty of disarming;  */
     /* and P1 represents the experienced gained when disarmed*/
     {"an open pit",
      0x00000000L,
@@ -6077,7 +6077,7 @@ treasure_type object_list[MAX_OBJECTS] = {
      0,
      {1, 1},
      1},
-    /* Special trap	*/
+    /* Special trap  */
     {"a strange rune",
      0x00000000L,
      TV_VIS_TRAP,
@@ -6093,7 +6093,7 @@ treasure_type object_list[MAX_OBJECTS] = {
      0,
      {0, 0},
      10},
-    /* Gold list (All types of gold and gems are defined here)	*/
+    /* Gold list (All types of gold and gems are defined here)  */
     {"copper",
      0x00000000L,
      TV_GOLD,
@@ -6349,15 +6349,15 @@ char* special_names[SN_ARRAY_SIZE] = {CNIL,
 #ifndef RSRC_PART2
 int16 sorted_objects[MAX_DUNGEON_OBJ];
 
-/* Identified objects flags					*/
+/* Identified objects flags  				*/
 int8u object_ident[OBJECT_IDENT_SIZE];
 int16 t_level[MAX_OBJ_LEVEL + 1];
 inven_type t_list[MAX_TALLOC];
 inven_type inventory[INVEN_ARRAY_SIZE];
 #endif
 
-/* Treasure related values					*/
-int16 inven_ctr = 0;    /* Total different obj's	*/
-int16 inven_weight = 0; /* Cur carried weight	*/
-int16 equip_ctr = 0;    /* Cur equipment ctr	*/
-int16 tcptr;            /* Cur treasure heap ptr	*/
+/* Treasure related values  				*/
+int16 inven_ctr = 0;    /* Total different obj's  */
+int16 inven_weight = 0; /* Cur carried weight  */
+int16 equip_ctr = 0;    /* Cur equipment ctr  */
+int16 tcptr;            /* Cur treasure heap ptr  */

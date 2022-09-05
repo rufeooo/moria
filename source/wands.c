@@ -31,7 +31,7 @@
 #include <strings.h>
 #endif
 
-/* Wands for the aiming.				*/
+/* Wands for the aiming.  			*/
 void
 aim()
 {
@@ -73,7 +73,7 @@ aim()
           j = bit_pos(&i) + 1;
           k = char_row;
           l = char_col;
-          /* Wands			 */
+          /* Wands  		 */
           switch (j) {
             case 1:
               msg_print("A line of blue shimmering light appears.");
@@ -163,7 +163,7 @@ aim()
               msg_print("Internal error in wands()");
               break;
           }
-          /* End of Wands.		    */
+          /* End of Wands.  	    */
         }
         if (ident) {
           if (!known1_p(i_ptr)) {

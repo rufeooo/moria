@@ -41,7 +41,7 @@
 
 long atol();
 
-/* Light up the dungeon					-RAK-	*/
+/* Light up the dungeon  				-RAK-	*/
 void
 wizard_light()
 {
@@ -65,7 +65,7 @@ wizard_light()
   prt_map();
 }
 
-/* Wizard routine for gaining on stats			-RAK-	*/
+/* Wizard routine for gaining on stats  		-RAK-	*/
 void
 change_character()
 {
@@ -254,7 +254,7 @@ change_character()
   }
 }
 
-/* Wizard routine for creating objects			-RAK-	*/
+/* Wizard routine for creating objects  		-RAK-	*/
 void
 wizard_create()
 {

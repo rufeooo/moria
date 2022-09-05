@@ -63,33 +63,33 @@ owner_type owners[MAX_OWNERS] = {
      10}};
 #endif
 
-/* Buying and selling adjustments for character race VS store	*/
-/* owner race							 */
+/* Buying and selling adjustments for character race VS store  */
+/* owner race  						 */
 int8u rgold_adj[MAX_RACES][MAX_RACES] = {
-    /*  Hum,  HfE,	Elf,  Hal,  Gno,  Dwa,	HfO,  HfT*/
-    /*Human		 */ {100, 105, 105, 110, 113, 115, 120, 125},
-    /*Half-Elf	 */ {110, 100, 100, 105, 110, 120, 125, 130},
-    /*Elf		 */ {110, 105, 100, 105, 110, 120, 125, 130},
-    /*Halfling	 */ {115, 110, 105, 95, 105, 110, 115, 130},
-    /*Gnome		 */ {115, 115, 110, 105, 95, 110, 115, 130},
-    /*Dwarf		 */ {115, 120, 120, 110, 110, 95, 125, 135},
-    /*Half-Orc	 */ {115, 120, 125, 115, 115, 130, 110, 115},
-    /*Half-Troll	 */ {110, 115, 115, 110, 110, 130, 110, 110}};
+    /*  Hum,  HfE,  Elf,  Hal,  Gno,  Dwa,	HfO,  HfT*/
+    /*Human  	 */ {100, 105, 105, 110, 113, 115, 120, 125},
+    /*Half-Elf   */ {110, 100, 100, 105, 110, 120, 125, 130},
+    /*Elf  	 */ {110, 105, 100, 105, 110, 120, 125, 130},
+    /*Halfling   */ {115, 110, 105, 95, 105, 110, 115, 130},
+    /*Gnome  	 */ {115, 115, 110, 105, 95, 110, 115, 130},
+    /*Dwarf  	 */ {115, 120, 120, 110, 110, 95, 125, 135},
+    /*Half-Orc   */ {115, 120, 125, 115, 115, 130, 110, 115},
+    /*Half-Troll   */ {110, 115, 115, 110, 110, 130, 110, 110}};
 /* object_list[] index of objects that may appear in the store */
 int16u store_choice[MAX_STORES][STORE_CHOICES] = {
     /* General Store */
     {366, 365, 364, 84,  84,  365, 123, 366, 365, 350, 349, 348, 347,
      346, 346, 345, 345, 345, 344, 344, 344, 344, 344, 344, 344, 344},
-    /* Armory	 */
+    /* Armory   */
     {94,  95,  96,  109, 103, 104, 105, 106, 110, 111, 112, 114, 116,
      124, 125, 126, 127, 129, 103, 104, 124, 125, 91,  92,  95,  96},
-    /* Weaponsmith	 */
+    /* Weaponsmith   */
     {29, 30, 34, 37, 45, 49, 57, 58, 59, 65, 67, 68, 73,
      74, 75, 77, 79, 80, 81, 83, 29, 30, 80, 83, 80, 83},
-    /* Temple	 */
+    /* Temple   */
     {322, 323, 324, 325, 180, 180, 233, 237, 240, 241, 361, 362, 57,
      58,  59,  260, 358, 359, 265, 237, 237, 240, 240, 241, 323, 359},
-    /* Alchemy shop	 */
+    /* Alchemy shop   */
     {173, 174, 175, 351, 351, 352, 353, 354, 355, 356, 357, 206, 227,
      230, 236, 252, 253, 352, 353, 354, 355, 356, 359, 363, 359, 359},
     /* Magic-User store*/
@@ -108,7 +108,7 @@ int (*store_buy[MAX_STORES])() = {general_store, armory,    weaponsmith,
                                   temple,        alchemist, magic_shop};
 #endif
 
-/* Following are arrays for descriptive pieces			*/
+/* Following are arrays for descriptive pieces  		*/
 
 #ifdef MACGAME
 
@@ -235,7 +235,7 @@ char* syllables[MAX_SYLLABLES] = {
 
 /* used to calculate the number of blows the player gets in combat */
 int8u blows_table[7][6] = {
-    /* STR/W:	   9  18  67 107 117 118   : DEX */
+    /* STR/W:     9  18  67 107 117 118   : DEX */
     /* <2 */ {1, 1, 1, 1, 1, 1},
     /* <3 */ {1, 1, 1, 1, 2, 2},
     /* <4 */ {1, 1, 1, 2, 2, 3},
@@ -244,7 +244,7 @@ int8u blows_table[7][6] = {
     /* <9 */ {1, 2, 2, 3, 4, 4},
     /* >9 */ {2, 2, 3, 3, 4, 4}};
 
-/* this table is used to generate a psuedo-normal distribution.	 See the
+/* this table is used to generate a psuedo-normal distribution.   See the
    function randnor() in misc1.c, this is much faster than calling
    transcendental function to calculate a true normal distribution */
 int16u normal_table[NORMAL_TABLE_SIZE] = {

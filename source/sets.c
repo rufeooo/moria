@@ -190,7 +190,7 @@ int set_fire_destroy(item) inven_type* item;
   return (FALSE);
 }
 
-int set_large(item)      /* Items too large to fit in chests 	-DJG- */
+int set_large(item)      /* Items too large to fit in chests   -DJG- */
     treasure_type* item; /* Use treasure_type since item not yet created */
 {
   switch (item->tval) {

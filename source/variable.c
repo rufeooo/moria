@@ -50,15 +50,15 @@ int16 cur_height, cur_width; /* Cur dungeon size    */
 int16 dun_level = 0;         /* Cur dungeon level   */
 int16 missile_ctr = 0;       /* Counter for missiles */
 int msg_flag;                /* Set with first msg  */
-vtype old_msg[MAX_SAVE_MSG]; /* Last message	      */
+vtype old_msg[MAX_SAVE_MSG]; /* Last message        */
 int16 last_msg = 0;          /* Where last is held */
-int death = FALSE;           /* True if died	      */
+int death = FALSE;           /* True if died        */
 int find_flag;               /* Used in MORIA for .(dir) */
 int free_turn_flag;          /* Used in MORIA, do not move creatures  */
 int command_count;           /* Gives repetition of commands. -CJS- */
 int default_dir = FALSE;     /* Use last direction for repeated command */
 int32 turn = -1;             /* Cur turn of game    */
-int wizard = FALSE;          /* Wizard flag	      */
+int wizard = FALSE;          /* Wizard flag        */
 int to_be_wizard = FALSE;    /* used during startup, when -w option used */
 int16 panic_save = FALSE;    /* this is true if playing from a panic save */
 int16 noscore = FALSE;       /* Don't log the game. -CJS- */
@@ -82,7 +82,7 @@ int screen_change = FALSE; /* Track screen updates for inven_commands. */
 char last_command = ' ';   /* Memory of previous command. */
 
 /* these used to be in dungeon.c */
-int new_level_flag;     /* Next level when true	 */
+int new_level_flag;     /* Next level when true   */
 int teleport_flag;      /* Handle teleport traps  */
 int player_light;       /* Player carrying light */
 int eof_flag = FALSE;   /* Used to signal EOF/HANGUP condition */
@@ -91,7 +91,7 @@ int light_flag = FALSE; /* Track if temporary light about player.  */
 int wait_for_more = FALSE; /* used when ^C hit during -more- prompt */
 int closing_flag = FALSE;  /* Used for closing   */
 
-/*  Following are calculated from max dungeon sizes		*/
+/*  Following are calculated from max dungeon sizes  	*/
 int16 max_panel_rows, max_panel_cols;
 int panel_row, panel_col;
 int panel_row_min, panel_row_max;

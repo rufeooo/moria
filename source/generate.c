@@ -84,7 +84,7 @@ static void town_gen(void);
 static coords doorstk[100];
 static int doorindex;
 
-/* Always picks a correct direction		*/
+/* Always picks a correct direction  	*/
 static void correct_dir(rdir, cdir, y1, x1, y2, x2) int *rdir, *cdir;
 register int y1, x1, y2, x2;
 {
@@ -108,7 +108,7 @@ register int y1, x1, y2, x2;
   }
 }
 
-/* Chance of wandering direction			*/
+/* Chance of wandering direction  		*/
 static void rand_dir(rdir, cdir) int *rdir, *cdir;
 {
   register int tmp;
@@ -123,7 +123,7 @@ static void rand_dir(rdir, cdir) int *rdir, *cdir;
   }
 }
 
-/* Blanks out entire cave				-RAK-	*/
+/* Blanks out entire cave  			-RAK-	*/
 static void
 blank_cave()
 {
@@ -140,8 +140,8 @@ blank_cave()
 #endif
 }
 
-/* Fills in empty spots with desired rock		-RAK-	*/
-/* Note: 9 is a temporary value.				*/
+/* Fills in empty spots with desired rock  	-RAK-	*/
+/* Note: 9 is a temporary value.  			*/
 static void fill_cave(fval) register int fval;
 {
   register int i, j;
@@ -164,7 +164,7 @@ static void fill_cave(fval) register int fval;
 #include <assert.h>
 #endif
 
-/* Places indestructible rock around edges of dungeon	-RAK-	*/
+/* Places indestructible rock around edges of dungeon  -RAK-	*/
 static void
 place_boundary()
 {
@@ -206,7 +206,7 @@ place_boundary()
   }
 }
 
-/* Places "streamers" of rock through dungeon		-RAK-	*/
+/* Places "streamers" of rock through dungeon  	-RAK-	*/
 static void place_streamer(fval, treas_chance) int fval;
 int treas_chance;
 {
@@ -214,15 +214,15 @@ int treas_chance;
   int y, x, t1, t2, dir;
   register cave_type* c_ptr;
 
-  /* Choose starting point and direction		*/
+  /* Choose starting point and direction  	*/
   y = (cur_height / 2) + 11 - randint(23);
   x = (cur_width / 2) + 16 - randint(33);
 
-  dir = randint(8); /* Number 1-4, 6-9	*/
+  dir = randint(8); /* Number 1-4, 6-9  */
   if (dir > 4) dir = dir + 1;
 
-  /* Place streamer into dungeon			*/
-  t1 = 2 * DUN_STR_RNG + 1; /* Constants	*/
+  /* Place streamer into dungeon  		*/
+  t1 = 2 * DUN_STR_RNG + 1; /* Constants  */
   t2 = DUN_STR_RNG + 1;
   do {
     for (i = 0; i < DUN_STR_DEN; i++) {
@@ -336,7 +336,7 @@ static void place_door(y, x) int y, x;
     place_secret_door(y, x);
 }
 
-/* Place an up staircase at given y, x			-RAK-	*/
+/* Place an up staircase at given y, x  		-RAK-	*/
 static void place_up_stairs(y, x) int y, x;
 {
   register int cur_pos;
@@ -349,7 +349,7 @@ static void place_up_stairs(y, x) int y, x;
   invcopy(&t_list[cur_pos], OBJ_UP_STAIR);
 }
 
-/* Place a down staircase at given y, x			-RAK-	*/
+/* Place a down staircase at given y, x  		-RAK-	*/
 static void place_down_stairs(y, x) int y, x;
 {
   register int cur_pos;
@@ -362,7 +362,7 @@ static void place_down_stairs(y, x) int y, x;
   invcopy(&t_list[cur_pos], OBJ_DOWN_STAIR);
 }
 
-/* Places a staircase 1=up, 2=down			-RAK-	*/
+/* Places a staircase 1=up, 2=down  		-RAK-	*/
 static void place_stairs(typ, num, walls) int typ, num, walls;
 {
   register cave_type* cave_ptr;
@@ -404,7 +404,7 @@ static void place_stairs(typ, num, walls) int typ, num, walls;
   }
 }
 
-/* Place a trap with a given displacement of point	-RAK-	*/
+/* Place a trap with a given displacement of point  -RAK-	*/
 static void vault_trap(y, x, yd, xd, num) int y, x, yd, xd, num;
 {
   register int count, y1, x1;
@@ -428,7 +428,7 @@ static void vault_trap(y, x, yd, xd, num) int y, x, yd, xd, num;
   }
 }
 
-/* Place a trap with a given displacement of point	-RAK-	*/
+/* Place a trap with a given displacement of point  -RAK-	*/
 static void vault_monster(y, x, num) int y, x, num;
 {
   register int i;
@@ -441,7 +441,7 @@ static void vault_monster(y, x, num) int y, x, num;
   }
 }
 
-/* Builds a room at a row, column coordinate		-RAK-	*/
+/* Builds a room at a row, column coordinate  	-RAK-	*/
 static void build_room(yval, xval) int yval, xval;
 {
   register int i, j, y_depth, x_right;
@@ -450,9 +450,9 @@ static void build_room(yval, xval) int yval, xval;
   register cave_type *c_ptr, *d_ptr;
 
   if (dun_level <= randint(25))
-    floor = LIGHT_FLOOR; /* Floor with light	*/
+    floor = LIGHT_FLOOR; /* Floor with light  */
   else
-    floor = DARK_FLOOR; /* Dark floor		*/
+    floor = DARK_FLOOR; /* Dark floor  	*/
 
   y_height = yval - randint(4);
   y_depth = yval + randint(3);
@@ -492,8 +492,8 @@ static void build_room(yval, xval) int yval, xval;
   }
 }
 
-/* Builds a room at a row, column coordinate		-RAK-	*/
-/* Type 1 unusual rooms are several overlapping rectangular ones	*/
+/* Builds a room at a row, column coordinate  	-RAK-	*/
+/* Type 1 unusual rooms are several overlapping rectangular ones  */
 static void build_type1(yval, xval) int yval, xval;
 {
   int y_height, y_depth;
@@ -503,9 +503,9 @@ static void build_type1(yval, xval) int yval, xval;
   register cave_type *c_ptr, *d_ptr;
 
   if (dun_level <= randint(25))
-    floor = LIGHT_FLOOR; /* Floor with light	*/
+    floor = LIGHT_FLOOR; /* Floor with light  */
   else
-    floor = DARK_FLOOR; /* Dark floor		*/
+    floor = DARK_FLOOR; /* Dark floor  	*/
   limit = 1 + randint(2);
   for (i0 = 0; i0 < limit; i0++) {
     y_height = yval - randint(4);
@@ -553,13 +553,13 @@ static void build_type1(yval, xval) int yval, xval;
   }
 }
 
-/* Builds an unusual room at a row, column coordinate	-RAK-	*/
-/* Type 2 unusual rooms all have an inner room:			*/
-/*   1 - Just an inner room with one door			*/
-/*   2 - An inner room within an inner room			*/
-/*   3 - An inner room with pillar(s)				*/
-/*   4 - Inner room has a maze					*/
-/*   5 - A set of four inner rooms				*/
+/* Builds an unusual room at a row, column coordinate  -RAK-	*/
+/* Type 2 unusual rooms all have an inner room:  		*/
+/*   1 - Just an inner room with one door  		*/
+/*   2 - An inner room within an inner room  		*/
+/*   3 - An inner room with pillar(s)  			*/
+/*   4 - Inner room has a maze  				*/
+/*   5 - A set of four inner rooms  			*/
 static void build_type2(yval, xval) int yval, xval;
 {
   register int i, j, y_height, x_left;
@@ -568,9 +568,9 @@ static void build_type2(yval, xval) int yval, xval;
   register cave_type *c_ptr, *d_ptr;
 
   if (dun_level <= randint(25))
-    floor = LIGHT_FLOOR; /* Floor with light	*/
+    floor = LIGHT_FLOOR; /* Floor with light  */
   else
-    floor = DARK_FLOOR; /* Dark floor		*/
+    floor = DARK_FLOOR; /* Dark floor  	*/
   y_height = yval - 4;
   y_depth = yval + 4;
   x_left = xval - 11;
@@ -605,7 +605,7 @@ static void build_type2(yval, xval) int yval, xval;
     d_ptr->lr = TRUE;
     d_ptr++;
   }
-  /* The inner room		*/
+  /* The inner room  	*/
   y_height = y_height + 2;
   y_depth = y_depth - 2;
   x_left = x_left + 2;
@@ -622,11 +622,11 @@ static void build_type2(yval, xval) int yval, xval;
     d_ptr->fval = TMP1_WALL;
     d_ptr++;
   }
-  /* Inner room variations		*/
+  /* Inner room variations  	*/
   switch (randint(5)) {
-    case 1: /* Just an inner room.	*/
+    case 1: /* Just an inner room.  */
       tmp = randint(4);
-      if (tmp < 3) { /* Place a door	*/
+      if (tmp < 3) { /* Place a door  */
         if (tmp == 1)
           place_secret_door(y_height - 1, xval);
         else
@@ -640,9 +640,9 @@ static void build_type2(yval, xval) int yval, xval;
       vault_monster(yval, xval, 1);
       break;
 
-    case 2: /* Treasure Vault	*/
+    case 2: /* Treasure Vault  */
       tmp = randint(4);
-      if (tmp < 3) { /* Place a door	*/
+      if (tmp < 3) { /* Place a door  */
         if (tmp == 1)
           place_secret_door(y_height - 1, xval);
         else
@@ -661,14 +661,14 @@ static void build_type2(yval, xval) int yval, xval;
       cave[yval - 1][xval].fval = TMP1_WALL;
       cave[yval + 1][xval].fval = TMP1_WALL;
 
-      tmp = randint(4); /* Place a door	*/
+      tmp = randint(4); /* Place a door  */
       if (tmp < 3)
         place_locked_door(yval - 3 + (tmp << 1),
                           xval); /* 1 -> yval-1; 2 -> yval+1*/
       else
         place_locked_door(yval, xval - 7 + (tmp << 1));
 
-      /* Place an object in the treasure vault	*/
+      /* Place an object in the treasure vault  */
       tmp = randint(10);
       if (tmp > 2)
         place_object(yval, xval, FALSE);
@@ -677,15 +677,15 @@ static void build_type2(yval, xval) int yval, xval;
       else
         place_up_stairs(yval, xval);
 
-      /* Guard the treasure well		*/
+      /* Guard the treasure well  	*/
       vault_monster(yval, xval, 2 + randint(3));
-      /* If the monsters don't get 'em.	*/
+      /* If the monsters don't get 'em.  */
       vault_trap(yval, xval, 4, 10, 2 + randint(3));
       break;
 
-    case 3: /* Inner pillar(s).	*/
+    case 3: /* Inner pillar(s).  */
       tmp = randint(4);
-      if (tmp < 3) { /* Place a door	*/
+      if (tmp < 3) { /* Place a door  */
         if (tmp == 1)
           place_secret_door(y_height - 1, xval);
         else
@@ -722,7 +722,7 @@ static void build_type2(yval, xval) int yval, xval;
         }
       }
 
-      if (randint(3) == 1) /* Inner rooms	*/
+      if (randint(3) == 1) /* Inner rooms  */
       {
         c_ptr = &cave[yval - 1][xval - 5];
         d_ptr = &cave[yval + 1][xval - 5];
@@ -743,9 +743,9 @@ static void build_type2(yval, xval) int yval, xval;
       }
       break;
 
-    case 4: /* Maze inside.	*/
+    case 4: /* Maze inside.  */
       tmp = randint(4);
-      if (tmp < 3) { /* Place a door	*/
+      if (tmp < 3) { /* Place a door  */
         if (tmp == 1)
           place_secret_door(y_height - 1, xval);
         else
@@ -761,17 +761,17 @@ static void build_type2(yval, xval) int yval, xval;
         for (j = x_left; j <= x_right; j++)
           if (0x1 & (j + i)) cave[i][j].fval = TMP1_WALL;
 
-      /* Monsters just love mazes.		*/
+      /* Monsters just love mazes.  	*/
       vault_monster(yval, xval - 5, randint(3));
       vault_monster(yval, xval + 5, randint(3));
-      /* Traps make them entertaining.	*/
+      /* Traps make them entertaining.  */
       vault_trap(yval, xval - 3, 2, 8, randint(3));
       vault_trap(yval, xval + 3, 2, 8, randint(3));
-      /* Mazes should have some treasure too..	*/
+      /* Mazes should have some treasure too..  */
       for (i = 0; i < 3; i++) random_object(yval, xval, 1);
       break;
 
-    case 5: /* Four small rooms.	*/
+    case 5: /* Four small rooms.  */
       for (i = y_height; i <= y_depth; i++) cave[i][xval].fval = TMP1_WALL;
 
       c_ptr = &cave[yval][x_left];
@@ -794,9 +794,9 @@ static void build_type2(yval, xval) int yval, xval;
         place_secret_door(yval - i, x_right + 1);
       }
 
-      /* Treasure in each one.		*/
+      /* Treasure in each one.  	*/
       random_object(yval, xval, 2 + randint(2));
-      /* Gotta have some monsters.		*/
+      /* Gotta have some monsters.  	*/
       vault_monster(yval + 2, xval - 4, randint(2));
       vault_monster(yval + 2, xval + 4, randint(2));
       vault_monster(yval - 2, xval - 4, randint(2));
@@ -805,8 +805,8 @@ static void build_type2(yval, xval) int yval, xval;
   }
 }
 
-/* Builds a room at a row, column coordinate		-RAK-	*/
-/* Type 3 unusual rooms are cross shaped				*/
+/* Builds a room at a row, column coordinate  	-RAK-	*/
+/* Type 3 unusual rooms are cross shaped  			*/
 static void build_type3(yval, xval) int yval, xval;
 {
   int y_height, y_depth;
@@ -816,9 +816,9 @@ static void build_type3(yval, xval) int yval, xval;
   register cave_type* c_ptr;
 
   if (dun_level <= randint(25))
-    floor = LIGHT_FLOOR; /* Floor with light	*/
+    floor = LIGHT_FLOOR; /* Floor with light  */
   else
-    floor = DARK_FLOOR; /* Dark floor		*/
+    floor = DARK_FLOOR; /* Dark floor  	*/
   tmp = 2 + randint(2);
   y_height = yval - tmp;
   y_depth = yval + tmp;
@@ -881,9 +881,9 @@ static void build_type3(yval, xval) int yval, xval;
       c_ptr->lr = TRUE;
     }
   }
-  /* Special features.			*/
+  /* Special features.  		*/
   switch (randint(4)) {
-    case 1: /* Large middle pillar		*/
+    case 1: /* Large middle pillar  	*/
       for (i = yval - 1; i <= yval + 1; i++) {
         c_ptr = &cave[i][xval - 1];
         for (j = xval - 1; j <= xval + 1; j++) {
@@ -893,7 +893,7 @@ static void build_type3(yval, xval) int yval, xval;
       }
       break;
 
-    case 2: /* Inner treasure vault		*/
+    case 2: /* Inner treasure vault  	*/
       for (i = yval - 1; i <= yval + 1; i++) {
         cave[i][xval - 1].fval = TMP1_WALL;
         cave[i][xval + 1].fval = TMP1_WALL;
@@ -901,17 +901,17 @@ static void build_type3(yval, xval) int yval, xval;
       cave[yval - 1][xval].fval = TMP1_WALL;
       cave[yval + 1][xval].fval = TMP1_WALL;
 
-      tmp = randint(4); /* Place a door	*/
+      tmp = randint(4); /* Place a door  */
       if (tmp < 3)
         place_secret_door(yval - 3 + (tmp << 1), xval);
       else
         place_secret_door(yval, xval - 7 + (tmp << 1));
 
-      /* Place a treasure in the vault		*/
+      /* Place a treasure in the vault  	*/
       place_object(yval, xval, FALSE);
-      /* Let's guard the treasure well.	*/
+      /* Let's guard the treasure well.  */
       vault_monster(yval, xval, 2 + randint(2));
-      /* Traps naturally			*/
+      /* Traps naturally  		*/
       vault_trap(yval, xval, 4, 4, 1 + randint(3));
       break;
 
@@ -946,7 +946,7 @@ static void build_type3(yval, xval) int yval, xval;
   }
 }
 
-/* Constructs a tunnel between two points		*/
+/* Constructs a tunnel between two points  	*/
 static void build_tunnel(row1, col1, row2, col2) int row1, col1, row2, col2;
 {
   register int tmp_row, tmp_col, i, j;
@@ -958,8 +958,8 @@ static void build_tunnel(row1, col1, row2, col2) int row1, col1, row2, col2;
   int stop_flag, door_flag, main_loop_count;
   int start_row, start_col;
 
-  /* Main procedure for Tunnel			*/
-  /* Note: 9 is a temporary value		*/
+  /* Main procedure for Tunnel  		*/
+  /* Note: 9 is a temporary value  	*/
   stop_flag = FALSE;
   door_flag = FALSE;
   tunindex = 0;
@@ -1083,7 +1083,7 @@ static int next_to(y, x) register int y, x;
   return (next);
 }
 
-/* Places door at y, x position if at least 2 walls found	*/
+/* Places door at y, x position if at least 2 walls found  */
 static void try_door(y, x) register int y, x;
 {
   if ((cave[y][x].fval == CORR_FLOOR) && (randint(100) > DUN_TUN_JCT) &&
@@ -1091,7 +1091,7 @@ static void try_door(y, x) register int y, x;
     place_door(y, x);
 }
 
-/* Returns random co-ordinates				-RAK-	*/
+/* Returns random co-ordinates  			-RAK-	*/
 static void new_spot(y, x) int16 *y, *x;
 {
   register int i, j;
@@ -1107,7 +1107,7 @@ static void new_spot(y, x) int16 *y, *x;
   *x = j;
 }
 
-/* Cave logic flow for generation of new dungeon		*/
+/* Cave logic flow for generation of new dungeon  	*/
 static void
 cave_gen()
 {
@@ -1177,7 +1177,7 @@ cave_gen()
   for (i = 0; i < DUN_STR_MAG; i++) place_streamer(MAGMA_WALL, DUN_STR_MC);
   for (i = 0; i < DUN_STR_QUA; i++) place_streamer(QUARTZ_WALL, DUN_STR_QC);
   place_boundary();
-  /* Place intersection doors	*/
+  /* Place intersection doors  */
   for (i = 0; i < doorindex; i++) {
     try_door(doorstk[i].y, doorstk[i].x - 1);
     try_door(doorstk[i].y, doorstk[i].x + 1);
@@ -1205,7 +1205,7 @@ cave_gen()
   if (dun_level >= WIN_MON_APPEAR) place_win_monster();
 }
 
-/* Builds a store at a row, column coordinate			*/
+/* Builds a store at a row, column coordinate  		*/
 static void build_store(store_num, y, x) int store_num, y, x;
 {
   int yval, y_height, y_depth;
@@ -1243,7 +1243,7 @@ static void build_store(store_num, y, x) int store_num, y, x;
   invcopy(&t_list[cur_pos], OBJ_STORE_DOOR + store_num);
 }
 
-/* Link all free space in treasure list together		*/
+/* Link all free space in treasure list together  	*/
 static void
 tlink()
 {
@@ -1253,7 +1253,7 @@ tlink()
   tcptr = MIN_TRIX;
 }
 
-/* Link all free space in monster list together			*/
+/* Link all free space in monster list together  		*/
 static void
 mlink()
 {
@@ -1263,7 +1263,7 @@ mlink()
   mfptr = MIN_MONIX;
 }
 
-/* Town logic flow for generation of new town		*/
+/* Town logic flow for generation of new town  	*/
 static void
 town_gen()
 {
@@ -1288,7 +1288,7 @@ town_gen()
   reset_seed();
   /* Set up the character co-ords, used by alloc_monster below */
   new_spot(&char_row, &char_col);
-  if (0x1 & (turn / 5000)) { /* Night	*/
+  if (0x1 & (turn / 5000)) { /* Night  */
     for (i = 0; i < cur_height; i++) {
       c_ptr = &cave[i][0];
       for (j = 0; j < cur_width; j++) {
@@ -1300,7 +1300,7 @@ town_gen()
 #endif
     }
     alloc_monster(MIN_MALLOC_TN, 3, TRUE);
-  } else { /* Day	*/
+  } else { /* Day  */
     for (i = 0; i < cur_height; i++) {
       c_ptr = &cave[i][0];
       for (j = 0; j < cur_width; j++) {
@@ -1316,7 +1316,7 @@ town_gen()
   store_maint();
 }
 
-/* Generates a random dungeon level			-RAK-	*/
+/* Generates a random dungeon level  		-RAK-	*/
 void
 generate_cave()
 {

@@ -1,4 +1,4 @@
-/* unix/unix.c: UNIX dependent code.					-CJS-
+/* unix/unix.c: UNIX dependent code.  				-CJS-
 
    Copyright (c) 1989-91 James E. Wilson, Christopher J. Stuart
 
@@ -214,8 +214,8 @@ char *p;
   union wait w;
   extern char *getenv();
 
-  mask = sigsetmask(~0);	/* No interrupts. */
-  restore_term();		/* Terminal in original state. */
+  mask = sigsetmask(~0);  /* No interrupts. */
+  restore_term();  	/* Terminal in original state. */
   /* Are we in the control terminal group? */
   if (ioctl(0, TIOCGPGRP, (char *)&pgrp) < 0 || pgrp != getpgrp(0))
     pgrp = -1;
@@ -228,26 +228,26 @@ char *p;
     }
   if (pid == 0)
     {
-      (void) sigsetmask(0);	/* Interrupts on. */
+      (void) sigsetmask(0);  /* Interrupts on. */
       /* Transfer control terminal. */
       if (pgrp >= 0)
-	{
-	  i = getpid();
-	  (void) ioctl(0, TIOCSPGRP, (char *)&i);
-	  (void) setpgrp(i, i);
-	}
+  {
+    i = getpid();
+    (void) ioctl(0, TIOCSPGRP, (char *)&i);
+    (void) setpgrp(i, i);
+  }
       for(i = 2; i < 30; i++)
-	(void) close(i);	/* Close all but standard in and out.*/
-      (void) dup2(1, 2);	/* Make standard error as standard out. */
+  (void) close(i);	/* Close all but standard in and out.*/
+      (void) dup2(1, 2);  /* Make standard error as standard out. */
       if (p == 0 || *p == 0)
-	{
-	  p = getenv("SHELL");
-	  if (p)
-	    execl(p, p, 0);
-	  execl("/bin/sh", "sh", 0);
-	}
+  {
+    p = getenv("SHELL");
+    if (p)
+      execl(p, p, 0);
+    execl("/bin/sh", "sh", 0);
+  }
       else
-	execl("/bin/sh", "sh", "-c", p, 0);
+  execl("/bin/sh", "sh", "-c", p, 0);
       _exit(1);
     }
   /* Wait for child termination. */
@@ -255,25 +255,25 @@ char *p;
     {
       i = wait3(&w, WUNTRACED, (struct rusage *)0);
       if (i == pid)
-	{
-	  if (WIFSTOPPED(w))
-	    {
-	      /* Stop outselves, if child stops. */
-	      (void) kill(getpid(), SIGSTOP);
-	      /* Restore the control terminal, and restart subprocess. */
-	      if (pgrp >= 0)
-		(void) ioctl(0, TIOCSPGRP, (char *)&pid);
-	      (void) killpg(pid, SIGCONT);
-	    }
-	  else
-	    break;
-	}
+  {
+    if (WIFSTOPPED(w))
+      {
+        /* Stop outselves, if child stops. */
+        (void) kill(getpid(), SIGSTOP);
+        /* Restore the control terminal, and restart subprocess. */
+        if (pgrp >= 0)
+  	(void) ioctl(0, TIOCSPGRP, (char *)&pid);
+        (void) killpg(pid, SIGCONT);
+      }
+    else
+      break;
+  }
     }
   /* Get the control terminal back. */
   if (pgrp >= 0)
     (void) ioctl(0, TIOCSPGRP, (char *)&pgrp);
-  (void) sigsetmask(mask);	/* Interrupts on. */
-  moriaterm();			/* Terminal in moria mode. */
+  (void) sigsetmask(mask);  /* Interrupts on. */
+  moriaterm();  		/* Terminal in moria mode. */
   return 0;
 }
 #endif

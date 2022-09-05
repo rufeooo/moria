@@ -29,11 +29,11 @@
    (PMMLCG), also known as a Lehmer Grammer, which satisfies the following
    properties
 
-   (i)	 modulus: m - a large prime integer
-   (ii)	 multiplier: a - an integer in the range 2, 3, ..., m - 1
+   (i)   modulus: m - a large prime integer
+   (ii)   multiplier: a - an integer in the range 2, 3, ..., m - 1
    (iii) z[n+1] = f(z[n]), for n = 1, 2, ...
-   (iv)	 f(z) = az mod m
-   (v)	 u[n] = z[n] / m, for n = 1, 2, ...
+   (iv)   f(z) = az mod m
+   (v)   u[n] = z[n] / m, for n = 1, 2, ...
 
    The sequence of z's must be initialized by choosing an initial seed
    z[1] from the range 1, 2, ..., m - 1.  The sequence of z's is a pseudo-
@@ -46,7 +46,7 @@
    Then f(z) = az mod m = az - m * (az div m) =
              = gamma(z) + m * delta(z)
    Where gamma(z) = a(z mod q) - r(z div q)
-   and	 delta(z) = (z div q) - (az div m)
+   and   delta(z) = (z div q) - (az div m)
 
    If r < q, then for all z in 1, 2, ..., m - 1:
    (1) delta(z) is either 0 or 1

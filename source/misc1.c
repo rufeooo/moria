@@ -90,7 +90,7 @@ reset_seed()
   set_rnd_seed(old_seed);
 }
 
-/* Generates a random integer x where 1<=X<=MAXVAL	-RAK-	*/
+/* Generates a random integer x where 1<=X<=MAXVAL  -RAK-	*/
 int randint(maxval) int maxval;
 {
   register long randval;
@@ -107,7 +107,7 @@ int randnor(mean, stand) int mean, stand;
 #if 0
   /* alternate randnor code, slower but much smaller since no table */
   /* 2 per 1,000,000 will be > 4*SD, max is 5*SD */
-  tmp = damroll(8, 99);	 /* mean 400, SD 81 */
+  tmp = damroll(8, 99);   /* mean 400, SD 81 */
   tmp = (tmp - 400) * stand / 81;
   return tmp + mean;
 #endif
@@ -153,7 +153,7 @@ int randnor(mean, stand) int mean, stand;
   return mean + offset;
 }
 
-/* Returns position of first set bit			-RAK-	*/
+/* Returns position of first set bit  		-RAK-	*/
 /*     and clears that bit */
 int bit_pos(test) int32u* test;
 {
@@ -172,7 +172,7 @@ int bit_pos(test) int32u* test;
   return (-1);
 }
 
-/* Checks a co-ordinate for in bounds status		-RAK-	*/
+/* Checks a co-ordinate for in bounds status  	-RAK-	*/
 int in_bounds(y, x) int y, x;
 {
   if ((y > 0) && (y < cur_height - 1) && (x > 0) && (x < cur_width - 1))
@@ -181,7 +181,7 @@ int in_bounds(y, x) int y, x;
     return (FALSE);
 }
 
-/* Calculates current boundaries				-RAK-	*/
+/* Calculates current boundaries  			-RAK-	*/
 void
 panel_bounds()
 {
@@ -193,7 +193,7 @@ panel_bounds()
   panel_col_prt = panel_col_min - 13;
 }
 
-/* Given an row (y) and col (x), this routine detects  -RAK-	*/
+/* Given an row (y) and col (x), this routine detects  -RAK-  */
 /* when a move off the screen has occurred and figures new borders.
    Force forcses the panel bounds to be recalculated, useful for 'W'here. */
 int get_panel(y, x, force) int y, x, force;
@@ -229,8 +229,8 @@ int get_panel(y, x, force) int y, x, force;
   return (panel);
 }
 
-/* Tests a given point to see if it is within the screen -RAK-	*/
-/* boundaries.							  */
+/* Tests a given point to see if it is within the screen -RAK-  */
+/* boundaries.  						  */
 int panel_contains(y, x) register int y, x;
 {
   if ((y >= panel_row_min) && (y <= panel_row_max) && (x >= panel_col_min) &&
@@ -240,7 +240,7 @@ int panel_contains(y, x) register int y, x;
     return (FALSE);
 }
 
-/* Distance between two points				-RAK-	*/
+/* Distance between two points  			-RAK-	*/
 int distance(y1, x1, y2, x2) int y1, x1, y2, x2;
 {
   register int dy, dx;
@@ -253,9 +253,9 @@ int distance(y1, x1, y2, x2) int y1, x1, y2, x2;
   return ((((dy + dx) << 1) - (dy > dx ? dx : dy)) >> 1);
 }
 
-/* Checks points north, south, east, and west for a wall -RAK-	*/
+/* Checks points north, south, east, and west for a wall -RAK-  */
 /* note that y,x is always in_bounds(), i.e. 0 < y < cur_height-1, and
-   0 < x < cur_width-1	*/
+   0 < x < cur_width-1  */
 int next_to_walls(y, x) register int y, x;
 {
   register int i;
@@ -274,7 +274,7 @@ int next_to_walls(y, x) register int y, x;
   return (i);
 }
 
-/* Checks all adjacent spots for corridors		-RAK-	*/
+/* Checks all adjacent spots for corridors  	-RAK-	*/
 /* note that y, x is always in_bounds(), hence no need to check that
    j, k are in_bounds(), even if they are 0 or cur_x-1 is still works */
 int next_to_corr(y, x) register int y, x;
@@ -337,7 +337,7 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
 
   /* Handle the cases where deltaX or deltaY == 0. */
   if (deltaX == 0) {
-    register int p_y; /* y position -- loop variable	*/
+    register int p_y; /* y position -- loop variable  */
 
     if (deltaY < 0) {
       tmp = fromY;
@@ -348,7 +348,7 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
       if (cave[p_y][fromX].fval >= MIN_CLOSED_SPACE) return FALSE;
     return TRUE;
   } else if (deltaY == 0) {
-    register int px; /* x position -- loop variable	*/
+    register int px; /* x position -- loop variable  */
 
     if (deltaX < 0) {
       tmp = fromX;
@@ -366,13 +366,13 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
      integer arithmetic. */
 
   {
-    register int px, /* x position				*/
-        p_y,         /* y position				*/
-        scale2;      /* above scale factor / 2		*/
-    int scale,       /* above scale factor			*/
-        xSign,       /* sign of deltaX			*/
-        ySign,       /* sign of deltaY			*/
-        m;           /* slope or 1/slope of LOS		*/
+    register int px, /* x position  			*/
+        p_y,         /* y position  			*/
+        scale2;      /* above scale factor / 2  	*/
+    int scale,       /* above scale factor  		*/
+        xSign,       /* sign of deltaX  		*/
+        ySign,       /* sign of deltaY  		*/
+        m;           /* slope or 1/slope of LOS  	*/
 
     scale2 = abs(deltaX * deltaY);
     scale = scale2 << 1;
@@ -383,7 +383,7 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
        the longer axis. */
 
     if (abs(deltaX) >= abs(deltaY)) {
-      register int dy; /* "fractional" y position	*/
+      register int dy; /* "fractional" y position  */
       /* We start at the border between the first and second tiles,
          where the y offset = .5 * slope.  Remember the scale
          factor.  We have:
@@ -423,7 +423,7 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
       }
       return TRUE;
     } else {
-      register int dx; /* "fractional" x position	*/
+      register int dx; /* "fractional" x position  */
       dx = deltaX * deltaX;
       m = dx << 1;
 
@@ -455,7 +455,7 @@ int los(fromY, fromX, toY, toX) int fromY, fromX, toY, toX;
   }
 }
 
-/* Returns symbol for given row, column			-RAK-	*/
+/* Returns symbol for given row, column  		-RAK-	*/
 unsigned char loc_symbol(y, x) int y, x;
 {
   register cave_type* cave_ptr;
@@ -501,7 +501,7 @@ unsigned char loc_symbol(y, x) int y, x;
   }
 }
 
-/* Tests a spot for light or field mark status		-RAK-	*/
+/* Tests a spot for light or field mark status  	-RAK-	*/
 int test_light(y, x) int y, x;
 {
   register cave_type* cave_ptr;
@@ -513,7 +513,7 @@ int test_light(y, x) int y, x;
     return (FALSE);
 }
 
-/* Prints the map of the dungeon			-RAK-	*/
+/* Prints the map of the dungeon  		-RAK-	*/
 void
 prt_map()
 {
@@ -533,7 +533,7 @@ prt_map()
   }
 }
 
-/* Compact monsters					-RAK-	*/
+/* Compact monsters  				-RAK-	*/
 /* Return TRUE if any monsters were deleted, FALSE if could not delete any
    monsters.  */
 int
@@ -583,7 +583,7 @@ compact_monsters()
   return TRUE;
 }
 
-/* Add to the players food time				-RAK-	*/
+/* Add to the players food time  			-RAK-	*/
 void add_food(num) int num;
 {
   register struct flags* p_ptr;
@@ -611,7 +611,7 @@ void add_food(num) int num;
     msg_print("You are full.");
 }
 
-/* Returns a pointer to next free space			-RAK-	*/
+/* Returns a pointer to next free space  		-RAK-	*/
 /* Returns -1 if could not allocate a monster.  */
 int
 popm()
@@ -622,13 +622,13 @@ popm()
   return (mfptr++);
 }
 
-/* Gives Max hit points					-RAK-	*/
+/* Gives Max hit points  				-RAK-	*/
 int max_hp(array) int8u* array;
 {
   return (array[0] * array[1]);
 }
 
-/* Places a monster at given location			-RAK-	*/
+/* Places a monster at given location  		-RAK-	*/
 int place_monster(y, x, z, slp) register int y, x, z;
 int slp;
 {
@@ -662,7 +662,7 @@ int slp;
   return TRUE;
 }
 
-/* Places a monster at given location			-RAK-	*/
+/* Places a monster at given location  		-RAK-	*/
 void
 place_win_monster()
 {
@@ -730,7 +730,7 @@ int get_mons_num(level) int level;
   return i;
 }
 
-/* Allocates a random monster				-RAK-	*/
+/* Allocates a random monster  			-RAK-	*/
 void alloc_monster(num, dis, slp) int num, dis;
 int slp;
 {
@@ -754,7 +754,7 @@ int slp;
   }
 }
 
-/* Places creature adjacent to given location		-RAK-	*/
+/* Places creature adjacent to given location  	-RAK-	*/
 int summon_monster(y, x, slp) int *y, *x;
 int slp;
 {
@@ -784,7 +784,7 @@ int slp;
   return (summon);
 }
 
-/* Places undead adjacent to given location		-RAK-	*/
+/* Places undead adjacent to given location  	-RAK-	*/
 int summon_undead(y, x) int *y, *x;
 {
   register int i, j, k;
@@ -829,7 +829,7 @@ int summon_undead(y, x) int *y, *x;
   return (summon);
 }
 
-/* If too many objects on floor level, delete some of them-RAK-	*/
+/* If too many objects on floor level, delete some of them-RAK-  */
 static void
 compact_objects()
 {
@@ -881,7 +881,7 @@ compact_objects()
   if (cur_dis < 66) prt_map();
 }
 
-/* Gives pointer to next free space			-RAK-	*/
+/* Gives pointer to next free space  		-RAK-	*/
 int
 popt()
 {
@@ -889,7 +889,7 @@ popt()
   return (tcptr++);
 }
 
-/* Pushs a record back onto free space list		-RAK-	*/
+/* Pushs a record back onto free space list  	-RAK-	*/
 /* Delete_object() should always be called instead, unless the object in
    question is not in the dungeon, e.g. in store1.c and files.c */
 void pusht(x) register int8u x;
@@ -908,7 +908,7 @@ void pusht(x) register int8u x;
   invcopy(&t_list[tcptr], OBJ_NOTHING);
 }
 
-/* Boolean : is object enchanted	  -RAK- */
+/* Boolean : is object enchanted    -RAK- */
 int magik(chance) int chance;
 {
   if (randint(100) <= chance)

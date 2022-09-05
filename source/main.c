@@ -21,42 +21,42 @@
 /* Original copyright message follows; included for historical reasons
    but no longer valid. */
 
-/* Moria Version 4.8	COPYRIGHT (c) Robert Alan Koeneke		*/
-/*									 */
-/*	 I lovingly dedicate this game to hackers and adventurers	 */
-/*	 everywhere...							 */
-/*									 */
-/*									 */
-/*	 Designer and Programmer : Robert Alan Koeneke			 */
-/*				   University of Oklahoma		 */
-/*									 */
-/*	 Assistant Programmers	 : Jimmey Wayne Todd			 */
-/*				   University of Oklahoma		 */
-/*									 */
-/*				   Gary D. McAdoo			 */
-/*				   University of Oklahoma		 */
-/*									 */
-/*	 UNIX Port		 : James E. Wilson			 */
-/*				   UC Berkeley				 */
-/*				   wilson@kithrup.com			 */
-/*									 */
-/*	 MSDOS Port		 : Don Kneller				 */
-/*				   1349 - 10th ave			 */
-/*				   San Francisco, CA 94122		 */
-/*				   kneller@cgl.ucsf.EDU			 */
-/*				   ...ucbvax!ucsfcgl!kneller		 */
-/*				   kneller@ucsf-cgl.BITNET		 */
-/*									 */
-/*	 BRUCE Moria		 : Christopher Stuart			 */
-/*				   Monash University			 */
-/*				   Melbourne, Victoria, AUSTRALIA	 */
-/*				   cjs@moncsbruce.oz			 */
-/*									 */
+/* Moria Version 4.8  COPYRIGHT (c) Robert Alan Koeneke		*/
+/*  								 */
+/*   I lovingly dedicate this game to hackers and adventurers	 */
+/*   everywhere...							 */
+/*  								 */
+/*  								 */
+/*   Designer and Programmer : Robert Alan Koeneke			 */
+/*  			   University of Oklahoma		 */
+/*  								 */
+/*   Assistant Programmers	 : Jimmey Wayne Todd			 */
+/*  			   University of Oklahoma		 */
+/*  								 */
+/*  			   Gary D. McAdoo			 */
+/*  			   University of Oklahoma		 */
+/*  								 */
+/*   UNIX Port		 : James E. Wilson			 */
+/*  			   UC Berkeley				 */
+/*  			   wilson@kithrup.com			 */
+/*  								 */
+/*   MSDOS Port		 : Don Kneller				 */
+/*  			   1349 - 10th ave			 */
+/*  			   San Francisco, CA 94122		 */
+/*  			   kneller@cgl.ucsf.EDU			 */
+/*  			   ...ucbvax!ucsfcgl!kneller		 */
+/*  			   kneller@ucsf-cgl.BITNET		 */
+/*  								 */
+/*   BRUCE Moria		 : Christopher Stuart			 */
+/*  			   Monash University			 */
+/*  			   Melbourne, Victoria, AUSTRALIA	 */
+/*  			   cjs@moncsbruce.oz			 */
+/*  								 */
 /*       Amiga Port              : Corey Gehman                          */
 /*                                 Clemson University                    */
 /*                                 cg377170@eng.clemson.edu              */
-/*									 */
-/*	 Version 5.6		 : David Grabiner			 */
+/*  								 */
+/*   Version 5.6		 : David Grabiner			 */
 /*                                 grabiner@alumni.princeton.edu         */
 /*                                                                       */
 
@@ -129,7 +129,7 @@ long _stksize = 64*1024;
 */
 
 #ifdef ATARIST_MWC
-long _stksize = 18000; /*(SAJ) for MWC	*/
+long _stksize = 18000; /*(SAJ) for MWC  */
 #endif
 
 #ifdef __TURBOC__
@@ -167,7 +167,7 @@ static void price_adjust();
 #endif
 #endif
 
-/* Initialize, restore, and get the ball rolling.	-RAK-	*/
+/* Initialize, restore, and get the ball rolling.  -RAK-	*/
 #ifdef MAC
 /* This is just a subroutine for the Mac version */
 /* only options passed in are -orn */
@@ -273,21 +273,21 @@ char* argv[];
 #endif
     }
 
-      /* Some necessary initializations		*/
+      /* Some necessary initializations  	*/
       /* all made into constants or initialized in variables.c */
 
 #if (COST_ADJ != 100)
   price_adjust();
 #endif
 
-  /* Grab a random seed from the clock		*/
+  /* Grab a random seed from the clock  	*/
   init_seeds(seed);
 
   /* Init monster and treasure levels for allocate */
   init_m_level();
   init_t_level();
 
-  /* Init the store inventories			*/
+  /* Init the store inventories  		*/
   store_init();
 
 #ifndef MAC
@@ -337,7 +337,7 @@ char* argv[];
 
     /* could be restoring a dead character after a signal or HANGUP */
     if (py.misc.chp < 0) death = TRUE;
-  } else { /* Create character	   */
+  } else { /* Create character     */
     create_character();
 #ifdef MAC
     birth_date = time((time_t*)0);
@@ -367,12 +367,12 @@ char* argv[];
 
   magic_init();
 
-  /* Begin the game				*/
+  /* Begin the game  			*/
   clear_screen();
   prt_stat_block();
   if (generate) generate_cave();
 
-  /* Loop till dead, or exit			*/
+  /* Loop till dead, or exit  		*/
   while (!death) {
     dungeon(); /* Dungeon logic */
 
@@ -389,7 +389,7 @@ char* argv[];
     }
 #endif
 
-    if (!death) generate_cave(); /* New level	*/
+    if (!death) generate_cave(); /* New level  */
   }
 
   exit_game(); /* Character gets buried. */
@@ -397,7 +397,7 @@ char* argv[];
   return (0);
 }
 
-/* Init players with some belongings			-RAK-	*/
+/* Init players with some belongings  		-RAK-	*/
 static void
 char_inven_init()
 {
@@ -421,7 +421,7 @@ char_inven_init()
   for (i = 0; i < 32; i++) spell_order[i] = 99;
 }
 
-/* Initializes M_LEVEL array for use with PLACE_MONSTER	-RAK-	*/
+/* Initializes M_LEVEL array for use with PLACE_MONSTER  -RAK-	*/
 static void
 init_m_level()
 {
@@ -441,7 +441,7 @@ init_m_level()
 #endif
 }
 
-/* Initializes T_LEVEL array for use with PLACE_OBJECT	-RAK-	*/
+/* Initializes T_LEVEL array for use with PLACE_OBJECT  -RAK-	*/
 static void
 init_t_level()
 {
@@ -470,7 +470,7 @@ init_t_level()
 }
 
 #if (COST_ADJ != 100)
-/* Adjust prices of objects				-RAK-	*/
+/* Adjust prices of objects  			-RAK-	*/
 static void
 price_adjust()
 {

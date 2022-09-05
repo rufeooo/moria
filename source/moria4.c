@@ -48,8 +48,8 @@ static int look_ray();
 static int look_see();
 #endif
 
-/* Tunnels through rubble and walls			-RAK-	*/
-/* Must take into account: secret doors,  special tools		  */
+/* Tunnels through rubble and walls  		-RAK-	*/
+/* Must take into account: secret doors,  special tools  	  */
 void tunnel(dir) int dir;
 {
   register int i, tabil;
@@ -62,7 +62,7 @@ void tunnel(dir) int dir;
   int32u holder;
 #endif
 
-  if ((py.flags.confused > 0) && /* Confused?	     */
+  if ((py.flags.confused > 0) && /* Confused?       */
       (randint(4) > 1))          /* 75% random movement   */
     dir = randint(9);
   y = char_row;
@@ -70,8 +70,8 @@ void tunnel(dir) int dir;
   (void)mmove(dir, &y, &x);
 
   c_ptr = &cave[y][x];
-  /* Compute the digging ability of player; based on	   */
-  /* strength, and type of tool used			   */
+  /* Compute the digging ability of player; based on     */
+  /* strength, and type of tool used  		   */
   tabil = py.stats.use_stat[A_STR];
   i_ptr = &inventory[INVEN_WIELD];
 
@@ -184,7 +184,7 @@ void tunnel(dir) int dir;
     msg_print("You dig with your hands, making no progress.");
 }
 
-/* Disarms a trap					-RAK-	*/
+/* Disarms a trap  				-RAK-	*/
 void
 disarm_trap()
 {
@@ -282,7 +282,7 @@ disarm_trap()
   }
 }
 
-/* An enhanced look, with peripheral vision. Looking all 8	-CJS-
+/* An enhanced look, with peripheral vision. Looking all 8  -CJS-
    directions will see everything which ought to be visible. Can
    specify direction 5, which looks in all directions.
 
@@ -295,19 +295,19 @@ disarm_trap()
 
    Consider the following situation:
 
-     @....			    X	X   X	X   X
-     .##..			   / \ / \ / \ / \ / \
-     .....			  X @ X . X . X 1 X . X
+     @....                          X  X   X  X   X
+     .##..                         / \ / \ / \ / \ / \
+     .....                        X @ X . X . X 1 X . X
                                    \ / \ / \ / \ / \ /
-                                    X	X   X	X   X
-           Expanded view, with	   / \ / \ / \ / \ / \
-           diamonds inscribed	  X . X # X # X 2 X . X
-           about each point,	   \ / \ / \ / \ / \ /
-           and some locations	    X	X   X	X   X
-           numbered.		   / \ / \ / \ / \ / \
+                                    X   X   X   X   X
+           Expanded view, with     / \ / \ / \ / \ / \
+           diamonds inscribed     X . X # X # X 2 X . X
+           about each point,       \ / \ / \ / \ / \ /
+           and some locations       X   X   X   X   X
+           numbered.               / \ / \ / \ / \ / \
                                   X . X . X . X 3 X 4 X
                                    \ / \ / \ / \ / \ /
-                                    X	X   X	X   X
+                                    X  X   X  X   X
         - Location 1 is fully visible.
         - Location 2 is visible, even though partially obscured.
         - Location 3 is invisible, but if either # were
@@ -329,8 +329,8 @@ disarm_trap()
 
    The others map co-ords in the ray frame to dungeon co-ords.
 
-   dungeon y = char_row	 + gl_fyx * (ray x)  + gl_fyy * (ray y)
-   dungeon x = char_col	 + gl_fxx * (ray x)  + gl_fxy * (ray y) */
+   dungeon y = char_row   + gl_fyx * (ray x)  + gl_fyy * (ray y)
+   dungeon x = char_col   + gl_fxx * (ray x)  + gl_fxy * (ray y) */
 static int gl_fxx, gl_fxy, gl_fyx, gl_fyy;
 static int gl_nseen, gl_noquery;
 static int gl_rock;
@@ -453,10 +453,10 @@ look()
    (45 degrees) and 1 (almost horizontal).
 
    (y axis)/ angle from
-     ^	  /	    ___ angle to
-     |	 /	 ___
+     ^    /	    ___ angle to
+     |   /	 ___
   ...|../.....___.................... parameter y (look at things in the
-     | /   ___			      cone, and on or above this line)
+     | /   ___  		      cone, and on or above this line)
      |/ ___
      @-------------------->   direction in which you are looking. (x axis)
      |
@@ -483,7 +483,7 @@ static int look_ray(y, from, to) int y, from, to;
   if (max_x < x) return FALSE;
 
   /* gl_noquery is a HACK to prevent doubling up on direct lines of
-     sight. If 'to' is	greater than 1, we do not really look at
+     sight. If 'to' is  greater than 1, we do not really look at
      stuff along the direct line of sight, but we do have to see
      what is opaque for the purposes of obscuring other objects. */
   if (y == 0 && to > 1 || y == x && from < GRADF * 2)
@@ -644,7 +644,7 @@ int *tbth, *tpth, *tdam, *tdis;
   else
     tmp_weight = i_ptr->weight;
 
-  /* Throwing objects			*/
+  /* Throwing objects  		*/
   *tdam = pdamroll(i_ptr->damage) + i_ptr->todam;
   *tbth = py.misc.bthb * 75 / 100;
   *tpth = py.misc.ptohit + i_ptr->tohit;
@@ -659,7 +659,7 @@ int *tbth, *tpth, *tdam, *tdis;
   /* multiply damage bonuses instead of adding, when have proper
      missile/weapon combo, this makes them much more useful */
 
-  /* Using Bows,  slings,  or crossbows	*/
+  /* Using Bows,  slings,  or crossbows  */
   if (inventory[INVEN_WIELD].tval == TV_BOW)
     switch (inventory[INVEN_WIELD].p1) {
       case 1:
@@ -673,7 +673,7 @@ int *tbth, *tpth, *tdam, *tdis;
         }
         break;
       case 2:
-        if (i_ptr->tval == TV_ARROW) /* Short Bow and Arrow	*/
+        if (i_ptr->tval == TV_ARROW) /* Short Bow and Arrow  */
         {
           *tbth = py.misc.bthb;
           *tpth += 2 * inventory[INVEN_WIELD].tohit;
@@ -683,7 +683,7 @@ int *tbth, *tpth, *tdam, *tdis;
         }
         break;
       case 3:
-        if (i_ptr->tval == TV_ARROW) /* Long Bow and Arrow	*/
+        if (i_ptr->tval == TV_ARROW) /* Long Bow and Arrow  */
         {
           *tbth = py.misc.bthb;
           *tpth += 2 * inventory[INVEN_WIELD].tohit;
@@ -762,10 +762,10 @@ inven_type* t_ptr;
   }
 }
 
-/* Throw an object across the dungeon.		-RAK-	*/
-/* Note: Flasks of oil do fire damage				 */
+/* Throw an object across the dungeon.  	-RAK-	*/
+/* Note: Flasks of oil do fire damage  			 */
 /* Note: Extra damage and chance of hitting when missiles are used*/
-/*	 with correct weapon.  I.E.  wield bow and throw arrow.	 */
+/*   with correct weapon.  I.E.  wield bow and throw arrow.	 */
 void
 throw_object()
 {
@@ -824,7 +824,7 @@ throw_object()
                          (int)c_list[m_ptr->mptr].ac, CLA_BTHB)) {
               i = m_ptr->mptr;
               objdes(tmp_str, &throw_obj, FALSE);
-              /* Does the player know what he's fighting?	   */
+              /* Does the player know what he's fighting?     */
               if (!m_ptr->ml) {
                 (void)sprintf(out_val, "You hear a cry as the %s finds a mark.",
                               tmp_str);
@@ -869,7 +869,7 @@ throw_object()
   }
 }
 
-/* Make a bash attack on someone.				-CJS-
+/* Make a bash attack on someone.  			-CJS-
    Used to be part of bash above. */
 static void py_bash(y, x) int y, x;
 {
@@ -882,7 +882,7 @@ static void py_bash(y, x) int y, x;
   m_ptr = &m_list[monster];
   c_ptr = &c_list[m_ptr->mptr];
   m_ptr->csleep = 0;
-  /* Does the player know what he's fighting?	   */
+  /* Does the player know what he's fighting?     */
   if (!m_ptr->ml)
     (void)strcpy(m_name, "it");
   else
@@ -905,7 +905,7 @@ static void py_bash(y, x) int y, x;
     k += py.misc.wt / 60 + 3;
     if (k < 0) k = 0;
 
-    /* See if we done it in.				     */
+    /* See if we done it in.  			     */
     if (mon_take_hit(monster, k) >= 0) {
       (void)sprintf(out_val, "You have slain %s.", m_name);
       msg_print(out_val);
@@ -934,7 +934,7 @@ static void py_bash(y, x) int y, x;
   }
 }
 
-/* Bash open a door or chest				-RAK-	*/
+/* Bash open a door or chest  			-RAK-	*/
 /* Note: Affected by strength and weight of character
 
    For a closed door, p1 is positive if locked; negative if

@@ -67,7 +67,7 @@ void exit();
  *  Open the score file while we still have the setuid privileges.  Later
  *  when the score is being written out, you must be sure to flock the file
  *  so we don't have multiple people trying to write to it at the same time.
- *  Craig Norborg (doc)		Mon Aug 10 16:41:59 EST 1987
+ *  Craig Norborg (doc)  	Mon Aug 10 16:41:59 EST 1987
  */
 void
 init_scorefile()
@@ -107,7 +107,7 @@ init_scorefile()
 #endif
 }
 
-/* File perusal.	    -CJS-
+/* File perusal.      -CJS-
    primitive, but portable */
 void helpfile(filename) char* filename;
 #ifdef MAC
@@ -145,9 +145,9 @@ void helpfile(filename) char* filename;
 }
 #endif
 
-/* Prints a list of random objects to a file.  Note that -RAK-	 */
-/* the objects produced is a sampling of objects which		 */
-/* be expected to appear on that level.				 */
+/* Prints a list of random objects to a file.  Note that -RAK-   */
+/* the objects produced is a sampling of objects which  	 */
+/* be expected to appear on that level.  			 */
 void
 print_objects()
 {
@@ -232,7 +232,7 @@ print_objects()
     prt("Parameters no good.", 0, 0);
 }
 
-/* Print the character to a file or device		-RAK-	 */
+/* Print the character to a file or device  	-RAK-	 */
 #ifdef MAC
 int
 file_character()
@@ -383,7 +383,7 @@ int file_character(filename1) char* filename1;
     /* Write out the character's history     */
     (void)fprintf(file1, "Character Background\n");
     for (i = 0; i < 4; i++) (void)fprintf(file1, " %s\n", py.misc.history[i]);
-    /* Write out the equipment list.	     */
+    /* Write out the equipment list.       */
     j = 0;
     (void)fprintf(file1, "\n  [Character's Equipment List]\n\n");
     if (equip_ctr == 0)
@@ -439,7 +439,7 @@ int file_character(filename1) char* filename1;
         }
       }
 
-      /* Write out the character's inventory.	     */
+      /* Write out the character's inventory.       */
 #ifdef MAC
     (void)fprintf(file1, "\n\n");
 #else

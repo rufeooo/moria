@@ -35,7 +35,7 @@ static void unsample();
 
 char titles[MAX_TITLES][10];
 
-/* Object descriptor routines					*/
+/* Object descriptor routines  				*/
 
 int is_a_vowel(ch) char ch;
 {
@@ -56,7 +56,7 @@ int is_a_vowel(ch) char ch;
   }
 }
 
-/* Initialize all Potions, wands, staves, scrolls, etc.	*/
+/* Initialize all Potions, wands, staves, scrolls, etc.  */
 void
 magic_init()
 {
@@ -145,7 +145,7 @@ int16 object_offset(t_ptr) inven_type* t_ptr;
   }
 }
 
-/* Remove "Secret" symbol for identity of object			*/
+/* Remove "Secret" symbol for identity of object  		*/
 void known1(i_ptr) inven_type* i_ptr;
 {
   int16 offset;
@@ -173,7 +173,7 @@ int known1_p(i_ptr) inven_type* i_ptr;
   return (object_ident[offset + indexx] & OD_KNOWN1);
 }
 
-/* Remove "Secret" symbol for identity of plusses			*/
+/* Remove "Secret" symbol for identity of plusses  		*/
 void known2(i_ptr) inven_type* i_ptr;
 {
   unsample(i_ptr);
@@ -206,7 +206,7 @@ int store_bought_p(i_ptr) inven_type* i_ptr;
   return (i_ptr->ident & ID_STOREBOUGHT);
 }
 
-/*	Remove an automatically generated inscription.	-CJS- */
+/*  Remove an automatically generated inscription.	-CJS- */
 static void unsample(i_ptr) inven_type* i_ptr;
 {
   int16 offset;
@@ -234,7 +234,7 @@ void sample(i_ptr) inven_type* i_ptr;
   object_ident[offset + indexx] |= OD_TRIED;
 }
 
-/* Somethings been identified					*/
+/* Somethings been identified  				*/
 /* extra complexity by CJS so that it can merge store/dungeon objects
    when appropriate */
 void identify(item) int* item;
@@ -285,7 +285,7 @@ void identify(item) int* item;
 }
 
 /* If an object has lost magical properties,
- * remove the appropriate portion of the name.	       -CJS-
+ * remove the appropriate portion of the name.         -CJS-
  */
 void unmagic_name(i_ptr) inven_type* i_ptr;
 {
@@ -300,7 +300,7 @@ void unmagic_name(i_ptr) inven_type* i_ptr;
 #define FLAGS 4
 #define Z_PLUSSES 5
 
-/* Returns a description of item for inventory			*/
+/* Returns a description of item for inventory  		*/
 /* pref indicates that there should be an article added (prefix) */
 /* note that since out_val can easily exceed 80 characters, objdes must
    always be called with a bigvtype as the first paramter */
@@ -642,7 +642,7 @@ int from_index;
   to->ident = 0;
 }
 
-/* Describe number of remaining charges.		-RAK-	*/
+/* Describe number of remaining charges.  	-RAK-	*/
 void desc_charges(item_val) int item_val;
 {
   register int rem_num;
@@ -655,7 +655,7 @@ void desc_charges(item_val) int item_val;
   }
 }
 
-/* Describe amount of item remaining.			-RAK-	*/
+/* Describe amount of item remaining.  		-RAK-	*/
 void desc_remain(item_val) int item_val;
 {
   bigvtype out_val, tmp_str;
