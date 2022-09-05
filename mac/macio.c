@@ -80,12 +80,6 @@ void
 restore_term()
 /* Nothing to do on Mac */ {}
 
-void
-shell_out()
-{
-  alert_error("This command is not implemented on the Macintosh.");
-}
-
 /* Returns a single character input from the terminal.	This silently -CJS-
    consumes ^R to redraw the screen and reset the terminal, so that this
    operation can always be performed at any input prompt.  inkey() never

@@ -127,33 +127,6 @@ restore_term(void)
 }
 
 void
-shell_out(void)
-{
-  char* comspec;
-#ifndef __TURBOC__
-  char key;
-  int val;
-  char* str;
-#endif /* __TURBOC__ */
-  save_screen();
-  clear_screen();
-  puts("[Entering DOS shell, type exit to return to game.]");
-  msdos_noraw();
-  ignore_signals();
-  if ((comspec = getenv("COMSPEC")) == NULL ||
-      spawnl(P_WAIT, comspec, comspec, (char*)NULL) < 0) {
-    puts("Sorry, there seems to be a problem with shell_out()");
-    printf("comspec = %s\n", comspec);
-    flush();
-    puts("Hit a key to continue");
-    while (!kbhit())
-      ;
-  }
-  restore_signals();
-  restore_screen();
-}
-
-void
 save_screen(void)
 {
   gettext(1, 1, COLS, LINES, savescr);

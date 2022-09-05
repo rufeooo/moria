@@ -192,10 +192,6 @@ char* argv[];
   /* default command set defined in config.h file */
   rogue_like_commands = ROGUE_LIKE;
 
-#ifdef SECURE
-  Authenticate();
-#endif
-
 #ifdef MSDOS
   msdos_init(); /* find out where everything is */
 #endif
@@ -203,23 +199,6 @@ char* argv[];
   /* call this routine to grab a file pointer to the highscore file */
   /* and prepare things to relinquish setuid privileges */
   init_scorefile();
-
-#ifndef SECURE
-#if !defined(MSDOS) && !defined(ATARIST_MWC) && !defined(MAC)
-#if !defined(AMIGA) && !defined(ATARIST_TC)
-#if !defined(atarist)
-  if (0 != setuid(getuid())) {
-    perror("Can't set permissions correctly!  Setuid call failed.\n");
-    exit(0);
-  }
-  if (0 != setgid(getgid())) {
-    perror("Can't set permissions correctly!  Setgid call failed.\n");
-    exit(0);
-  }
-#endif
-#endif
-#endif
-#endif
 
   /* use curses */
   init_curses();

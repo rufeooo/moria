@@ -263,15 +263,6 @@ some of the system defines set up here.
 /* If you change this, you only need to recompile main.c.  */
 #define ROGUE_LIKE FALSE
 
-
-/* For the ANDREW distributed file system, define this to ensure that
-   the program is secure with respect to the setuid code, this prohibits
-   inferior shells.  It also does not relinquish setuid privileges at the
-   start, but instead calls the ANDREW library routines bePlayer(), beGames(),
-   and Authenticate().  */
-/* #define SECURE */
-
-
 /* System dependent defines follow.  You should not need to change anything
    below.  */
 
@@ -353,12 +344,6 @@ char *index();
 /* Define this to prevent <string.h> from including <NLchar.h> on a PC/RT
    running AIX.  This prevents a bunch of lint errors.  */
 #define RTPC_NO_NLS
-#endif
-
-#ifdef SECURE
-extern int PlayerUID;
-#define getuid() PlayerUID
-#define geteuid() PlayerUID
 #endif
 
 #ifdef THINK_C
