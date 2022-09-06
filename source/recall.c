@@ -427,7 +427,7 @@ int roff_recall(mon_num) int mon_num;
 #endif
   {
     if ((mp->r_spells & CS_FREQ) > 5) { /* Could offset by level */
-      (void)sprintf(temp, "; 1 time in %d", cp->spells & CS_FREQ);
+      (void)sprintf(temp, "; 1 time in %lu", cp->spells & CS_FREQ);
       roff(temp);
     }
     roff(".");

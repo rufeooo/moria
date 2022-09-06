@@ -189,11 +189,7 @@ static int flock(f, l) int f, l;
 #ifdef atarist
   (void)sprintf(lockname, (char*)prefix_file((char*)"moria.%d"), sbuf.st_ino);
 #else
-#ifdef __linux__
-  (void)sprintf(lockname, "/tmp/moria.%d", sbuf.st_ino);
-#else
-  (void)sprintf(lockname, "/tmp/moria.%d", sbuf.st_ino);
-#endif
+  (void)sprintf(lockname, "/tmp/moria.%ld", sbuf.st_ino);
 #endif
   if (l & LOCK_UN) return unlink(lockname);
 
