@@ -359,13 +359,7 @@ init_curses()
 #ifdef __386BSD__
   (void)signal(SIGTSTP, (sig_t)suspend);
 #else
-#ifdef DEBIAN_LINUX
-  /* (void) signal (SIGTSTP, (sig_t)suspend); */
-  /* RENMOD: libc6 defaults to BSD, this expects SYSV */
-  (void)sysv_signal(SIGTSTP, suspend);
-#else
-  (void)signal(SIGTSTP, suspend);
-#endif
+  (void)signal(SIGTSTP, (void*)suspend);
 #endif
 #endif
 #endif

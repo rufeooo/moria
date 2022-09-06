@@ -49,15 +49,7 @@ init_signals()
 
 #else /* a non-Mac system */
 
-/* Since libc6, linux (Debian, at least) defaults to BSD signal().  This */
-/* expects SYSV.  Thus, DEBIAN_LINUX uses the sysv_signal call, everyone */
-/* else uses just signal.  RJW 00_0528 */
-
-#ifdef DEBIAN_LINUX
-#define MSIGNAL sysv_signal
-#else
 #define MSIGNAL signal
-#endif
 
 #ifdef ATARIST_MWC
 /* need these for atari st, but for unix, must include signals.h first,
@@ -234,7 +226,7 @@ signals()
 #ifdef __386BSD__
   (void)MSIGNAL(SIGTSTP, (sig_t)suspend);
 #else
-  (void)MSIGNAL(SIGTSTP, suspend);
+  (void)MSIGNAL(SIGTSTP, (void*)suspend);
 #endif
 #endif
 #ifndef USG
