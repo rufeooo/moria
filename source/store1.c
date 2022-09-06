@@ -392,10 +392,11 @@ int32 price, minprice;
   register store_type* s_ptr;
 
   s_ptr = &store[store_num];
-  if (minprice > 9)
+  if (minprice > 9) {
     if (price == minprice) {
       if (s_ptr->good_buy < MAX_SHORT) s_ptr->good_buy++;
     } else {
       if (s_ptr->bad_buy < MAX_SHORT) s_ptr->bad_buy++;
     }
+  }
 }

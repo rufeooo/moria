@@ -1015,7 +1015,7 @@ int32u* rcmove;
         }
       }
       /* Creature has attempted to move on player?     */
-      if (do_move)
+      if (do_move) {
         if (c_ptr->cptr == 1) {
           /* if the monster is not lit, must call update_mon, it may
              be faster than character, and hence could have just
@@ -1052,6 +1052,7 @@ int32u* rcmove;
           } else
             do_move = FALSE;
         }
+      }
       /* Creature has been allowed move.   */
       if (do_move) {
         /* Pick up or eat an object         */
@@ -1631,7 +1632,7 @@ void creatures(attack) int attack;
               || ((!(c_list[m_ptr->mptr].cmove & CM_PHASE))
 #endif
                   && cave[m_ptr->fy][m_ptr->fx].fval >= MIN_CAVE_WALL)) {
-            if (m_ptr->csleep > 0)
+            if (m_ptr->csleep > 0) {
               if (py.flags.aggravate)
                 m_ptr->csleep = 0;
               else if ((py.flags.rest == 0 && py.flags.paralysis < 1) ||
@@ -1648,6 +1649,7 @@ void creatures(attack) int attack;
                   }
                 }
               }
+            }
             if (m_ptr->stunned != 0) {
               /* NOTE: Balrog = 100*100 = 10000, it always
                  recovers instantly */

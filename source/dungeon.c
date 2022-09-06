@@ -615,7 +615,7 @@ dungeon()
       }
     }
     /* Word-of-Recall  Note: Word-of-Recall is a delayed action   */
-    if (f_ptr->word_recall > 0)
+    if (f_ptr->word_recall > 0) {
       if (f_ptr->word_recall == 1) {
         new_level_flag = TRUE;
         f_ptr->paralysis++;
@@ -629,6 +629,7 @@ dungeon()
         }
       } else
         f_ptr->word_recall--;
+    }
 
     /* Random teleportation  */
     if ((py.flags.teleport) && (randint(100) == 1)) {

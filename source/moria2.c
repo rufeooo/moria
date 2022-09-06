@@ -91,12 +91,13 @@ void search(y, x, chance) int y, x, chance;
           /* Chest is trapped?         */
           else if (t_ptr->tval == TV_CHEST) {
             /* mask out the treasure bits */
-            if ((t_ptr->flags & CH_TRAPPED) > 1)
+            if ((t_ptr->flags & CH_TRAPPED) > 1) {
               if (!known2_p(t_ptr)) {
                 known2(t_ptr);
                 msg_print("You have discovered a trap on the chest!");
               } else
                 msg_print("The chest is trapped!");
+            }
           }
         }
       }

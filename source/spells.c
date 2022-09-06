@@ -156,7 +156,7 @@ detect_trap()
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++) {
       c_ptr = &cave[i][j];
-      if (c_ptr->tptr != 0)
+      if (c_ptr->tptr != 0) {
         if (t_list[c_ptr->tptr].tval == TV_INVIS_TRAP) {
           c_ptr->fm = TRUE;
           change_trap(i, j);
@@ -165,6 +165,7 @@ detect_trap()
           t_ptr = &t_list[c_ptr->tptr];
           known2(t_ptr);
         }
+      }
     }
   return (detect);
 }
@@ -180,7 +181,7 @@ detect_sdoor()
   for (i = panel_row_min; i <= panel_row_max; i++)
     for (j = panel_col_min; j <= panel_col_max; j++) {
       c_ptr = &cave[i][j];
-      if (c_ptr->tptr != 0) /* Secret doors  */
+      if (c_ptr->tptr != 0) { /* Secret doors  */
         if (t_list[c_ptr->tptr].tval == TV_SECRET_DOOR) {
           c_ptr->fm = TRUE;
           change_trap(i, j);
@@ -194,6 +195,7 @@ detect_sdoor()
           lite_spot(i, j);
           detect = TRUE;
         }
+      }
     }
   return (detect);
 }
@@ -1558,7 +1560,7 @@ genocide()
     for (i = mfptr - 1; i >= MIN_MONIX; i--) {
       m_ptr = &m_list[i];
       r_ptr = &c_list[m_ptr->mptr];
-      if (typ == c_list[m_ptr->mptr].cchar)
+      if (typ == c_list[m_ptr->mptr].cchar) {
 #ifdef ATARIST_MWC
         if ((r_ptr->cmove & (holder = CM_WIN)) == 0)
 #else
@@ -1574,6 +1576,7 @@ genocide()
           (void)sprintf(out_val, "The %s is unaffected.", r_ptr->name);
           msg_print(out_val);
         }
+      }
     }
   return (killed);
 }
