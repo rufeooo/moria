@@ -1117,7 +1117,7 @@ int get_char(generate) int* generate;
                       "This game is from a panic save.  \
 Score will not be added to scoreboard.");
         msg_print(temp);
-      } else if ((!noscore & 0x04) && duplicate_character()) {
+      } else if ((noscore & 0x04) == 0 && duplicate_character()) {
         (void)sprintf(temp,
                       "This character is already on the \
 scoreboard; it will not be scored again.");
