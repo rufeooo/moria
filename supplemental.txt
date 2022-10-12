@@ -1,0 +1,36 @@
+Gloves
+  Free Action
+  Slaying
+  (-)
+  Clumsiness
+  Weakness
+
+Boots
+  Slow Descent
+  Speed
+  (-)
+  Stealth
+  Slowness
+  Noise
+  Great Mass
+
+Helm
+  Intelligence
+  Wisdom
+  Infravision
+  (-)
+  Stupidity
+  Dullness
+  Blindness
+  Timidness
+  Weakness
+  Teleportation
+  Ugliness
+  (+Crowns)
+  Might
+  Lordliness
+  Magi
+  Beauty
+  Seeing
+  Regen
+
