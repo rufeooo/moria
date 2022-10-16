@@ -1264,7 +1264,7 @@ static void do_command(com_val) char com_val;
       restore_screen();
       free_turn_flag = TRUE;
       break;
-    case '{': /* ({) inscribe an object    */
+    case '{': /* inscribe an object    */
       scribe_object();
       free_turn_flag = TRUE;
       break;

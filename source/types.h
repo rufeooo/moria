@@ -345,9 +345,9 @@ typedef struct cave_type
   unsigned int tptr : 8;
   unsigned int fval : 8;
 #else
-  int8u cptr;
-  int8u tptr;
-  int8u fval;
+  int8u cptr; // creature ptr
+  int8u tptr; // teasure ptr
+  int8u fval; // floor value
 #endif
 #if !defined(MSDOS) && !defined(ATARIST_MWC)
   unsigned int lr : 1;  /* room should be lit with perm light, walls with
