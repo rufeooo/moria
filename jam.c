@@ -12,6 +12,13 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#ifndef FEATURE
+enum { FEATURE = -1 };
+#endif
+enum {
+  ENABLE_INPUT = (1 << 0),
+};
+
 static struct termios save_termio;
 static int curses_on = FALSE;
 
@@ -220,7 +227,7 @@ main()
   init_curses();
 
   int row = 0, col = 0;
-  while (true) {
+  while (FEATURE & ENABLE_INPUT) {
     char c = inkey();
     if (c == CTRL('X')) break;
     mvaddch(row, col, c);

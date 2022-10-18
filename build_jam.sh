@@ -1,2 +1,2 @@
 #!/bin/bash
-clang jam.c -I source -lncurses
+clang jam.c ${DEV_FLAGS} -I source -lncurses
