@@ -152,6 +152,15 @@ dungeon()
           disturb(0, 1);
           /* unlight creatures */
           creatures(FALSE);
+
+          // Just destroy light sources that are empty
+          // (the only place that destroys an equipped item?)
+          if (i_ptr->subval != 0) {
+            equip_ctr--;
+            inven_weight -= i_ptr->weight * i_ptr->number;
+            invcopy(i_ptr, OBJ_NOTHING);
+            py.flags.status |= PY_STR_WGT;
+          }
         } else if ((i_ptr->p1 < 40) && (randint(5) == 1) &&
                    (py.flags.blind < 1)) {
           disturb(0, 0);
