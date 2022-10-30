@@ -1111,10 +1111,6 @@ static void new_spot(y, x) int16 *y, *x;
 static void
 cave_gen()
 {
-  struct spot_type {
-    int endx;
-    int endy;
-  };
   int room_map[20][20];
   register int i, j, k;
   int y1, x1, y2, x2, pick1, pick2, tmp;
