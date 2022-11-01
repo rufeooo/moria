@@ -944,6 +944,7 @@ void inven_command(command) char command;
                     else {
                       slot = 0;
                       /* Rings. Give choice over where they go. */
+                      show_equip(FALSE, 80);
                       do {
                         if (!get_com("Put ring on which hand (l/r/L/R)?",
                                      &query)) {
@@ -963,6 +964,7 @@ void inven_command(command) char command;
                           if (slot && !verify("Replace", slot)) slot = 0;
                         }
                       } while (slot == 0);
+                      restore_screen();
                     }
                     break;
                   default:
