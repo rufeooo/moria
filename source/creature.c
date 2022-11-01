@@ -760,6 +760,7 @@ static void make_attack(monptr) int monptr;
           break;
         case 21: /*Disenchant     */
           flag = FALSE;
+          // INVEN_AUX is protected
           switch (randint(7)) {
             case 1:
               i = INVEN_WIELD;
@@ -784,23 +785,30 @@ static void make_attack(monptr) int monptr;
               break;
           }
           i_ptr = &inventory[i];
-          if (i_ptr->tohit > 0) {
-            i_ptr->tohit -= randint(2);
-            /* don't send it below zero */
-            if (i_ptr->tohit < 0) i_ptr->tohit = 0;
-            flag = TRUE;
+          // Weapons may lose tohit/todam. Armor may lose toac.
+          // Ego weapon toac is protected.
+          // Gauntlets of Slaying tohit/todam are protected.
+          if (i == INVEN_WIELD) {
+            if (i_ptr->tohit > 0) {
+              i_ptr->tohit -= randint(2);
+              /* don't send it below zero */
+              if (i_ptr->tohit < 0) i_ptr->tohit = 0;
+              flag = TRUE;
+            }
+            if (i_ptr->todam > 0) {
+              i_ptr->todam -= randint(2);
+              /* don't send it below zero */
+              if (i_ptr->todam < 0) i_ptr->todam = 0;
+              flag = TRUE;
+            }
           }
-          if (i_ptr->todam > 0) {
-            i_ptr->todam -= randint(2);
-            /* don't send it below zero */
-            if (i_ptr->todam < 0) i_ptr->todam = 0;
-            flag = TRUE;
-          }
-          if (i_ptr->toac > 0) {
-            i_ptr->toac -= randint(2);
-            /* don't send it below zero */
-            if (i_ptr->toac < 0) i_ptr->toac = 0;
-            flag = TRUE;
+          else {
+            if (i_ptr->toac > 0) {
+              i_ptr->toac -= randint(2);
+              /* don't send it below zero */
+              if (i_ptr->toac < 0) i_ptr->toac = 0;
+              flag = TRUE;
+            }
           }
           if (flag) {
             msg_print("There is a static feeling in the air.");
