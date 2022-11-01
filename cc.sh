@@ -6,10 +6,13 @@ hash $CC || exit 1
 [ -z $CFLAGS] && CFLAGS="-O1 -g1 -Isource "
 LFLAGS+=" -lcurses "
 
-PLATFORM=$1
-[ -z $PLATFORM] && PLATFORM="unix"
+TARGET_FILE=${1:-moria.c}
+PLATFORM=${2:-unix}
+
+[ -z $PLATFORM ] && PLATFORM="unix"
 FILE_LIST=`ls -f1 $PLATFORM/*c source/*.c` || exit 1
 
-BUILD_FILE=build.c
-printf "#include \"%s\"\n" $FILE_LIST > $BUILD_FILE
-time $CC $CFLAGS $LFLAGS $BUILD_FILE -o moria
+[ ! -f moria.c ] && printf "#include \"%s\"\n" $FILE_LIST > moria.c
+
+OUT_FILE=`basename $TARGET_FILE .c`
+time $CC $TARGET_FILE $CFLAGS $LFLAGS -o $OUT_FILE
