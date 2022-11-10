@@ -214,8 +214,8 @@ typedef struct player_type
     {
       int8u max_stat[6];	/* What is restored */
       int8u cur_stat[6];	/* What is natural */
-      int16 mod_stat[6];	/* What is modified, may be +/- */
-      int8u use_stat[6];	/* What is used */
+      int16 mod_stat[6];	/* Boosted artificially (by wearing something), may be +/- */
+      int8u use_stat[6];	/* Play value, see set_use_stat() */
     } stats;
   struct flags
     {
