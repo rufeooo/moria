@@ -405,18 +405,38 @@ umoria.");
 #endif /* ! unix && ! VMS */
 }
 
+void
+prt_old_msg()
+{
+  int i, j, x;
+  i = MAX_SAVE_MSG;
+  j = last_msg;
+  save_screen();
+  x = i;
+  while (i > 0) {
+    i--;
+    prt(old_msg[j], i, 0);
+    if (j == 0)
+      j = MAX_SAVE_MSG - 1;
+    else
+      j--;
+  }
+  erase_line(x, 0);
+  pause_line(x, 0);
+  erase_line(x + 1, 0);
+  restore_screen();
+}
+
 /* Prints the gravestone of the character  	-RAK-	 */
 static void
 print_tomb()
 {
+  char func;
+  int ok;
   vtype str, tmp_str;
   register int i;
   char day[11];
   register char* p;
-#ifdef MAC
-  char func;
-  int ok;
-#endif
 
   clear_screen();
   put_buffer("_______________________", 1, 15);
@@ -476,13 +496,11 @@ print_tomb()
 
 retry:
   flush();
-#ifdef MAC
-  /* On Mac, file_character() gets file name via std file dialog */
-  /* So, the prompt for character record cannot be made to do double duty */
   put_buffer(
       "('F' - Save record in file / 'Y' - Display record on screen \
 / 'N' - Abort)",
       23, 0);
+  put_buffer("CTRL-P: previous message log", 21, 0);
   put_buffer("Character record [F/Y/N]?", 22, 0);
   do {
     func = inkey();
@@ -502,34 +520,38 @@ retry:
         func = 'N';
         ok = TRUE;
         break;
+      case CTRL('P'):
+        prt_old_msg();
+        ok = FALSE;
+        break;
       default:
         bell();
         ok = FALSE;
         break;
     }
   } while (!ok);
-  if (func != 'N')
-#else
-  put_buffer("(ESC to abort, return to print on screen, or file name)", 23, 0);
-  put_buffer("Character record?", 22, 0);
-  if (get_string(str, 22, 18, 60))
-#endif
-  {
+  if (func != 'N') {
     for (i = 0; i < INVEN_ARRAY_SIZE; i++) {
       known1(&inventory[i]);
       known2(&inventory[i]);
     }
     calc_bonuses();
-#ifdef MAC
     if (func == 'F') {
+#ifdef MAC
+      /* On Mac, file_character() gets file name via std file dialog */
+      /* So, the prompt for character record cannot be made to do double duty */
       if (!file_character()) goto retry;
-    }
 #else
-    if (str[0]) {
-      if (!file_character(str)) goto retry;
-    }
+      erase_line(22, 0);
+      erase_line(23, 0);
+      put_buffer("Character record?", 22, 0);
+      if (get_string(str, 22, 18, 60)) {
+        if (str[0]) {
+          if (!file_character(str)) goto retry;
+        }
+      }
 #endif
-    else {
+    } else {
       clear_screen();
       display_char();
       put_buffer("Type ESC to skip the inventory:", 23, 0);
