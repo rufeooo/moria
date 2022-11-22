@@ -103,6 +103,7 @@ static char* desc_breath[] = {"lightning", "poison gases", "acid", "frost",
 static char* desc_weakness[] = {"frost", "fire",         "poison",
                                 "acid",  "bright light", "rock remover"};
 
+static FILE* fileD;
 static vtype roffbuf; /* Line buffer. */
 static char* roffp;   /* Pointer into line buffer. */
 static int roffpline; /* Place to print line now being loaded. */
@@ -118,7 +119,9 @@ static int roffpline; /* Place to print line now being loaded. */
 #define knowdamage(l, a, d) ((4 + (l)) * (a) > 80 * (d))
 
 /* Do we know anything about this monster? */
-int bool_roff_recall(mon_num) int mon_num;
+int
+bool_roff_recall(mon_num)
+int mon_num;
 {
   register recall_type* mp;
   register int i;
@@ -134,7 +137,9 @@ int bool_roff_recall(mon_num) int mon_num;
 }
 
 /* Print out what we have discovered about this monster. */
-int roff_recall(mon_num) int mon_num;
+int
+roff_recall(mon_num)
+int mon_num;
 {
   char *p, *q;
   int8u* pu;
@@ -208,7 +213,7 @@ int roff_recall(mon_num) int mon_num;
   rcmove = mp->r_cmove | (CM_WIN & cp->cmove);
 #endif
   rcdefense = mp->r_cdefense & cp->cdefense;
-  (void)sprintf(temp, "The %s:\n", cp->name);
+  (void)sprintf(temp, "'%c' The %s:\n", cp->cchar, cp->name);
   roff(temp);
   /* Conflict history. */
   if (mp->r_deaths) {
@@ -673,9 +678,15 @@ int roff_recall(mon_num) int mon_num;
 #endif
     roff(" Killing one of these wins the game!");
   roff("\n");
-  prt("--pause--", roffpline, 0);
+  if (BESTIARY)
+    fprintf(fileD, "\n");
+  else
+    prt("--pause--", roffpline, 0);
   if (wizard) *mp = save_mem;
-  return inkey();
+  if (BESTIARY)
+    return ' ';
+  else
+    return inkey();
 }
 
 /* Print out strings, filling up lines as we go. */
@@ -691,6 +702,7 @@ static void roff(p) register char* p;
         while (*q != ' ') q--;
       *q = 0;
       prt(roffbuf, roffpline, 0);
+      if (BESTIARY) fprintf(fileD, " %s", roffbuf);
       roffpline++;
       r = roffbuf;
       while (q < roffp) {

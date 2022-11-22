@@ -622,3 +622,5 @@ some of the system defines set up there.
 
 /* Number of entries allowed in the scorefile.  */
 #define SCOREFILE_SIZE	1000
+
+#define BESTIARY 0
