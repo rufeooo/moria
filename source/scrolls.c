@@ -433,10 +433,14 @@ read_scroll()
             (void)sprintf(out_val, "Your %s glows black, fades.", tmp_str);
             msg_print(out_val);
             unmagic_name(i_ptr);
-            i_ptr->flags = TR_CURSED;
             i_ptr->tohit = 0;
             i_ptr->todam = 0;
             i_ptr->toac = -randint(5) - randint(5);
+            /* Must call py_bonuses() before set (clear) flags, and
+               must call calc_bonuses() after set (clear) flags, so that
+               all attributes will be properly turned off. */
+            py_bonuses(i_ptr, -1);
+            i_ptr->flags = TR_CURSED;
             calc_bonuses();
             ident = TRUE;
           }
