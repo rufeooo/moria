@@ -933,7 +933,7 @@ prt_stat_block()
   if (PY_CONFUSED & status) prt_confused();
   if (PY_FEAR & status) prt_afraid();
   if (PY_POISONED & status) prt_poisoned();
-  if ((PY_SEARCH | PY_REST) & status) prt_state();
+  if ((PY_PARALYSED | PY_SEARCH | PY_REST) & status) prt_state();
   /* if speed non zero, print it, modify speed if Searching */
   if (py.flags.speed - ((PY_SEARCH & status) >> 8) != 0) prt_speed();
   /* display the study field */
