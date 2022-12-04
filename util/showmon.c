@@ -28,9 +28,44 @@ CMP(level);
 #define INT_MIN ~0x7fffffff
 #define MIN(x, y) (x < y ? x : y)
 #define MAX(x, y) (x > y ? x : y)
+#define AL(x) (sizeof(x) / sizeof(x[0]))
 int
 main()
 {
+  for (int it = 0; it < AL(c_list); ++it) {
+    if (c_list[it].cdefense & CD_DRAGON) puts(c_list[it].name);
+  }
+  int animal_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if (c_list[it].cdefense & CD_ANIMAL) animal_count += 1;
+  }
+  printf("%d animal_count\n", animal_count);
+  int evil_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if (c_list[it].cdefense & CD_EVIL) evil_count += 1;
+  }
+  printf("%d evil_count\n", evil_count);
+  int undead_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if (c_list[it].cdefense & CD_UNDEAD) undead_count += 1;
+  }
+  printf("%d undead_count\n", undead_count);
+  int none_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if ((c_list[it].cdefense & 0xf) == 0) none_count += 1;
+  }
+  printf("%d none_count\n", none_count);
+  int frost_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if ((c_list[it].cdefense & CD_FROST) == 0) frost_count += 1;
+  }
+  printf("%d frost_count\n", frost_count);
+  int fire_count = 0;
+  for (int it = 0; it < AL(c_list); ++it) {
+    if ((c_list[it].cdefense & CD_FIRE) == 0) fire_count += 1;
+  }
+  printf("%d fire_count\n", fire_count);
+
   qsort(c_list, MAX_CREATURES, sizeof(creature_type), cmp_sleep);
   int min_sleep = INT_MAX;
   int max_sleep = INT_MIN;
