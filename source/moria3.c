@@ -699,10 +699,10 @@ void py_attack(y, x) int y, x;
           (void)sprintf(out_val, "%s is unaffected.", m_name);
         else {
           (void)sprintf(out_val, "%s appears confused.", m_name);
-          if (m_list[crptr].confused)
-            m_list[crptr].confused += 3;
+          if (m_list[crptr].mconfused)
+            m_list[crptr].mconfused += 3;
           else
-            m_list[crptr].confused = 2 + randint(16);
+            m_list[crptr].mconfused = 2 + randint(16);
         }
         msg_print(out_val);
         if (m_list[crptr].ml && randint(4) == 1)

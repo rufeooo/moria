@@ -1295,7 +1295,7 @@ static void wr_monster(mon) register monster_type* mon;
   wr_byte(mon->cdis);
   wr_byte(mon->ml);
   wr_byte(mon->stunned);
-  wr_byte(mon->confused);
+  wr_byte(mon->mconfused);
 }
 
 static void rd_byte(ptr) int8u* ptr;
@@ -1429,7 +1429,7 @@ static void rd_monster(mon) register monster_type* mon;
   rd_byte(&mon->cdis);
   rd_byte(&mon->ml);
   rd_byte(&mon->stunned);
-  rd_byte(&mon->confused);
+  rd_byte(&mon->mconfused);
 }
 
 /* functions called from death.c to implement the score file */

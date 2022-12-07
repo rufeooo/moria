@@ -1129,10 +1129,10 @@ int confuse_monster(dir, y, x) int dir, y, x;
         (void)sprintf(out_val, "%s is unaffected.", m_name);
         msg_print(out_val);
       } else {
-        if (m_ptr->confused)
-          m_ptr->confused += 3;
+        if (m_ptr->mconfused)
+          m_ptr->mconfused += 3;
         else
-          m_ptr->confused = 2 + randint(16);
+          m_ptr->mconfused = 2 + randint(16);
         confuse = TRUE;
         m_ptr->csleep = 0;
         (void)sprintf(out_val, "%s appears confused.", m_name);
@@ -1988,7 +1988,7 @@ turn_undead()
           turn_und = TRUE;
           c_recall[m_ptr->mptr].r_cdefense |= CD_UNDEAD;
         }
-        m_ptr->confused = py.misc.lev;
+        m_ptr->mconfused = py.misc.lev;
       } else if (m_ptr->ml) {
         (void)sprintf(out_val, "%s is unaffected.", m_name);
         msg_print(out_val);

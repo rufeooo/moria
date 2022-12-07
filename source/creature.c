@@ -867,10 +867,10 @@ static void make_attack(monptr) int monptr;
           (void)sprintf(tmp_str, "%sis unaffected.", cdesc);
         else {
           (void)sprintf(tmp_str, "%sappears confused.", cdesc);
-          if (m_ptr->confused)
-            m_ptr->confused += 3;
+          if (m_ptr->mconfused)
+            m_ptr->mconfused += 3;
           else
-            m_ptr->confused = 2 + randint(16);
+            m_ptr->mconfused = 2 + randint(16);
         }
         msg_print(tmp_str);
         if (visible && !death && randint(4) == 1)
@@ -1500,7 +1500,7 @@ int32u* rcmove;
     return; /* monster movement finished */
   }
   /* Creature is confused or undead turned? */
-  else if (m_ptr->confused) {
+  else if (m_ptr->mconfused) {
     if (r_ptr->cdefense & CD_UNDEAD) /* Undead only get confused from
                                         turn undead, so they should flee */
     {
@@ -1519,7 +1519,7 @@ int32u* rcmove;
     }
     /* don't move him if he is not supposed to move! */
     if (!(r_ptr->cmove & CM_ATTACK_ONLY)) make_move(monptr, mm, rcmove);
-    m_ptr->confused--;
+    m_ptr->mconfused--;
     move_test = TRUE;
   }
   /* Creature may cast a spell */

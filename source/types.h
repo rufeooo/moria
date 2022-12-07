@@ -113,7 +113,7 @@ typedef struct monster_type
   int8u cdis;		/* Cur dis from player	*/
   int8u ml;
   int8u stunned;
-  int8u confused;
+  int8u mconfused;
 } monster_type;
 
 typedef struct treasure_type
